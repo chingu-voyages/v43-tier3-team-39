@@ -13,7 +13,7 @@ const SignIn = () => {
           <button className="bg-white p-1 my-3 w-full border border-black">
             Sign in with Email
           </button>
-          <a href="/" className="p-1 underline">
+          <a href="/signup" className="p-1 underline">
             Create New User
           </a>
         </div>
