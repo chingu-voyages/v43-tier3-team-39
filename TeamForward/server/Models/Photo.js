@@ -1,13 +1,14 @@
-const mongoose = reuqire('mongoose')
+const mongoose = require('mongoose');
 
-const PhotoSchema = new Schema({
+const PhotoSchema = new mongoose.Schema({
     imageURL:{
         type:String
     },
-    profile:Boolean
-})
+    profile: {
+        type: Boolean
+    }
+});
 
-const Photo = new mongoose.model('photo',PhotoSchema)
-
-module.exports = Photo
+const Photo = mongoose.model('photo',PhotoSchema);
+module.exports = Photo;
 

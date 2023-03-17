@@ -24,7 +24,7 @@ const UserSchema = new mongoose.Schema({
     },
     // add photo model to save profile photo info
     photos:{
-        type:[Photo]
+        type:[Photo.schema]
     },
     profession:{
         type:String
@@ -51,4 +51,7 @@ const UserSchema = new mongoose.Schema({
     googleAuthId:{
         type:String
     }
-})
+});
+
+const User = mongoose.model("User", UserSchema);
+module.exports = User;
