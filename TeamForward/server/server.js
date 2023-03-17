@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -11,6 +12,6 @@ app.use(cors({
 }));
 
 require('./config/mongoose.config');
-require('routes/teamForward.routes')(app);
+require('./routes/teamForward.routes')(app);
 
 app.listen(port, ()=> log(`listening on port: ${port}`));
