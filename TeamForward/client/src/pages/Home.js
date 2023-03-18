@@ -2,8 +2,12 @@ import React from "react";
 import Button from "../components/Button";
 import StepsDetail from "../components/HomePage/StepsDetail";
 import heroImg from "../assets/home/hero.jpeg";
+import { useReactiveVar } from "@apollo/client";
+import { userState } from "../GlobalState";
 
 const Home = () => {
+  const user = useReactiveVar(userState);
+  
   return (
     <div>
       <Hero />
