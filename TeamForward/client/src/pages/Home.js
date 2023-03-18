@@ -1,7 +1,7 @@
-import React from "react";
 import Button from "../components/Button";
 import StepsDetail from "../components/HomePage/StepsDetail";
 import heroImg from "../assets/home/hero.jpeg";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -17,7 +17,7 @@ const Home = () => {
 function Hero() {
   return (
     <div className="">
-      <section class="mb-40 ">
+      <section class="mb-36 ">
         <nav class="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between">
           <div
             div
@@ -27,27 +27,23 @@ function Hero() {
               <h1 className="font-bold">TEAM FORWARD</h1>
             </div>
             <div class="flex items-center lg:ml-auto">
-              {/* <button
-                type="button"
-                class="inline-block px-6 py-2.5 mr-2 bg-transparent text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light"
-              >
-                Login
-              </button> */}
-              <Button
-                text="Login"
-                className="inline-block px-6 py-2.5 mr-2 bg-transparent text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
-              />
-              <Button
-                text="Sign Up"
-                className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-              />
+              <Link to="/Signin">
+                <Button
+                  text="Login"
+                  className="inline-block px-6 py-2.5 mr-2 bg-transparent text-blue-600 font-medium text-xs leading-tight uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
+                />
+              </Link>
+              <Link to="/SignUp">
+                <Button
+                  text="Sign Up"
+                  className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                />
+              </Link>
             </div>
           </div>
         </nav>
 
-        <div class="px-6 py-12 mt-12 md:px-12 bg-gray-50 text-gray-800 text-center lg:text-left">
+        <div class="px-6 py-12 mt-20 md:px-12 bg-gray-50 text-gray-800 text-center lg:text-left">
           <div class="container mx-auto xl:px-32">
             <div class="grid lg:grid-cols-2 gap-12 flex items-center">
               <div class="mt-12 lg:mt-0">
@@ -57,11 +53,13 @@ function Hero() {
                     Find your wellness buddy at work and exercise together.
                   </span>
                 </h1>
+                <Link to="/SignUp">
                 <Button
                   text="Get Started"
                   className="inline-block px-7 py-3 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                   href="#!"
                 />
+                </Link>
 
                 <a
                   class="inline-block px-7 py-3 bg-transparent text-blue-600 font-medium text-sm leading-snug uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
@@ -87,15 +85,15 @@ function Hero() {
 function ThreeStepProcess() {
   return (
     <div class="container my-24 px-6 mx-auto">
-      <section class="mb-32 text-gray-800 text-center">
-        <h2 class="text-3xl font-bold mb-8">
+      <section class="mb-40 text-gray-800 text-center">
+        <h2 class="text-3xl font-bold mb-6">
           Connect with colleagues and stay fit together
         </h2>
         <p class="text-xl mb-24">
           Discover your shared interests, connect, and organize meet ups.
         </p>
 
-        <div class="grid lg:gap-x-12 lg:grid-cols-3">
+        <div class="grid lg:gap-x-12 lg:grid-cols-3 ">
           <StepsDetail
             title="Choose your activity"
             description="Choose your activity"
