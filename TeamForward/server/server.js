@@ -11,6 +11,7 @@ const port = 8000;
 // configure Passport
 require("./Config/passport");
 
+// middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -29,11 +30,18 @@ app.use(
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: { secure: false },
   })
 );
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+  console.log(req.user, "-------------");
+  res.locals.user = req.user;
+  next();
+});
 
 require("./config/mongoose.config");
 require("./routes/teamForward.routes")(app);

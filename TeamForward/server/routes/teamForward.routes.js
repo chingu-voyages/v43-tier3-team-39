@@ -6,11 +6,12 @@ module.exports = (app) => {
   app.post("/teamForward/users", UserController.createNewUser);
   app.post("/teamForward/login", UserController.login);
   app.post("/teamForward/logout/:id", UserController.logOut);
-  app.get(
-    "/teamForward/loggedInUser",
-    authenticate,
-    UserController.loggedInUser
-  );
+  // app.get(
+  //   "/teamForward/loggedInUser",
+  //   authenticate,
+  //   UserController.loggedInUser
+  // );
+  app.get("/teamForward/loggedInUser", UserController.loggedInUser);
   app.get("/teamForward/:id", authenticate, UserController.findOneUser);
   app.get("/teamForward", authenticate, UserController.findAllUsers);
   app.put("/teamForward/:id", authenticate, UserController.updateUser);
