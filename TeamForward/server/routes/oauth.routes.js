@@ -10,12 +10,18 @@ router.get(
 router.get(
   "/oauth2callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/",
-    failureRedirect: "/",
+    // successRedirect: "http://localhost:3000/",
+    successRedirect: "/success",
+    failureRedirect: "/signin",
     successMessage: true,
     failureMessage: true,
   })
 );
+
+router.get("/success", (req, res) => {
+  let user = req.user;
+  res.redirect("http://localhost:3000/feed");
+});
 
 // OAuth Logout Route
 router.post("/logout", function (req, res) {

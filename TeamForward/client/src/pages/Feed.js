@@ -3,7 +3,7 @@ import { userState } from "../GlobalState";
 
 const Feed = () => {
   const user = useReactiveVar(userState);
-  
+
   return <div>Feed</div>;
 };
 
