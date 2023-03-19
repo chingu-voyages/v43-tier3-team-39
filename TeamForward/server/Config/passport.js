@@ -15,7 +15,6 @@ passport.use(
     // passport verify callback
     async (accessToken, refreshToken, profile, done) => {
       try {
-        // console.log(profile);
         // checks if user Google account already exists in db
         const existingGoogleAccount = await User.findOne({
           googleAuthId: profile.id,
