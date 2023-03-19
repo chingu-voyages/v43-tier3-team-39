@@ -9,7 +9,7 @@ import { userState } from "./GlobalState";
 import { useEffect, useState } from "react";
 import log from "./helpers/logging";
 
-const ProtectedRoute = ({childrem}) => {
+const ProtectedRoute = ({children}) => {
   const user = useReactiveVar(userState);
   const [apiComplete, setApiComplete] = useState (user? true: false);
 
