@@ -103,7 +103,7 @@ function ThreeStepProcess() {
         <div class="grid lg:gap-x-12 lg:grid-cols-3 ">
           <StepsDetail
             title="Choose your activity"
-            description="Choose your activity"
+            description="Choose the activity you are interested in."
             icon={
               <>
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -130,7 +130,7 @@ function ThreeStepProcess() {
           />
           <StepsDetail
             title="Get together"
-            description="Choose your activity"
+            description="Set the date, meet up, and connect through activities."
             icon={
               <>
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
