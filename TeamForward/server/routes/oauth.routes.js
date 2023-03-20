@@ -20,7 +20,7 @@ router.get(
 
 router.get("/success", (req, res) => {
   let user = req.user;
-  res.redirect("http://localhost:3000/feed");
+  res.redirect("https://team-forward-back-end.onrender.com/feed");
 });
 
 // OAuth Logout Route
