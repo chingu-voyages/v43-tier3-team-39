@@ -6,7 +6,7 @@ const session = require("express-session");
 const log = require("./helpers/logging");
 const passport = require("passport");
 const app = express();
-const port = 8000;
+const port = 10000;
 
 // configure Passport
 require("./Config/passport");
@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -43,7 +43,7 @@ app.use((req, res, next) => {
   next();
 });
 
-require("./config/mongoose.config");
+require("./Config/mongoose.config");
 require("./routes/teamForward.routes")(app);
 // require("./routes/loginOauth.routes");
 
