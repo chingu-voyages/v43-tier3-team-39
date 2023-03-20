@@ -43,7 +43,7 @@ app.use((req, res, next) => {
   next();
 });
 
-require("./config/mongoose.config");
+require("./Config/mongoose.config");
 require("./routes/teamForward.routes")(app);
 // require("./routes/loginOauth.routes");
 
