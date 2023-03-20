@@ -20,7 +20,7 @@ router.get(
 
 router.get("/success", (req, res) => {
   let user = req.user;
-  res.redirect("https://team-forward-back-end.onrender.com/feed");
+  res.redirect("https://zippy-kangaroo-408751.netlify.app/feed");
 });
 
 // OAuth Logout Route
