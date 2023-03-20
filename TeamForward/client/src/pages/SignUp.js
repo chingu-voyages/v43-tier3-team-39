@@ -2,7 +2,11 @@ import React from "react";
 
 const SignUp = () => {
   const google = () => {
-    window.open("https://team-forward-back-end.onrender.com/auth/google", "_self");
+    window.open(
+      "https://team-forward-back-end.onrender.com/auth/google",
+      // "http://localhost:8000/auth/google",
+      "_self"
+    );
   };
 
   return (
