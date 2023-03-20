@@ -20,7 +20,8 @@ router.get(
 
 router.get("/success", (req, res) => {
   let user = req.user;
-  res.redirect("http://localhost:3000/feed");
+  // res.redirect("http://localhost:3000/feed");
+  res.redirect("https://zippy-kangaroo-408751.netlify.app/feed");
 });
 
 // OAuth Logout Route
