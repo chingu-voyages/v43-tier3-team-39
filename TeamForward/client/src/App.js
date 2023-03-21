@@ -18,7 +18,7 @@ import log from "./helpers/logging";
 //   useEffect(() => {
 //     if (!user) {
 //       axios
-//         .get("http://localhost:8000/teamForward/loggedInUser")
+//         .get("http://localhost:/teamForward/loggedInUser")
 //         .then((res) => {
 //           userState(res.data);
 //           setApiComplete(true);
