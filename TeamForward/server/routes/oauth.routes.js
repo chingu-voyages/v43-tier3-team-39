@@ -10,7 +10,6 @@ router.get(
 router.get(
   "/oauth2callback",
   passport.authenticate("google", {
-    // successRedirect: "http://localhost:3000/",
     successRedirect: "/success",
     failureRedirect: "/signin",
     successMessage: true,
@@ -22,10 +21,8 @@ router.get("/success", (req, res) => {
   let user = req.user;
   let json = JSON.stringify(user);
   const queryString = new URLSearchParams({ user: json }).toString();
-  // res.redirect(`http://localhost:3000/feed/?${queryString}`);
-  res.redirect(
-    `https://zippy-kangaroo-408751.netlify.app/feed/?${queryString}`
-  );
+  console.log(`${process.env.REDIRECTKEYONE}?${queryString}`);
+  res.redirect(`${process.env.REDIRECTKEYONE}?${queryString}`);
 });
 
 // OAuth Logout Route
@@ -35,8 +32,7 @@ router.get("/logout", function (req, res) {
       return next(err);
     }
   });
-  res.redirect("https://zippy-kangaroo-408751.netlify.app/");
-  // res.redirect("http:localhost:3000/");
+  res.redirect("http:localhost:3000/");
 });
 
 module.exports = router;

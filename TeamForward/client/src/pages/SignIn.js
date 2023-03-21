@@ -3,8 +3,8 @@ import React from "react";
 const SignIn = () => {
   const google = () => {
     window.open(
-      "https://team-forward-back-end.onrender.com/auth/google",
-      // "http://localhost:8000/auth/google",
+      // "https://team-forward-back-end.onrender.com/auth/google",
+      process.env.REACT_APP_WINDOWKEY,
       "_self"
     );
   };

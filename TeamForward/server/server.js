@@ -6,7 +6,7 @@ const session = require("express-session");
 const log = require("./helpers/logging");
 const passport = require("passport");
 const app = express();
-const port = 10000;
+const port = process.env.PORTKEY;
 
 // configure Passport
 require("./Config/passport");

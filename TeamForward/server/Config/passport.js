@@ -10,8 +10,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      // callbackURL: "/oauth2callback",
-      callbackURL: "https://team-forward-back-end.onrender.com/oauth2callback",
+      callbackURL: process.env.CALLBACKKEY
     },
     // passport verify callback
     async (accessToken, refreshToken, profile, done) => {
