@@ -21,7 +21,6 @@ router.get("/success", (req, res) => {
   let user = req.user;
   let json = JSON.stringify(user);
   const queryString = new URLSearchParams({ user: json }).toString();
-  console.log(`${process.env.REDIRECTKEYONE}?${queryString}`);
   res.redirect(`${process.env.REDIRECTKEYONE}?${queryString}`);
 });
 
