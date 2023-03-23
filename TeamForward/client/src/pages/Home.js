@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
+import FullStar from "../components/FullStar";
 
 
 const Home = () => {

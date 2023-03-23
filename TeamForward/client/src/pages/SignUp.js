@@ -2,7 +2,6 @@ import React from "react";
 
 const SignUp = () => {
   const google = () => {
-    console.log(process.env.REACT_APP_WINDOWKEY);
     window.open(
       // "https://team-forward-back-end.onrender.com/auth/google",
       process.env.REACT_APP_WINDOWKEY,
