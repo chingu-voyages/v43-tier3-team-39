@@ -10,7 +10,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: process.env.CALLBACKKEY
+      callbackURL: process.env.CALLBACKKEY,
     },
     // passport verify callback
     async (accessToken, refreshToken, profile, done) => {
@@ -19,11 +19,6 @@ passport.use(
         const existingGoogleAccount = await User.findOne({
           googleAuthId: profile.id,
         });
-        console.log(
-          "existingGoogleAccount log: ",
-          existingGoogleAccount,
-          profile.id
-        );
         // checks if there's user with the email in the db
         if (!existingGoogleAccount) {
           const existingEmailAccount = await User.findOne({
@@ -32,21 +27,21 @@ passport.use(
           // create a new user in the db
           if (!existingEmailAccount) {
             const newAccount = await User.create({
-              firstName: profile.displayName,
+              firstName: profile.name.givenName,
+              lastName: profile.name.familyName,
               googleAuthId: profile.id,
               email: profile.emails[0].value,
-              //   avatar: profile.photos[0].value,
             });
             // returns new account after being created
             console.log("new account! google login successful!");
             return done(null, newAccount);
           }
           // if email exists in the database, return existing email account
-          console.log("google login successful!!");
+          console.log("existing user! google login successful!");
           return done(null, existingEmailAccount);
         }
-        // if user with googleID existed, return Google account
-        console.log("google login successful!!");
+        // if user with googleId existed, return Google account
+        console.log("google login successful!");
         return done(null, existingGoogleAccount);
       } catch (error) {
         console.log(error);
