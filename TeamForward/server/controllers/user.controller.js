@@ -30,8 +30,9 @@ module.exports = {
   },
 
   login: async (req, res) => {
+    log(req.body.email, req.body.password);
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send("something went wring with login");
+      return res.status(400).send("something went wrong with login");
     }
     const user = await User.findOne({ email: req.body.email });
     if (user === null) {
@@ -51,7 +52,7 @@ module.exports = {
       .cookie("jwt-token", userToken, {
         httpOnly: true,
       })
-      .son({ msg: "success!", user: user });
+      .json({ msg: "success!", user: user });
   },
 
   findOneUser: (req, res) => {
