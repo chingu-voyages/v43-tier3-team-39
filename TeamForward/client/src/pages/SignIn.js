@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { userState } from "../GlobalState";
+import log from "../helpers/logging";
 
 const SignIn = () => {
   const google = () => {
-    window.open(
-      // "https://team-forward-back-end.onrender.com/auth/google",
-      process.env.REACT_APP_WINDOWKEY,
-      "_self"
-    );
+    window.open(process.env.REACT_APP_WINDOWKEY, "_self");
+    <Navigate to="/feed" />;
   };
+
   return (
     <div className="bg-white flex flex-col h-screen">
       <header className="m-5 bg-white">Team Forward</header>

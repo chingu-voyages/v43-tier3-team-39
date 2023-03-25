@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
@@ -7,40 +8,42 @@ import UpdateProfile from "./pages/UpdateProfile";
 import axios from "axios";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "./GlobalState";
-import { useEffect, useState } from "react";
 import log from "./helpers/logging";
 
-// const ProtectedRoute = ({ children }) => {
-//   const user = useReactiveVar(userState);
-//   const [apiComplete, setApiComplete] = useState(user ? true : false);
+axios.defaults.withCredentials = true;
 
-//   log(user);
+const ProtectedRoute = ({ children }) => {
+  const user = useReactiveVar(userState);
+  const [apiComplete, setApiComplete] = useState(user ? true : false);
 
-//   useEffect(() => {
-//     if (!user) {
-//       axios
-//         .get("http://localhost:/teamForward/loggedInUser")
-//         .then((res) => {
-//           userState(res.data);
-//           setApiComplete(true);
-//         })
-//         .catch((err) => {
-//           log(err);
-//           setApiComplete(true);
-//         });
-//     }
-//   }, [user]);
+  log(user);
 
-//   if (!apiComplete) {
-//     return null;
-//   }
+  useEffect(() => {
+    if (!user) {
+      axios
+        .get("http://localhost:8000/signin/success")
+        // .get("http://localhost:8000/teamForward/loggedInUser")
+        .then((res) => {
+          userState(res.data.user);
+          setApiComplete(true);
+        })
+        .catch((err) => {
+          log(err);
+          setApiComplete(true);
+        });
+    }
+  }, [user]);
 
-//   if (!user) {
-//     return <Navigate to="/signin" />;
-//   }
+  if (!apiComplete) {
+    return null;
+  }
 
-//   return children;
-// };
+  if (!user) {
+    return <Navigate to="/signin" />;
+  }
+
+  return children;
+};
 
 function App() {
   const user = useReactiveVar(userState);
@@ -48,18 +51,29 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/signin" element={<SignIn />} />
+        <Route
+          path="/signin"
+          element={user ? <Navigate to="/feed" /> : <SignIn />}
+        />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/" element={<Home />} />
         <Route
           path="/feed"
           element={
-            // <ProtectedRoute>
-            <Feed />
-            // </ProtectedRoute>
+            <ProtectedRoute>
+              <Feed />
+            </ProtectedRoute>
           }
         />
-        <Route path="/updateprofile" element={<UpdateProfile />} />
+
+        <Route
+          path="/updateprofile"
+          element={
+            <ProtectedRoute>
+              <UpdateProfile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

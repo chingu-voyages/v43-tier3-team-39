@@ -1,13 +1,10 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 const SignUp = () => {
-  const google = () => {
-    console.log(process.env.REACT_APP_WINDOWKEY);
-    window.open(
-      // "https://team-forward-back-end.onrender.com/auth/google",
-      process.env.REACT_APP_WINDOWKEY,
-      "_self"
-    );
+  const google = async () => {
+    await window.open(process.env.REACT_APP_WINDOWKEY, "_self");
+    <Navigate to="/feed" />;
   };
 
   return (

@@ -79,6 +79,7 @@ module.exports = {
         log("findOneUser failed");
       });
   },
+
   findAllUsers: (req, res) => {
     User.find({})
       .then((allUsers) => {

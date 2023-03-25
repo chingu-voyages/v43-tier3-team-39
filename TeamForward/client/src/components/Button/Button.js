@@ -1,9 +1,9 @@
 const Button = (props) => {
-    const {text, className} = props;
+  const { text, className } = props;
   return (
     <button
       type="button"
-      class={className}
+      className={className}
       data-mdb-ripple="true"
       data-mdb-ripple-color="light"
     >

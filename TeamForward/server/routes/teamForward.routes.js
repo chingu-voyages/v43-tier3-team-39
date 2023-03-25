@@ -1,4 +1,3 @@
-const userController = require("../controllers/user.controller");
 const UserController = require("../controllers/user.controller");
 const { authenticate } = require("../config/jwt.config");
 

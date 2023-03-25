@@ -7,10 +7,9 @@ import { Link } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
 
-
 const Home = () => {
-  const user = useReactiveVar(userState);
-  
+  // const user = useReactiveVar(userState);
+
   return (
     <div>
       <Hero />
@@ -24,16 +23,16 @@ const Home = () => {
 function Hero() {
   return (
     <div className="">
-      <section class="mb-36 ">
-        <nav class="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between">
+      <section className="mb-36 ">
+        <nav className="navbar navbar-expand-lg shadow-md py-2 bg-white relative flex items-center w-full justify-between">
           <div
             div
-            class="px-6 w-full flex flex-wrap items-center justify-between"
+            className="px-6 w-full flex flex-wrap items-center justify-between"
           >
-            <div class="flex items-center">
+            <div className="flex items-center">
               <h1 className="font-bold">TEAM FORWARD</h1>
             </div>
-            <div class="flex items-center lg:ml-auto">
+            <div className="flex items-center lg:ml-auto">
               <Link to="/Signin">
                 <Button
                   text="Login"
@@ -50,26 +49,26 @@ function Hero() {
           </div>
         </nav>
 
-        <div class="px-6 py-12 mt-20 md:px-12 bg-gray-50 text-gray-800 text-center lg:text-left">
-          <div class="container mx-auto xl:px-32">
-            <div class="grid lg:grid-cols-2 gap-12 flex items-center">
-              <div class="mt-12 lg:mt-0">
-                <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">
+        <div className="px-6 py-12 mt-20 md:px-12 bg-gray-50 text-gray-800 text-center lg:text-left">
+          <div className="container mx-auto xl:px-32">
+            <div className="grid lg:grid-cols-2 gap-12 flex items-center">
+              <div className="mt-12 lg:mt-0">
+                <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">
                   Time for wellness <br />
-                  <span class="text-blue-600 text-base font-medium md:text-xl xl:text-3xl">
+                  <span className="text-blue-600 text-base font-medium md:text-xl xl:text-3xl">
                     Find your wellness buddy at work and exercise together.
                   </span>
                 </h1>
                 <Link to="/SignUp">
-                <Button
-                  text="Get Started"
-                  className="inline-block px-7 py-3 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-                  href="#!"
-                />
+                  <Button
+                    text="Get Started"
+                    className="inline-block px-7 py-3 mr-2 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    href="#!"
+                  />
                 </Link>
 
                 <a
-                  class="inline-block px-7 py-3 bg-transparent text-blue-600 font-medium text-sm leading-snug uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
+                  className="inline-block px-7 py-3 bg-transparent text-blue-600 font-medium text-sm leading-snug uppercase rounded hover:text-blue-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                   href="#!"
@@ -78,7 +77,7 @@ function Hero() {
                   Learn more
                 </a>
               </div>
-              <div class="mb-12 lg:mb-0">
+              <div className="mb-12 lg:mb-0">
                 <img src={heroImg} class="w-full rounded-lg shadow-lg" alt="" />
               </div>
             </div>
@@ -91,16 +90,16 @@ function Hero() {
 
 function ThreeStepProcess() {
   return (
-    <div class="container my-24 px-6 mx-auto">
-      <section class="mb-40 text-gray-800 text-center">
+    <div className="container my-24 px-6 mx-auto">
+      <section className="mb-40 text-gray-800 text-center">
         <h2 class="text-3xl font-bold mb-6">
           Connect with colleagues and stay fit together
         </h2>
-        <p class="text-xl mb-24">
+        <p className="text-xl mb-24">
           Discover your shared interests, connect, and organize meet ups.
         </p>
 
-        <div class="grid lg:gap-x-12 lg:grid-cols-3 ">
+        <div className="grid lg:gap-x-12 lg:grid-cols-3 ">
           <StepsDetail
             title="Choose your activity"
             description="Choose the activity you are interested in."
@@ -154,45 +153,47 @@ function ThreeStepProcess() {
 
 function Testimonials() {
   return (
-    <div class="container my-24 px-6 mx-auto">
-      <section class="mb-32 text-gray-800 text-center">
-        <h2 class="text-3xl font-bold mb-12 pb-4 text-center">
+    <div className="container my-24 px-6 mx-auto">
+      <section className="mb-32 text-gray-800 text-center">
+        <h2 className="text-3xl font-bold mb-12 pb-4 text-center">
           HEAR FROM OUR MEMBERS
         </h2>
 
-        <div class="grid md:grid-cols-3 gap-6 xl:gap-x-12">
-          <div class="mb-6 lg:mb-0">
-            <div class="relative block bg-white rounded-lg shadow-lg">
-              <div class="flex">
+        <div className="grid md:grid-cols-3 gap-6 xl:gap-x-12">
+          <div className="mb-6 lg:mb-0">
+            <div className="relative block bg-white rounded-lg shadow-lg">
+              <div className="flex">
                 <div
-                  class="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4 w-full"
+                  className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4 w-full"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
                   <img
                     src="https://mdbcdn.b-cdn.net/img/new/avatars/8.jpg"
-                    class="w-full"
+                    className="w-full"
                     alt="a man with glasses"
                   />
                   <a href="#!">
                     <div
-                      class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
+                      className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
                       style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
                     ></div>
                   </a>
                 </div>
               </div>
-              <div class="p-6">
-                <h5 class="text-lg font-bold mb-2">John Doe</h5>
-                <h6 class="font-medium text-blue-600 mb-4">Senior Developer</h6>
-                <ul class="flex justify-center mb-6">
+              <div className="p-6">
+                <h5 className="text-lg font-bold mb-2">John Doe</h5>
+                <h6 className="font-medium text-blue-600 mb-4">
+                  Senior Developer
+                </h6>
+                <ul className="flex justify-center mb-6">
                   <li>
                     <svg
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -209,7 +210,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -226,7 +227,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -243,7 +244,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -260,7 +261,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star-half-alt"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 536 512"
@@ -281,11 +282,11 @@ function Testimonials() {
             </div>
           </div>
 
-          <div class="mb-6 lg:mb-0">
-            <div class="relative block bg-white rounded-lg shadow-lg">
+          <div className="mb-6 lg:mb-0">
+            <div className="relative block bg-white rounded-lg shadow-lg">
               <div class="flex">
                 <div
-                  class="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4 w-full"
+                  className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4 w-full"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
@@ -296,23 +297,25 @@ function Testimonials() {
                   />
                   <a href="#!">
                     <div
-                      class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
+                      className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
                       style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
                     ></div>
                   </a>
                 </div>
               </div>
-              <div class="p-6">
-                <h5 class="text-lg font-bold mb-2">Halley Frank</h5>
-                <h6 class="font-medium text-blue-600 mb-4">Product Owner</h6>
-                <ul class="flex justify-center mb-6">
+              <div className="p-6">
+                <h5 className="text-lg font-bold mb-2">Halley Frank</h5>
+                <h6 className="font-medium text-blue-600 mb-4">
+                  Product Owner
+                </h6>
+                <ul className="flex justify-center mb-6">
                   <li>
                     <svg
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -329,7 +332,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -346,7 +349,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -363,7 +366,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -380,7 +383,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -401,38 +404,40 @@ function Testimonials() {
             </div>
           </div>
 
-          <div class="mb-0">
-            <div class="relative block bg-white rounded-lg shadow-lg">
-              <div class="flex">
+          <div className="mb-0">
+            <div className="relative block bg-white rounded-lg shadow-lg">
+              <div className="flex">
                 <div
-                  class="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4 w-full"
+                  className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4 w-full"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
                 >
                   <img
                     src="https://mdbcdn.b-cdn.net/img/new/avatars/18.jpg"
-                    class="w-full"
+                    className="w-full"
                     alt="young-lady-looking-away"
                   />
                   <a href="#!">
                     <div
-                      class="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
+                      className="absolute top-0 right-0 bottom-0 left-0 w-full h-full overflow-hidden bg-fixed opacity-0 hover:opacity-100 transition duration-300 ease-in-out"
                       style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
                     ></div>
                   </a>
                 </div>
               </div>
-              <div class="p-6">
-                <h5 class="text-lg font-bold mb-2">Lisa Trey</h5>
-                <h6 class="font-medium text-blue-600 mb-4">Lead Designer</h6>
-                <ul class="flex justify-center mb-6">
+              <div className="p-6">
+                <h5 className="text-lg font-bold mb-2">Lisa Trey</h5>
+                <h6 className="font-medium text-blue-600 mb-4">
+                  Lead Designer
+                </h6>
+                <ul className="flex justify-center mb-6">
                   <li>
                     <svg
                       aria-hidden="true"
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -449,7 +454,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -466,7 +471,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -483,7 +488,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="fas"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -500,7 +505,7 @@ function Testimonials() {
                       focusable="false"
                       data-prefix="far"
                       data-icon="star"
-                      class="w-4 text-yellow-500"
+                      className="w-4 text-yellow-500"
                       role="img"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 576 512"
@@ -529,16 +534,16 @@ function Testimonials() {
 function NewsletterForm() {
   return (
     <div className="container my-24 px-6 mx-auto">
-      <section class="mb-32 text-gray-800 text-center">
-        <div class="flex flex-wrap justify-center">
-          <div class="grow-0 shrink-0 flex-basis w-full lg:w-6/12 px-3">
-            <div class="p-4 bg-blue-600 rounded-full shadow-lg inline-block mb-6">
+      <section className="mb-32 text-gray-800 text-center">
+        <div className="flex flex-wrap justify-center">
+          <div className="grow-0 shrink-0 flex-basis w-full lg:w-6/12 px-3">
+            <div className="p-4 bg-blue-600 rounded-full shadow-lg inline-block mb-6">
               <svg
                 aria-hidden="true"
                 focusable="false"
                 data-prefix="fas"
                 data-icon="envelope"
-                class="w-5 h-5 text-white"
+                className="w-5 h-5 text-white"
                 role="img"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
@@ -550,17 +555,19 @@ function NewsletterForm() {
               </svg>
             </div>
 
-            <h2 class="text-3xl font-bold mb-6">Subscribe to the newsletter</h2>
+            <h2 className="text-3xl font-bold mb-6">
+              Subscribe to the newsletter
+            </h2>
 
-            <p class="text-gray-500 mb-12">
+            <p className="text-gray-500 mb-12">
               Be the first to know when the full version is released! Sign up
               below to receive updates and exclusive access.
             </p>
 
-            <div class="md:flex flex-row">
+            <div className="md:flex flex-row">
               <input
                 type="text"
-                class="form-control block w-full px-4 py-2 mb-2 md:mb-0 md:mr-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                className="form-control block w-full px-4 py-2 mb-2 md:mb-0 md:mr-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 placeholder="Enter your email"
               />
               <Button
