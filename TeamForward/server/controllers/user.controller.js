@@ -80,6 +80,7 @@ module.exports = {
         log("findOneUser failed");
       });
   },
+
   findAllUsers: (req, res) => {
     User.find({})
       .then((allUsers) => {
@@ -95,9 +96,10 @@ module.exports = {
       });
   },
   updateUser: (req, res) => {
+    console.log(req.body);
     User.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((updatedUser) => {
-        log(updatedUser);
+        console.log(updatedUser);
         res.json(updatedUser);
       })
       .catch((err) => {

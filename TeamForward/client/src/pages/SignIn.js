@@ -1,19 +1,17 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import SignInWEmail from "../components/SignUpAndSignInPopUps/SignInWEmail";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 import { userState } from "../GlobalState";
+import log from "../helpers/logging";
 
 const SignIn = () => {
   const [emailLoginForm, setEmailLoginForm] = useState(false);
   
   const google = () => {
-    window.open(
-      // "https://team-forward-back-end.onrender.com/auth/google",
-      process.env.REACT_APP_WINDOWKEY,
-      "_self"
-    );
+    window.open(process.env.REACT_APP_WINDOWKEY, "_self");
+    <Navigate to="/feed" />;
   };
-
-
 
   return (
     <div className="bg-white flex flex-col h-screen">

@@ -18,7 +18,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "*",
+    origin: process.env.REDIRECTKEYTWO,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -44,7 +44,6 @@ app.use((req, res, next) => {
 
 require("./Config/mongoose.config");
 require("./routes/teamForward.routes")(app);
-// require("./routes/loginOauth.routes");
 
 app.use("/", require("./routes/oauth.routes"));
 

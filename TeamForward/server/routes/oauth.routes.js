@@ -1,37 +1,49 @@
 const router = require("express").Router();
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 
-// OAuth callback route
 router.get(
   "/oauth2callback",
   passport.authenticate("google", {
-    successRedirect: "/success",
-    failureRedirect: "/signin",
+    successRedirect: process.env.REDIRECTKEYONE,
+    failureRedirect: "/signin/failed",
     successMessage: true,
     failureMessage: true,
   })
 );
 
-router.get("/success", (req, res) => {
-  let user = req.user;
-  let json = JSON.stringify(user);
-  const queryString = new URLSearchParams({ user: json }).toString();
-  res.redirect(`${process.env.REDIRECTKEYONE}?${queryString}`);
+router.get("/signin/success", (req, res) => {
+  if (req.user) {
+    const payload = { id: req.user._id };
+    const userToken = jwt.sign(payload, process.env.SecretKeyOne);
+    res.cookie("jwt-token", userToken, { httpOnly: true });
+    res.status(200).json({
+      success: true,
+      message: "successful",
+      user: req.user,
+    });
+  }
 });
 
-// OAuth Logout Route
+router.get("/signin/failed", (req, res) => {
+  res.status(401).json({
+    success: false,
+    message: "failure",
+  });
+});
+
 router.get("/logout", function (req, res) {
   req.logout(function (err) {
     if (err) {
       return next(err);
     }
   });
-  res.redirect("http:localhost:3000/");
+  res.redirect(process.env.REDIRECTKEYTWO);
 });
 
 module.exports = router;

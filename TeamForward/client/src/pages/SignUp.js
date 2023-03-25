@@ -5,12 +5,8 @@ import { userState } from "../GlobalState";
 const SignUp = () => {
   const [emailSignUpForm, setEmailSignUpForm] = useState(false);
 
-  const google = () => {
-    window.open(
-      // "https://team-forward-back-end.onrender.com/auth/google",
-      process.env.REACT_APP_WINDOWKEY,
-      "_self"
-    );
+  const google = async () => {
+    await window.open(process.env.REACT_APP_WINDOWKEY, "_self");
   };
 
   return (

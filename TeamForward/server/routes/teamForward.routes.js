@@ -1,4 +1,3 @@
-const userController = require("../controllers/user.controller");
 const UserController = require("../controllers/user.controller");
 const { authenticate } = require("../config/jwt.config");
 
@@ -13,7 +12,9 @@ module.exports = (app) => {
   // );
   app.get("/teamForward/loggedInUser", UserController.loggedInUser);
   app.get("/teamForward/:id", authenticate, UserController.findOneUser);
-  app.get("/teamForward", authenticate, UserController.findAllUsers);
-  app.put("/teamForward/:id", authenticate, UserController.updateUser);
+  // app.get("/teamForward", authenticate, UserController.findAllUsers);
+  app.get("/teamForward", UserController.findAllUsers);
+  // app.put("/teamForward/:id", authenticate, UserController.updateUser);
+  app.put("/teamForward/:id", UserController.updateUser);
   app.delete("/teamForward/:id", authenticate, UserController.deleteUser);
 };
