@@ -7,26 +7,15 @@ const cloudinary = require("../Config/cloudinary");
 
 module.exports = {
   createNewUser: (req, res) => {
-    cloudinary.uploader
-      .upload(req.file.path)
-      .then((result) => {
-        const { secure_url, public_id } = result;
-        return User.create({
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          image: result.secure_url,
-          cloudinaryId: result.public_id,
-        });
-      })
+    User.create(req.body)
       .then((newUser) => {
         const payload = { id: newUser._id };
         const userToken = jwt.sign(payload, process.env.SecretKeyOne);
-        console.log(newUser);
+        log(newUser);
         res.cookie("jwt-token", userToken, { httpOnly: true }).json(newUser);
       })
       .catch((err) => {
-        console.log("something went wrong with createNewUser", err);
+        log("something went wrong with createNewUser");
         res.status(400).json(err);
       });
   },
@@ -109,9 +98,11 @@ module.exports = {
       });
   },
   updateUser: (req, res) => {
+
+
     if (req.body.photo) { // TODO: when we hook the front end, this may be called something else like req.file.path
       // TODO: if there's an existing cloudinaryProfileImgUrl/cloudinaryId, then delete it from cloudinary LINK: https://cloudinary.com/documentation/image_upload_api_reference#destroy_method
-
+      cloudinary.uploader.destroy(User.cloudinaryId)
       cloudinary.uploader
         .upload(req.body.photo) 
         .then((result) => {

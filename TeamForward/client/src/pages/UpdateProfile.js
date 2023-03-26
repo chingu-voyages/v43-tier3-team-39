@@ -37,6 +37,7 @@ const UpdateProfile = () => {
   return (
     <div>
       <Jumbotron />
+      <PhotoInput />
       <UserInfo
         formInfo={formInfo}
         setFormInfo={setFormInfo}
@@ -58,6 +59,29 @@ function Jumbotron() {
           Let's start your profile, connect to people you know, and engage with
           them through shared interests.
         </p>
+      </div>
+    </div>
+  );
+}
+
+function PhotoInput() {
+  return (
+    <div class="flex justify-center dark:bg-gray-900">
+      <div class="mb-3 w-96 mt-12">
+        <label
+          for="photo-upload"
+          class="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
+        >
+          Upload profile picture
+        </label>
+        <input
+          class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding py-[0.32rem] px-3 text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100"
+          type="file"
+          id="photo-upload"
+          name= "profilePhoto"
+          accept=".jpeg, .png, .jpg"
+          
+        />
       </div>
     </div>
   );
@@ -238,3 +262,18 @@ function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
 }
 
 export default UpdateProfile;
+
+
+// converts img to base64
+function convertToBase64(file){
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result)
+    };
+    fileReader.onerror = (error) => {
+      reject(error)
+    }
+  })
+}
