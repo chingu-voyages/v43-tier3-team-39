@@ -55,7 +55,6 @@ const UpdateProfile = () => {
   return (
     <div>
       <Jumbotron user={user} />
-      <PhotoInput />
       <UserInfo
         formInfo={formInfo}
         setFormInfo={setFormInfo}
