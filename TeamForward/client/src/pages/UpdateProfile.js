@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
 import userService from "../helpers/userService";
+import Button from "../components/Button/Button";
+import log from "../helpers/logging";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -27,61 +29,57 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       const response = await userService.updateProfile(user._id, formInfo);
-      console.log(response);
+      log(response);
       navigate("/feed");
     } catch (error) {
-      console.log(error);
+      log(error);
+    }
+  };
+
+  const checkInterests = (item) => {
+    if (user.interests) {
+      return user.interests.includes(item);
+    } else {
+      return false;
+    }
+  };
+
+  const checkActivities = (item) => {
+    if (user.activities) {
+      return user.activities.includes(item);
+    } else {
+      return false;
     }
   };
 
   return (
     <div>
-      <Jumbotron />
+      <Jumbotron user={user} />
       <PhotoInput />
       <UserInfo
         formInfo={formInfo}
         setFormInfo={setFormInfo}
         handleOnChange={handleOnChange}
         handleSubmit={handleSubmit}
-        navigate={navigate}
+        checkInterests={checkInterests}
+        checkActivities={checkActivities}
         user={user}
       />
     </div>
   );
 };
 
-function Jumbotron() {
+function Jumbotron({ user }) {
   return (
     <div>
       <div className="rounded-lg bg-neutral-100 p-6 text-neutral-700 shadow-lg dark:bg-neutral-600 dark:text-neutral-200 dark:shadow-black/30">
-        <h2 className="mb-5 text-3xl font-semibold">Welcome, user!</h2>
+        <h2 className="mb-5 text-3xl font-semibold">
+          Welcome, {user.firstName}!
+        </h2>
         <p>
           Let's start your profile, connect to people you know, and engage with
           them through shared interests.
         </p>
-      </div>
-    </div>
-  );
-}
-
-function PhotoInput() {
-  return (
-    <div class="flex justify-center dark:bg-gray-900">
-      <div class="mb-3 w-96 mt-12">
-        <label
-          for="photo-upload"
-          class="mb-2 inline-block text-neutral-700 dark:text-neutral-200"
-        >
-          Upload profile picture
-        </label>
-        <input
-          class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding py-[0.32rem] px-3 text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[margin-inline-end:0.75rem] file:[border-inline-end-width:1px] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100"
-          type="file"
-          id="photo-upload"
-          name= "profilePhoto"
-          accept=".jpeg, .png, .jpg"
-          
-        />
       </div>
     </div>
   );
@@ -210,18 +208,18 @@ function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
                 Interests:
               </label>
               <div className="flex items-center space-x-4">
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Networking
-                </button>
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Mentorship
-                </button>
+                {INTERESTS.map((item, key) => {
+                  return (
+                    <Button
+                      text={item}
+                      className={
+                        checkInterests(item)
+                          ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                          : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                      }
+                    />
+                  );
+                })}
               </div>
             </div>
             <div className="sm:col-span-2">
@@ -232,18 +230,18 @@ function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
                 Activities:
               </label>
               <div className="flex items-center space-x-4">
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Virtual Coffee
-                </button>
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Hiking
-                </button>
+                {ACTIVITIES.map((item, key) => {
+                  return (
+                    <Button
+                      text={item}
+                      className={
+                        checkActivities(item)
+                          ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                          : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                      }
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>

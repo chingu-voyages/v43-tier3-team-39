@@ -21,7 +21,7 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     if (!user) {
       axios
-        .get("http://localhost:8000/signin/success")
+        .get(`${process.env.REACT_APP_BE_URL}/signin/success`)
         // .get("http://localhost:8000/teamForward/loggedInUser")
         .then((res) => {
           userState(res.data.user);
