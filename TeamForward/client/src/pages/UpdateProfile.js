@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
 import userService from "../helpers/userService";
+import Button from "../components/Button/Button";
+import log from "../helpers/logging";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -27,33 +29,52 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       const response = await userService.updateProfile(user._id, formInfo);
-      console.log(response);
+      log(response);
       navigate("/feed");
     } catch (error) {
-      console.log(error);
+      log(error);
+    }
+  };
+
+  const checkInterests = (item) => {
+    if (user.interests) {
+      return user.interests.includes(item);
+    } else {
+      return false;
+    }
+  };
+
+  const checkActivities = (item) => {
+    if (user.activities) {
+      return user.activities.includes(item);
+    } else {
+      return false;
     }
   };
 
   return (
     <div>
-      <Jumbotron />
+      <Jumbotron user={user} />
       <UserInfo
         formInfo={formInfo}
         setFormInfo={setFormInfo}
         handleOnChange={handleOnChange}
         handleSubmit={handleSubmit}
-        navigate={navigate}
+        checkInterests={checkInterests}
+        checkActivities={checkActivities}
         user={user}
       />
     </div>
   );
 };
 
-function Jumbotron() {
+function Jumbotron({ user }) {
   return (
     <div>
       <div className="rounded-lg bg-neutral-100 p-6 text-neutral-700 shadow-lg dark:bg-neutral-600 dark:text-neutral-200 dark:shadow-black/30">
-        <h2 className="mb-5 text-3xl font-semibold">Welcome, user!</h2>
+        <h2 className="mb-5 text-3xl font-semibold">
+          Welcome, {user.firstName}!
+        </h2>
         <p>
           Let's start your profile, connect to people you know, and engage with
           them through shared interests.
@@ -63,7 +84,15 @@ function Jumbotron() {
   );
 }
 
-function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
+function UserInfo({
+  formInfo,
+  handleOnChange,
+  handleSubmit,
+  checkInterests,
+  checkActivities,
+}) {
+  const INTERESTS = ["Networking", "Mentorship"];
+  const ACTIVITIES = ["Virtual Coffee", "Hiking"];
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -186,18 +215,18 @@ function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
                 Interests:
               </label>
               <div className="flex items-center space-x-4">
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Networking
-                </button>
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Mentorship
-                </button>
+                {INTERESTS.map((item, key) => {
+                  return (
+                    <Button
+                      text={item}
+                      className={
+                        checkInterests(item)
+                          ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                          : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                      }
+                    />
+                  );
+                })}
               </div>
             </div>
             <div className="sm:col-span-2">
@@ -208,18 +237,18 @@ function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
                 Activities:
               </label>
               <div className="flex items-center space-x-4">
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Virtual Coffee
-                </button>
-                <button
-                  type="button"
-                  className="text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                >
-                  Hiking
-                </button>
+                {ACTIVITIES.map((item, key) => {
+                  return (
+                    <Button
+                      text={item}
+                      className={
+                        checkActivities(item)
+                          ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                          : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                      }
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
