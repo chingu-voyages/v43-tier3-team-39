@@ -26,6 +26,12 @@ const UserSchema = new mongoose.Schema({
   photos: {
     type: [Photo.schema],
   },
+  cloudinaryProfileImgUrl: {
+    type: String,
+  },
+  cloudinaryId: {
+    type: String,
+  },
   profession: {
     type: String,
   },
