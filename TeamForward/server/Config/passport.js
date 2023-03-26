@@ -1,5 +1,7 @@
 const express = require("express");
 const passport = require("passport");
+// const JwtStrategy = require("passport-jwt").Strategy;
+// const ExtractJwt = require("passport-jwt").ExtractJwt;
 const GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
 const User = require("../Models/User");
 // const Photo = require("../Models/Photo");
@@ -31,6 +33,10 @@ passport.use(
               lastName: profile.name.familyName,
               googleAuthId: profile.id,
               email: profile.emails[0].value,
+              zipCode: 0,
+              radius: 0,
+              bio: "",
+              profession: "",
             });
             // returns new account after being created
             console.log("new account! google login successful!");
