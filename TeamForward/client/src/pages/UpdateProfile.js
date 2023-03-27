@@ -84,7 +84,15 @@ function Jumbotron({ user }) {
   );
 }
 
-function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
+function UserInfo({
+  formInfo,
+  handleOnChange,
+  handleSubmit,
+  checkInterests,
+  checkActivities,
+}) {
+  const INTERESTS = ["Networking", "Mentorship"];
+  const ACTIVITIES = ["Virtual Coffee", "Hiking"];
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -259,18 +267,3 @@ function UserInfo({ formInfo, handleOnChange, handleSubmit, navigate, user }) {
 }
 
 export default UpdateProfile;
-
-
-// converts img to base64
-function convertToBase64(file){
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result)
-    };
-    fileReader.onerror = (error) => {
-      reject(error)
-    }
-  })
-}

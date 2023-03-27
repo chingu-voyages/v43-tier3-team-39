@@ -79,7 +79,7 @@ function Hero() {
                 </a>
               </div>
               <div className="mb-12 lg:mb-0">
-                <img src={heroImg} class="w-full rounded-lg shadow-lg" alt="" />
+                <img src={heroImg} className="w-full rounded-lg shadow-lg" alt="" />
               </div>
             </div>
           </div>
@@ -93,7 +93,7 @@ function ThreeStepProcess() {
   return (
     <div className="container my-24 px-6 mx-auto">
       <section className="mb-40 text-gray-800 text-center">
-        <h2 class="text-3xl font-bold mb-6">
+        <h2 className="text-3xl font-bold mb-6">
           Connect with colleagues and stay fit together
         </h2>
         <p className="text-xl mb-24">
@@ -229,7 +229,7 @@ function Testimonials() {
 
           <div className="mb-6 lg:mb-0">
             <div className="relative block bg-white rounded-lg shadow-lg">
-              <div class="flex">
+              <div className="flex">
                 <div
                   className="relative overflow-hidden bg-no-repeat bg-cover relative overflow-hidden bg-no-repeat bg-cover shadow-lg rounded-lg mx-4 -mt-4 w-full"
                   data-mdb-ripple="true"
@@ -237,7 +237,7 @@ function Testimonials() {
                 >
                   <img
                     src="https://mdbcdn.b-cdn.net/img/new/avatars/6.jpg"
-                    class="w-full"
+                    className="w-full"
                     alt="lady with brown hair"
                   />
                   <a href="#!">

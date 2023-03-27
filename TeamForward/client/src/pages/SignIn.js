@@ -25,7 +25,7 @@ const SignIn = () => {
             Sign in with Email
           </button>
           {emailLoginForm?<SignInWEmail/>:null}
-          <div class="mb-6 flex items-center justify-between"></div>
+          <div className="mb-6 flex items-center justify-between"></div>
           <button
             className="bg-white p-1 w-full border border-black"
             onClick={google}>
