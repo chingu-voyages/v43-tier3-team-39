@@ -1,4 +1,4 @@
-const Button = (props) => {
+const BasicButtonStyling = (props) => {
   const { text, className } = props;
   return (
     <button
@@ -13,4 +13,4 @@ const Button = (props) => {
   );
 };
 
-export default Button;
+export default BasicButtonStyling;
