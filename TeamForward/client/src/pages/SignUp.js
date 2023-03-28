@@ -6,6 +6,8 @@ import { Navigate } from "react-router-dom";
 const SignUp = () => {
   const [emailSignUpForm, setEmailSignUpForm] = useState(false);
 
+  const user = userState();
+
   const google = async () => {
     await window.open(process.env.REACT_APP_WINDOWKEY, "_self");
     <Navigate to="/feed" />;
@@ -24,13 +26,12 @@ const SignUp = () => {
             Sign up with Email
           </button>
           {emailSignUpForm ? <SignUpWEmail /> : null}
-          <button
+          {/* <button
             className="bg-white p-1 w-full border border-black"
             onClick={google}
           >
             Sign up with Google
-          </button>
-
+          </button> */}
           <p>Already have an account?</p>
           <a href="/signin" className="p-1 underline">
             Sign in

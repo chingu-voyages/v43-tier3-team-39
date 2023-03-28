@@ -1,34 +1,37 @@
-import React, {useState} from 'react';
-import axios from 'axios';
-import {userState} from '../../GlobalState';
-import log from '../../helpers/logging';
-import {useNavigate} from 'react-router-dom';
-import Input from '../Input';
-import { useReactiveVar } from '@apollo/client';
+import React, { useState } from "react";
+import axios from "axios";
+import { userState } from "../../GlobalState";
+import log from "../../helpers/logging";
+import { useNavigate } from "react-router-dom";
+import Input from "../Input";
+import { useReactiveVar } from "@apollo/client";
 
 const SignInWEmail = () => {
-    const [userEmail, setUserEmail] = useState();
-    const [userPassword, setUserPassword] = useState();
-    const [error, setError] = useState();
-    const navigate = useNavigate();
-    const user = useReactiveVar(userState);
+  const [userEmail, setUserEmail] = useState();
+  const [userPassword, setUserPassword] = useState();
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+  const user = useReactiveVar(userState);
 
+  console.log("password", userPassword);
+  console.log("email", userEmail);
 
-    console.log("password", userPassword);
-    console.log("email", userEmail);
+  const onLoginHandler = (e) => {
+    e.preventDefault();
+    axios
+      .post(`${process.env.REACT_APP_BE_URL}/teamForward/login`, {
+        email: userEmail,
+        password: userPassword,
+      })
+      .then((res) => {
+        userState(res.data.user);
+        navigate(`/feed`);
+      })
+      .catch((err) => {
+        setError("Your Email or Password is incorrect.");
+      });
+  };
 
-    const onLoginHandler = (e) => {
-        e.preventDefault();
-        axios.post("http://localhost:8000/teamForward/login", {email: userEmail, password: userPassword})
-        .then((res)=>{
-            userState(res.data.user);
-            navigate(`/feed`);
-        })
-        .catch((err)=>{
-            setError("Your Email or Password is incorrect.");
-        });
-    };
-    
     return (
         <div className="block max-w-sm rounded-lg bg-white p-6 shadow-lg ">
             <form onSubmit={onLoginHandler}>
@@ -71,7 +74,7 @@ const SignInWEmail = () => {
                 <div>{ error ? <span>{error}</span>:null}</div>
             </form>
         </div>
-    )
+  );
 };
 
 export default SignInWEmail;

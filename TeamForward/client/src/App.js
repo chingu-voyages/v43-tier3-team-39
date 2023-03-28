@@ -16,13 +16,11 @@ const ProtectedRoute = ({ children }) => {
   const user = useReactiveVar(userState);
   const [apiComplete, setApiComplete] = useState(user ? true : false);
 
-  log(user);
-
   useEffect(() => {
     if (!user) {
       axios
-        .get(`${process.env.REACT_APP_BE_URL}/signin/success`)
-        // .get("http://localhost:8000/teamForward/loggedInUser")
+        // .get(`${process.env.REACT_APP_BE_URL}/signin/success`)
+        .get(`${process.env.REACT_APP_BE_URL}/teamForward/loggedInUser`)
         .then((res) => {
           userState(res.data.user);
           setApiComplete(true);
@@ -56,7 +54,7 @@ function App() {
           element={user ? <Navigate to="/feed" /> : <SignIn />}
         />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={user ? <Navigate to="/feed" /> : <Home />} />
         <Route
           path="/feed"
           element={
@@ -69,9 +67,9 @@ function App() {
         <Route
           path="/updateprofile"
           element={
-            <ProtectedRoute>
-              <UpdateProfile />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <UpdateProfile />
+            // </ProtectedRoute>
           }
         />
         <Route
