@@ -76,11 +76,7 @@ const SignUpWEmail = () => {
                         placeholder="Enter your first name."
                     />
                     <label
-<<<<<<< HEAD
                         htmlFor="exampleInputEmail2"
-=======
-                        htmlFhtmlFor="exampleInputEmail2"
->>>>>>> main
                         className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">
                         First Name
                     </label>
@@ -102,11 +98,7 @@ const SignUpWEmail = () => {
                         placeholder="Enter your last name."
                     />
                     <label
-<<<<<<< HEAD
-                        for="exampleInputEmail2"
-=======
                         htmlFor="exampleInputEmail2"
->>>>>>> main
                         className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">
                         Last Name
                     </label>
@@ -128,11 +120,7 @@ const SignUpWEmail = () => {
                         placeholder="Enter Email"
                     />
                     <label
-<<<<<<< HEAD
-                        for="exampleInputEmail2"
-=======
                         htmlFor="exampleInputEmail2"
->>>>>>> main
                         className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">
                         Email address
                     </label>
@@ -154,11 +142,7 @@ const SignUpWEmail = () => {
                         placeholder="Password"
                     />
                     <label
-<<<<<<< HEAD
-                        for="exampleInputPassword"
-=======
                         htmlFor="InputPassword"
->>>>>>> main
                         className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">
                         Password</label>
                 </div>
@@ -172,11 +156,7 @@ const SignUpWEmail = () => {
                         placeholder="Confirm Password"
                     />
                     <label
-<<<<<<< HEAD
-                        for="InputPassword2"
-=======
                         htmlFor="InputPassword2"
->>>>>>> main
                         className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">
                         Confirm Password</label>
                 </div>
