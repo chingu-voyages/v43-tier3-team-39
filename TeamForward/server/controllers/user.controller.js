@@ -10,7 +10,6 @@ module.exports = {
       .then((newUser) => {
         const payload = { id: newUser._id };
         const userToken = jwt.sign(payload, process.env.SecretKeyOne);
-        log(newUser);
         res.cookie("jwt-token", userToken, { httpOnly: true }).json(newUser);
       })
       .catch((err) => {
