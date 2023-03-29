@@ -95,10 +95,9 @@ module.exports = {
       });
   },
   updateUser: (req, res) => {
-    console.log(req.body);
     User.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((updatedUser) => {
-        console.log(updatedUser);
+        log(updatedUser);
         res.json(updatedUser);
       })
       .catch((err) => {
