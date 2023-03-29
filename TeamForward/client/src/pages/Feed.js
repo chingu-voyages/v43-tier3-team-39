@@ -12,6 +12,8 @@ const Feed = () => {
     <div>
       <h1>Hello {user ? user.firstName : ""}</h1>
       <Link to="/updateprofile">Update Profile</Link>
+      <br />
+      <Link to="/myProfile" >My Profile</Link>
     </div>
   );
 };
