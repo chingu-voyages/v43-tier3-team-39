@@ -42,7 +42,7 @@ const SignUpWEmail = () => {
     }
     // if(passwordMatches){
     axios
-      .post("http://localhost:8000/teamForward/newUsers", newUser)
+      .post(`${process.env.REACT_APP_BE_URL}/teamForward/newUsers`, newUser)
       .then((res) => {
         userState(res.data);
         navigate(`/feed`);
