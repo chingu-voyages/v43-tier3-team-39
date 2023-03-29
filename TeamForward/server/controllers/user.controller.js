@@ -3,6 +3,7 @@ const log = require("../helpers/logging");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const getLocationHelper = require("../helpers/locationHelpers");
 
 module.exports = {
   createNewUser: (req, res) => {
