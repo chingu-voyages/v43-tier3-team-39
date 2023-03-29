@@ -94,8 +94,32 @@ module.exports = {
         });
       });
   },
-  updateUser: (req, res) => {
-    User.findOneAndUpdate({ _id: req.params.id }, req.body)
+
+  updateUser: async(req, res) => {
+    const address = req.body.zipcode;
+    const locationData = await getLocationHelper(address);
+
+    let location;
+    if(locationData.length > 0){
+      location = locationData[0];
+    }
+
+    const coordinates = [location.longitude, location.latitude];
+    console.log("coordinates", coordinates);
+
+    const newInputInfo = {
+      ...req.body, 
+      location: {
+          type:'Point',
+          coordinates
+      },
+      location2: {
+        type:'Point',
+        coordinates
+      }
+    };
+
+    User.findOneAndUpdate({ _id: req.params.id }, newInputInfo)
       .then((updatedUser) => {
         log(updatedUser);
         res.json(updatedUser);
