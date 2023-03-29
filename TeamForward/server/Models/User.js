@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
 const Photo = require("./Photo");
+const GeoJSON = require("mongoose-geojson-schema");
+const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const uniqueValidator = require("mongoose-unique-validator");
 
@@ -41,6 +42,20 @@ const UserSchema = new mongoose.Schema({
   },
   zipCode: {
     type: Number,
+  },
+  location2: {
+    type: mongoose.Schema.Types.Point 
+  },
+  location: {
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ['Point'], // 'location.type' must be 'Point'
+      required: true
+    },
+    coordinates: {
+      type: [Number],
+      required: true
+    }
   },
   // how to convert miles to km
   radius: {
