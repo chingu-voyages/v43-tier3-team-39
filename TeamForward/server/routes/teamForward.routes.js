@@ -10,7 +10,8 @@ module.exports = (app) => {
   //   authenticate,
   //   UserController.loggedInUser
   // );
-  app.get("/teamForward/loggedInUser", UserController.loggedInUser);
+  
+  app.get("/teamForward/loggedInUser", authenticate, UserController.loggedInUser);
   app.get("/teamForward/:id", authenticate, UserController.findOneUser);
   // app.get("/teamForward", authenticate, UserController.findAllUsers);
   app.get("/teamForward", UserController.findAllUsers);
