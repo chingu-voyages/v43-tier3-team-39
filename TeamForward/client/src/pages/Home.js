@@ -557,7 +557,7 @@ function NewsletterForm() {
             <p className="text-gray-500 mb-12">
               Be the first to know when the full version is released! Sign up
               below to receive updates and early access.
-            </p>git
+            </p>
 
             <div className="md:flex flex-row">
               <input
