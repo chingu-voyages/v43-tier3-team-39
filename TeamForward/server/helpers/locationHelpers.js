@@ -12,5 +12,11 @@ const getLocationHelper = async(address) => {
 module.exports = getLocationHelper;
 
 
-
+const getUsersWithinRadius = async(centerPoint) => {
+    //geoWithin centersphere // users coordinates
+    
+    //check all users coordinates
+        //create list of users within radius
+    //return new list
+}
 

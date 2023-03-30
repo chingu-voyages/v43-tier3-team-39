@@ -82,11 +82,20 @@ module.exports = {
       });
   },
 
+  //function for separating acitivies array
+
+  //function for separating interests array
+
+  //function for within radius search
+
   findAllUsers: (req, res) => {
+    
     User.find({})
       .then((allUsers) => {
-        log(allUsers);
+        console.log(allUsers);
+        // add in above 3 functions
         res.json(allUsers);
+
       })
       .catch((err) => {
         log("findallUsers failed");
@@ -98,7 +107,7 @@ module.exports = {
   },
 
   updateUser: async(req, res) => {
-    const address = req.body.zipcode;
+    const address = req.body.zipCode;
     const locationData = await getLocationHelper(address);
 
     let location;
@@ -107,7 +116,6 @@ module.exports = {
     }
 
     const coordinates = [location.longitude, location.latitude];
-    console.log("coordinates", coordinates);
 
     const newInputInfo = {
       ...req.body, 
