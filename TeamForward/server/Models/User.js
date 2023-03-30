@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
   },
   // DOB: {
   //   type: Date,
-  //   // check that dob is greater than 18 years ago
+  //   check that dob is greater than 18 years ago
   //   required: [false, "Must be 18 or older to sign up"],
   // },
   bio: {

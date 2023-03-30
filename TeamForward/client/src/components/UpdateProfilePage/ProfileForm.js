@@ -5,14 +5,16 @@ import BasicButtonStyling from "../Button/BasicButtonStyling";
 
 export default function ProfileForm({
   formInfo,
-  handleOnChange,
+  formInterests,
+  formActivities,
+  handleFormInfoChange,
+  handleInterestsChange,
   handleSubmit,
-  checkInterests,
-  checkActivities,
+  INTERESTS,
+  ACTIVITIES,
 }) {
   const user = useReactiveVar(userState);
-  const INTERESTS = ["Networking", "Mentorship"];
-  const ACTIVITIES = ["Virtual Coffee", "Hiking"];
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -34,7 +36,9 @@ export default function ProfileForm({
                 id="firstName"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 value={formInfo.firstName}
-                onChange={(e) => handleOnChange("firstName", e.target.value)}
+                onChange={(e) =>
+                  handleFormInfoChange("firstName", e.target.value)
+                }
                 placeholder=""
                 required=""
               />
@@ -53,7 +57,9 @@ export default function ProfileForm({
                 id="lastName"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 value={formInfo.lastName}
-                onChange={(e) => handleOnChange("lastName", e.target.value)}
+                onChange={(e) =>
+                  handleFormInfoChange("lastName", e.target.value)
+                }
                 placeholder=""
                 required=""
               />
@@ -70,7 +76,7 @@ export default function ProfileForm({
                 id="bio"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 value={formInfo.bio}
-                onChange={(e) => handleOnChange("bio", e.target.value)}
+                onChange={(e) => handleFormInfoChange("bio", e.target.value)}
                 rows="4"
                 placeholder=""
                 required=""
@@ -88,7 +94,9 @@ export default function ProfileForm({
                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder=""
                 value={formInfo.profession}
-                onChange={(e) => handleOnChange("profession", e.target.value)}
+                onChange={(e) =>
+                  handleFormInfoChange("profession", e.target.value)
+                }
               />
             </div>
             <div className="w-full">
@@ -104,7 +112,9 @@ export default function ProfileForm({
                 id="zipCode"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 value={formInfo.zipCode}
-                onChange={(e) => handleOnChange("zipCode", e.target.value)}
+                onChange={(e) =>
+                  handleFormInfoChange("zipCode", e.target.value)
+                }
                 placeholder=""
                 required=""
               />
@@ -124,7 +134,7 @@ export default function ProfileForm({
                 max="5"
                 step="0.5"
                 value={formInfo.radius}
-                onChange={(e) => handleOnChange("radius", e.target.value)}
+                onChange={(e) => handleFormInfoChange("radius", e.target.value)}
               />
             </div>
             <div className="sm:col-span-2">
@@ -136,15 +146,21 @@ export default function ProfileForm({
               </label>
               <div className="flex items-center space-x-4">
                 {INTERESTS.map((item, key) => {
+                  let value = formInterests?.get(item);
                   return (
-                    <BasicButtonStyling
-                      text={item}
+                    <button
+                      onClick={(e) => {
+                        handleInterestsChange(e, item, !value);
+                      }}
+                      value={value}
                       className={
-                        checkInterests(item)
+                        value
                           ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
                           : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
                       }
-                    />
+                    >
+                      {item}
+                    </button>
                   );
                 })}
               </div>
@@ -161,8 +177,9 @@ export default function ProfileForm({
                   return (
                     <BasicButtonStyling
                       text={item}
+                      value={formActivities?.get(item)}
                       className={
-                        checkActivities(item)
+                        formActivities?.get(item)
                           ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
                           : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
                       }
