@@ -47,8 +47,9 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     // min max radius distance
   },
+  // will be stored as an object holding all possible activities and booleans
   interests: {
-    type: [String],
+    type: [String]
   },
   activities: {
     type: [String],
