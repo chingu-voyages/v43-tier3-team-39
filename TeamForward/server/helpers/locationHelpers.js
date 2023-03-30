@@ -13,6 +13,7 @@ module.exports = getLocationHelper;
 
 
 const getUsersWithinRadius = async(centerPoint) => {
+    //message for testing
     //geoWithin centersphere // users coordinates
     
     //check all users coordinates
