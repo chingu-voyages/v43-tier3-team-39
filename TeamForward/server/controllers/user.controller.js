@@ -19,6 +19,7 @@ module.exports = {
       });
   },
 
+
   loggedInUser: (req, res) => {
     User.findOne({ _id: req.userId }, { password: 0 })
       .then((loggedUser) => {
@@ -45,7 +46,7 @@ module.exports = {
     }
     const userToken = jwt.sign(
       {
-        if: user._id,
+        id: user._id,
       },
       process.env.SecretKeyOne
     );
@@ -146,10 +147,12 @@ module.exports = {
         });
     }
   },
+
   logOut: (req, res) => {
     res.clearCookie("jwt-token");
     res.sendStatus(200);
   },
+
   deleteUser: (req, res) => {
     User.deleteOne({ _id: req.params.id })
       .then((deletedUser) => {

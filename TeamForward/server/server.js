@@ -25,17 +25,17 @@ app.use(
 );
 
 // setting up session cookie with logged in user's database id
-app.use(
-  session({
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: { secure: false },
+//   })
+// );
 
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.use((req, res, next) => {
   res.locals.user = req.user;
@@ -45,6 +45,6 @@ app.use((req, res, next) => {
 require("./Config/mongoose.config");
 require("./routes/teamForward.routes")(app);
 
-app.use("/", require("./routes/oauth.routes"));
+// app.use("/", require("./routes/oauth.routes"));
 
 app.listen(port, () => console.log(`listening on port: ${port}`));

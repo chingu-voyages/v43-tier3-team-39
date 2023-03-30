@@ -1,3 +1,3 @@
-import Button from "./Button";
+import BasicButtonStyling from "./BasicButtonStyling";
 
-export default Button
+export default BasicButtonStyling;

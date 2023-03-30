@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-
+    // minlength: [8, "Password must be 8 characters or longer."],
   },
   // DOB: {
   //   type: Date,
@@ -53,8 +53,9 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     // min max radius distance
   },
+  // will be stored as an object holding all possible activities and booleans
   interests: {
-    type: [String],
+    type: [String]
   },
   activities: {
     type: [String],
