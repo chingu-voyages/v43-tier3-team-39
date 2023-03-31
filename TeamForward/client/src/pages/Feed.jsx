@@ -10,11 +10,13 @@ import BasicButtonStyling from "../components/Button";
 const Feed = () => {
   const user = userState();
   const test = [1,2,3,4]
+  const [firstName, setFirstName] = useState(user ? user.firstName : "");
   const [open,setOpen] = useState(true)
   const [interestArr,setInterestArr] = useState(['Networking','Mentoring','Chingu','Local-US-Seattle'])
   const activityArr = []
   const [userList,setUserList] = useState([])
 
+  
   // grab all users from db based on filters
   useEffect(()=>{
     axios.get(`${process.env.REACT_APP_BE_URL}/teamForward`)
@@ -30,7 +32,7 @@ const Feed = () => {
       
       <div className="inline-block ml-4">
         <NavMenu />
-        <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
+        <h1 className="font-bold inline-block">Hello {firstName}</h1>
       </div>
       <div className="flex justify-center mx-auto">
           {interestArr.map((interest) => {

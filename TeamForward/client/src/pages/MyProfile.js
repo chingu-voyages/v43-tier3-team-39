@@ -8,13 +8,22 @@ import { useReactiveVar } from "@apollo/client";
 
 const UserProfile = () => {
 
-  const user = userState()
+  // const user = userState()
+  const user = useReactiveVar(userState);
   console.log('this is userState', user)
   
-  useEffect(() => {
-    userState()
-    console.log('useEffect hit')
-  },[]); 
+  const [profileData, setProfileData] = useState({
+    // id: user ? user._id : "",
+    firstName: user ? user.firstName : "",
+    lastName: user ? user.lastName : "",
+    bio: user ? user.bio : "",
+    profession: user ? user.profession : "",
+    zipCode: user ? user.zipCode : "",
+    radius: user ? user.radius : "",
+    cloudinaryProfileImgUrl: user ? user.cloudinaryProfileImgUrl : "",
+    // interests: user ? user.interests : "",
+    // activities: user ? user.activities : "",
+  });
 
 
   return (
@@ -26,7 +35,7 @@ const UserProfile = () => {
           {/* PROFILE PICTURE */}
           <div className="relative ">
             <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-              {user.cloudinaryProfileImgUrl ? <img className="rounded-full" src={user.cloudinaryProfileImgUrl} /> :  <svg
+              {profileData.cloudinaryProfileImgUrl ? <img className="rounded-full" src={profileData.cloudinaryProfileImgUrl} /> :  <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-24 w-24"
                 viewBox="0 0 20 20"
@@ -66,19 +75,19 @@ const UserProfile = () => {
 
         <div className="mt-20 text-center border-b pb-12">
           <h1 className="text-4xl font-medium text-gray-700">
-            {`${user.firstName} ${user.lastName}`}
+            {`${profileData.firstName} ${profileData.lastName}`}
           </h1>
-          <p className="font-light text-gray-600 mt-3">Location: {`${user.zipCode}`}</p>
+          <p className="font-light text-gray-600 mt-3">Location: {`${profileData.zipCode}`}</p>
 
           <p className="mt-5 text-gray-500">
-            {user.profession}
+            {profileData.profession}
           </p>
           {/* <p className="mt-2 text-gray-500">University of Computer Science</p> */}
         </div>
 
         <div className="mt-12 flex flex-col justify-center ">
           <p className="text-gray-600 text-center font-light lg:px-16">
-            {user.bio}
+            {profileData.bio}
           </p>
         </div>
         {/* INTERESTS AND ACTIVITIES */}
