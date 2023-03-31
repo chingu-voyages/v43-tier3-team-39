@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { userState } from "../../GlobalState";
 import { useReactiveVar } from "@apollo/client";
@@ -22,8 +22,14 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
     previewFile(file);
     setSelectedFile(file);
     setFileInputState(e.target.value);
-    console.log("Old State", profileImg)
+    // console.log("State in handleFileInputChange", profileImg)
   };
+
+  useEffect(()=>{
+    setPreviewSource(profileImg)
+    // console.log("useEffect Preview File: ", profileImg)
+  })
+
 
 //   // show state or local file thats uploaded
   const previewFile = (file) => {
@@ -33,8 +39,11 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
       setPreviewSource(reader.result);
       setProfileImg(reader.result);
       console.log("New State:", profileImg)
+      if (!previewSource) return;
+          uploadImage(previewSource);
     };
 };
+
 
   
 //   const handleSubmitFile = (e) => {
@@ -44,9 +53,10 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
 //     uploadImage(previewSource);
 //   };
 
-//   const uploadImage = async (base64EncodedImage) => {
-//     console.log(base64EncodedImage);
-//   };
+  const uploadImage = async (base64EncodedImage) => {
+    console.log("Upload Img works:",base64EncodedImage);
+  };
+
   return (
     <div>
       <h1>Upload an Image</h1>

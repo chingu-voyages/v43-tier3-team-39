@@ -121,9 +121,9 @@ module.exports = {
             $set: req.body,
           };
           console.log("req.body: ", req.body);
-          User.updateOne({ _id: req.params.id }, updateDoc)
+          User.findOneAndUpdate({ _id: req.params.id }, updateDoc)
             .then((updatedUser) => {
-              log(updatedUser);
+              console.log("updatedUser:" ,updatedUser);
               res.json(updatedUser);
             })
             .catch((err) => {

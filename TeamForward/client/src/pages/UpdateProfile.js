@@ -11,7 +11,6 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
 
   const user = useReactiveVar(userState);
-  console.log(user);
 
   const [formInfo, setFormInfo] = useState({
     id: user ? user._id : "",
@@ -26,12 +25,17 @@ const UpdateProfile = () => {
   });
 
   const [profileImg, setProfileImg] = useState(
-    user.cloudinaryImgUrl ? user.cloudinaryImgUrl : null
+    user.cloudinaryProfileImgUrl ? user.cloudinaryProfileImgUrl : null
   );
 
-  useEffect(()=>{
-    console.log('profileImg', profileImg)
-  },[profileImg])
+  // useEffect(() => {
+  //   console.log("profileImg", profileImg);
+  // }, [profileImg]);
+
+  useEffect(() => {
+    console.log("formInfo",formInfo);
+    console.log("user", user)
+  }, [formInfo]);
 
   const handleOnChange = (key, value) => {
     setFormInfo({ ...formInfo, [key]: value });
@@ -56,6 +60,7 @@ const UpdateProfile = () => {
     axios
       .put(`${process.env.REACT_APP_BE_URL}/teamForward/${id}`, payload)
       .then((res) => {
+        console.log("AXIOS", res.data)
         userState(res.data);
       })
       .catch((err) => {
@@ -67,7 +72,8 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       await updateProfile(user._id, formInfo);
-      userState(formInfo);
+      // console.log("formInfo:", formInfo)
+      // userState(formInfo);   removed necessary for cloudinary to work 
       navigate("/feed");
     } catch (error) {
       log(error);
