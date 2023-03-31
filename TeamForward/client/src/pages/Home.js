@@ -219,9 +219,7 @@ function Testimonials() {
                   </li>
                 </ul>
                 <p>
-                  Ut pretium ultricies dignissim. Sed sit amet mi eget urna
-                  placerat vulputate. Ut vulputate est non quam dignissim
-                  elementum. Donec a ullamcorper diam.
+                As a junior PO networking and finding mentors can be a challenging task. However, Team forward has made it a lot easier for me to connect and engage with the community. With the app's features, I'm able to create a support system and connect with like-minded individuals who share the same interests and hobbies. I've also been able to find new jogging buddies, which has been a great way to stay active while building strong relationships with my colleagues. The app has helped me stay active, find new friends create a safe space where I can learn and thrive, while also allowing me to expand my network and stay connected with the industry. Overall, this app has been a game-changer in my career as a new PO.
                 </p>
               </div>
             </div>
@@ -271,9 +269,7 @@ function Testimonials() {
                   </li>
                 </ul>
                 <p>
-                  At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                  blanditiis praesentium accusamus voluptatum deleniti atque
-                  corrupti.
+                Team Forward has truly transformed my onboarding experience when joining a new company, especially during the pandemic where connecting with coworkers has been challenging due to remote work. With this app, I can now easily connect with my colleagues, join clubs, and create a support system. I've found like-minded buddies who share similar interests, such as jogging in the morning, and I'm now able to jog with my teammate who happens to be my neighbor. This has been a great opportunity for us to bond and discuss both work and personal life. Thanks to your app, I no longer feel like an outsider at work..
                 </p>
               </div>
             </div>
@@ -337,9 +333,7 @@ function Testimonials() {
                   </li>
                 </ul>
                 <p>
-                  Enim ad minima veniam, quis nostrum exercitationem ullam
-                  corporis suscipit laboriosam, nisi ut aliquid commodi quis
-                  nostrum minima.
+                Team Forward completely transformed my experience of visiting a new city in Canada. I was initially nervous about making new friends in an unfamiliar city, but the app changed all of that. With its help, I was able to connect with a teammate who lived in the same neighborhood as me and shared similar interests and hobbies. We decided to meet up for ice cream and quickly realized we had so much more in common. Not only did this app help me to make new friends in a new city, but it also allowed me to build a strong friendship with my teammate. Overall, this social application made my trip to Canada much more enjoyable and helped me form lasting connections with new people. 
                 </p>
               </div>
             </div>
@@ -380,7 +374,7 @@ function NewsletterForm() {
 
             <p className="text-gray-500 mb-12">
               Be the first to know when the full version is released! Sign up
-              below to receive updates and exclusive access.
+              below to receive updates and early access.
             </p>
 
             <div className="md:flex flex-row">
