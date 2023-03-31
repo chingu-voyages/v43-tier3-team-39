@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
@@ -11,6 +11,7 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
 
   const user = useReactiveVar(userState);
+  console.log(user);
 
   const [formInfo, setFormInfo] = useState({
     id: user ? user._id : "",
@@ -24,22 +25,36 @@ const UpdateProfile = () => {
     activities: user ? user.activities : "",
   });
 
+  const [profileImg, setProfileImg] = useState(
+    user.cloudinaryImgUrl ? user.cloudinaryImgUrl : null
+  );
+
+  useEffect(()=>{
+    console.log('profileImg', profileImg)
+  },[profileImg])
+
   const handleOnChange = (key, value) => {
     setFormInfo({ ...formInfo, [key]: value });
   };
 
   function updateProfile(id, form) {
+    const payload = {
+      firstName: form.firstName,
+      lastName: form.lastName,
+      bio: form.bio,
+      profession: form.profession,
+      zipCode: form.zipCode,
+      radius: form.radius,
+      interests: form.interests,
+      activities: form.activities,
+    };
+
+    if (profileImg.includes("base64")) {
+      payload.photo = profileImg;
+    }
+
     axios
-      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${id}`, {
-        firstName: form.firstName,
-        lastName: form.lastName,
-        bio: form.bio,
-        profession: form.profession,
-        zipCode: form.zipCode,
-        radius: form.radius,
-        interests: form.interests,
-        activities: form.activities,
-      })
+      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${id}`, payload)
       .then((res) => {
         userState(res.data);
       })
@@ -85,6 +100,8 @@ const UpdateProfile = () => {
         handleSubmit={handleSubmit}
         checkInterests={checkInterests}
         checkActivities={checkActivities}
+        profileImg={profileImg}
+        setProfileImg={setProfileImg}
       />
     </div>
   );
