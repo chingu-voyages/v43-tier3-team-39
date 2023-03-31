@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
 import log from "../helpers/logging";
@@ -12,58 +12,71 @@ const UpdateProfile = () => {
 
   const user = useReactiveVar(userState);
 
-  const INTERESTS = ["Networking", "Mentorship", "Chingu"];
-  const ACTIVITIES = ["Virtual Coffee", "Hiking", "Running"];
-
-  const [formInterests, setFormInterests] = useState();
-
-  const [formActivities, setFormActivities] = useState();
-
   const [formInfo, setFormInfo] = useState({
-    id: user ? user._id : "",
-    firstName: user ? user.firstName : "",
-    lastName: user ? user.lastName : "",
-    bio: user ? user.bio : "",
-    profession: user ? user.profession : "",
-    zipCode: user ? user.zipCode : "",
-    radius: user ? user.radius : "",
-    interests: user ? user.interests : "",
-    activities: user ? user.activities : "",
+    firstName: user.firstName,
+    lastName: user.lastName,
+    bio: user.bio,
+    profession: user.profession,
+    zipCode: user.zipCode,
+    radius: user.radius,
+    interests: {
+      Networking: user.interests.networking,
+      Mentorship: user.interests.mentorship,
+      Chingu: user.interests.chingu,
+    },
+    activities: {
+      VirtualCoffee: user.activities.virtualCoffee,
+      Hiking: user.activities.hiking,
+      Running: user.activities.running,
+    },
   });
 
   const handleFormInfoChange = (key, value) => {
     setFormInfo({ ...formInfo, [key]: value });
   };
 
-  const handleInterestsChange = (e, key, value) => {
-    e.preventDefault();
-    console.log(key, value);
-    setFormInterests(formInterests?.set(key, value));
-  };
-
-  const combineElements = (map) => {
-    let arr = [];
-    map.forEach((value, key) => {
-      if (value === true) {
-        arr.push(key);
-      }
+  const handleInterests = (key, value) => {
+    setFormInfo({
+      ...formInfo,
+      interests: {
+        ...formInfo.interests,
+        [key]: value,
+      },
     });
-    return arr;
   };
 
-  function updateProfile(id, form, interests) {
+  const handleActivities = (key, value) => {
+    setFormInfo({
+      ...formInfo,
+      activities: {
+        ...formInfo.activities,
+        [key]: value,
+      },
+    });
+  };
+
+  function updateProfile(form) {
     axios
-      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${id}`, {
+      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${user._id}`, {
         firstName: form.firstName,
         lastName: form.lastName,
         bio: form.bio,
         profession: form.profession,
         zipCode: form.zipCode,
         radius: form.radius,
-        interests: interests,
-        activities: form.activities,
+        interests: {
+          networking: form.interests.Networking,
+          mentorship: form.interests.Mentorship,
+          chingu: form.interests.Chingu,
+        },
+        activities: {
+          virtualCoffee: form.activities.VirtualCoffee,
+          hiking: form.activities.Hiking,
+          running: form.activities.Running,
+        },
       })
       .then((res) => {
+        console.log(res.data);
         userState(res.data);
       })
       .catch((err) => {
@@ -74,8 +87,7 @@ const UpdateProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const interests = combineElements(formInterests);
-      await updateProfile(user._id, formInfo, interests);
+      await updateProfile(formInfo);
       userState(formInfo);
       navigate("/feed");
     } catch (error) {
@@ -83,42 +95,16 @@ const UpdateProfile = () => {
     }
   };
 
-  const mapElements = (arr, elements) => {
-    const map = new Map();
-    if (!arr.length) {
-      for (let i of elements) {
-        map.set(i, false);
-      }
-    }
-
-    for (let i of elements) {
-      if (arr.includes(i)) {
-        map.set(i, true);
-      } else {
-        map.set(i, false);
-      }
-    }
-    return map;
-  };
-
-  useEffect(() => {
-    setFormInterests(mapElements(user.interests, INTERESTS));
-    setFormActivities(mapElements(user.activities, ACTIVITIES));
-  }, []);
-
   return (
     <div>
       <Jumbotron />
       <ProfileForm
         formInfo={formInfo}
         setFormInfo={setFormInfo}
-        formInterests={formInterests}
-        formActivities={formActivities}
-        handleInterestsChange={handleInterestsChange}
         handleFormInfoChange={handleFormInfoChange}
+        handleInterests={handleInterests}
+        handleActivities={handleActivities}
         handleSubmit={handleSubmit}
-        INTERESTS={INTERESTS}
-        ACTIVITIES={ACTIVITIES}
       />
     </div>
   );

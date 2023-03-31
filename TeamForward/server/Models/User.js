@@ -48,10 +48,14 @@ const UserSchema = new mongoose.Schema({
     // min max radius distance
   },
   interests: {
-    type: [String],
+    chingu: { type: Boolean, default: false },
+    networking: { type: Boolean, default: false },
+    mentorship: { type: Boolean, default: false },
   },
   activities: {
-    type: [String],
+    virtualCoffee: { type: Boolean, default: false },
+    hiking: { type: Boolean, default: false },
+    running: { type: Boolean, default: false },
   },
   dmPrivacy: Boolean,
   // userID in each message for ref

@@ -1,17 +1,13 @@
 import { Link } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../../GlobalState";
-import BasicButtonStyling from "../Button/BasicButtonStyling";
 
 export default function ProfileForm({
   formInfo,
-  formInterests,
-  formActivities,
   handleFormInfoChange,
-  handleInterestsChange,
+  handleInterests,
+  handleActivities,
   handleSubmit,
-  INTERESTS,
-  ACTIVITIES,
 }) {
   const user = useReactiveVar(userState);
 
@@ -21,7 +17,7 @@ export default function ProfileForm({
         <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
           Create/Update Profile
         </h2>
-        <form action="#" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
             <div className="w-full">
               <label
@@ -145,12 +141,13 @@ export default function ProfileForm({
                 Interests:
               </label>
               <div className="flex items-center space-x-4">
-                {INTERESTS.map((item, key) => {
-                  let value = formInterests?.get(item);
+                {Object.keys(formInfo.interests).map((key) => {
+                  let value = formInfo.interests[key];
                   return (
                     <button
-                      onClick={(e) => {
-                        handleInterestsChange(e, item, !value);
+                      type="button"
+                      onClick={() => {
+                        handleInterests(key, !value);
                       }}
                       value={value}
                       className={
@@ -159,7 +156,7 @@ export default function ProfileForm({
                           : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
                       }
                     >
-                      {item}
+                      {key}
                     </button>
                   );
                 })}
@@ -173,17 +170,23 @@ export default function ProfileForm({
                 Activities:
               </label>
               <div className="flex items-center space-x-4">
-                {ACTIVITIES.map((item, key) => {
+                {Object.keys(formInfo.activities).map((key) => {
+                  let value = formInfo.activities[key];
                   return (
-                    <BasicButtonStyling
-                      text={item}
-                      value={formActivities?.get(item)}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleActivities(key, !value);
+                      }}
+                      value={value}
                       className={
-                        formActivities?.get(item)
+                        value
                           ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
                           : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
                       }
-                    />
+                    >
+                      {key}
+                    </button>
                   );
                 })}
               </div>
