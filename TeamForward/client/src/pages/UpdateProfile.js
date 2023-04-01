@@ -56,6 +56,7 @@ const UpdateProfile = () => {
   };
 
   function updateProfile(form) {
+    console.log(form.interests, "updated interests");
     axios
       .put(`${process.env.REACT_APP_BE_URL}/teamForward/${user._id}`, {
         firstName: form.firstName,
@@ -76,7 +77,7 @@ const UpdateProfile = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data, "response from server after submit");
         userState(res.data);
       })
       .catch((err) => {

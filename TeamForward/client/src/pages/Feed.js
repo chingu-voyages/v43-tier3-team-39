@@ -10,7 +10,7 @@ const Feed = () => {
 
   return (
     <div>
-      <h1>Hello {user ? user.firstName : ""}</h1>
+      <h1>Hello {user.firstName}</h1>
       <Link to="/updateprofile">Update Profile</Link>
     </div>
   );

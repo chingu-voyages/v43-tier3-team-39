@@ -96,6 +96,7 @@ module.exports = {
       });
   },
   updateUser: (req, res) => {
+    console.log(req.body, "req.body in server");
     User.findOneAndUpdate({ _id: req.params.id }, req.body)
       .then((updatedUser) => {
         log(updatedUser);
