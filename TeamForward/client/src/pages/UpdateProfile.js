@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
 import log from "../helpers/logging";
@@ -13,31 +13,53 @@ const UpdateProfile = () => {
   const user = useReactiveVar(userState);
 
   const [formInfo, setFormInfo] = useState({
-    id: user ? user._id : "",
-    firstName: user ? user.firstName : "",
-    lastName: user ? user.lastName : "",
-    bio: user ? user.bio : "",
-    profession: user ? user.profession : "",
-    zipCode: user ? user.zipCode : "",
-    radius: user ? user.radius : "",
-    interests: user ? user.interests : "",
-    activities: user ? user.activities : "",
+    firstName: user.firstName,
+    lastName: user.lastName,
+    bio: user.bio,
+    profession: user.profession,
+    zipCode: user.zipCode,
+    radius: user.radius,
+    interests: {
+      Networking: user.interests.networking,
+      Mentorship: user.interests.mentorship,
+      Chingu: user.interests.chingu,
+    },
+    activities: {
+      VirtualCoffee: user.activities.virtualCoffee,
+      Hiking: user.activities.hiking,
+      Running: user.activities.running,
+    },
   });
 
   const [profileImg, setProfileImg] = useState(
     user.cloudinaryProfileImgUrl ? user.cloudinaryProfileImgUrl : null
   );
 
-  useEffect(() => {
-    console.log("formInfo",formInfo);
-    console.log("user", user)
-  }, [formInfo]);
-
-  const handleOnChange = (key, value) => {
+  const handleFormInfoChange = (key, value) => {
     setFormInfo({ ...formInfo, [key]: value });
   };
 
-  function updateProfile(id, form) {
+  const handleInterests = (key, value) => {
+    setFormInfo({
+      ...formInfo,
+      interests: {
+        ...formInfo.interests,
+        [key]: value,
+      },
+    });
+  };
+
+  const handleActivities = (key, value) => {
+    setFormInfo({
+      ...formInfo,
+      activities: {
+        ...formInfo.activities,
+        [key]: value,
+      },
+    });
+  };
+
+  function updateProfile(form) {
     const payload = {
       firstName: form.firstName,
       lastName: form.lastName,
@@ -45,8 +67,16 @@ const UpdateProfile = () => {
       profession: form.profession,
       zipCode: form.zipCode,
       radius: form.radius,
-      interests: form.interests,
-      activities: form.activities,
+      interests: {
+        networking: form.interests.Networking,
+        mentorship: form.interests.Mentorship,
+        chingu: form.interests.Chingu,
+      },
+      activities: {
+        virtualCoffee: form.activities.VirtualCoffee,
+        hiking: form.activities.Hiking,
+        running: form.activities.Running,
+      },
     };
 
     if (profileImg.includes("base64")) {
@@ -54,9 +84,9 @@ const UpdateProfile = () => {
     }
 
     axios
-      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${id}`, payload)
+      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${user._id}`, payload)
       .then((res) => {
-        console.log("AXIOS", res.data)
+        log(res.data);
         userState(res.data);
       })
       .catch((err) => {
@@ -67,27 +97,10 @@ const UpdateProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await updateProfile(user._id, formInfo);
-      // userState(formInfo);   *removed necessary for cloudinary to work 
+      await updateProfile(formInfo);
       navigate("/feed");
     } catch (error) {
       log(error);
-    }
-  };
-
-  const checkInterests = (item) => {
-    if (user.interests) {
-      return user.interests.includes(item);
-    } else {
-      return false;
-    }
-  };
-
-  const checkActivities = (item) => {
-    if (user.activities) {
-      return user.activities.includes(item);
-    } else {
-      return false;
     }
   };
 
@@ -97,10 +110,10 @@ const UpdateProfile = () => {
       <ProfileForm
         formInfo={formInfo}
         setFormInfo={setFormInfo}
-        handleOnChange={handleOnChange}
+        handleFormInfoChange={handleFormInfoChange}
+        handleInterests={handleInterests}
+        handleActivities={handleActivities}
         handleSubmit={handleSubmit}
-        checkInterests={checkInterests}
-        checkActivities={checkActivities}
         profileImg={profileImg}
         setProfileImg={setProfileImg}
       />
