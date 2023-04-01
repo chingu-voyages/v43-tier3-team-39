@@ -68,7 +68,7 @@ const Feed = () => {
               class="max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
               <a href="#!" data-te-ripple-init data-te-ripple-color="light">
                 <img
-                  class="rounded-t-lg h-44 w-screen"    
+                  class="rounded-t-lg h-40 object-cover w-screen"    
                   src={user.cloudinaryProfileImgUrl ? user.cloudinaryProfileImgUrl : "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"}
                   alt="" />
               </a>
