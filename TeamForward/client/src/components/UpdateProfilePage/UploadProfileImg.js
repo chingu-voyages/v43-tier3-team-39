@@ -3,81 +3,71 @@ import axios from "axios";
 import { userState } from "../../GlobalState";
 import { useReactiveVar } from "@apollo/client";
 
+
 const UploadProfileImg = ({ profileImg, setProfileImg }) => {
-    const user = useReactiveVar(userState);
-
-  // 1: if profile img contains cloudinaryimgUrl then preview it
-
-  // 2: if user uploads a new img, then set profileImg() to the base 64 string then preview it
-
-
-  // try to see if you can change state, test uploading new img, then preview original cloudinary img url
+  const user = useReactiveVar(userState);
 
   const [fileInputState, setFileInputState] = useState("");
   const [previewSource, setPreviewSource] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
-  
+
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     previewFile(file);
     setSelectedFile(file);
     setFileInputState(e.target.value);
-    // console.log("State in handleFileInputChange", profileImg)
   };
 
-  useEffect(()=>{
-    setPreviewSource(profileImg)
-    // console.log("useEffect Preview File: ", profileImg)
-  })
+  useEffect(() => {
+    setPreviewSource(profileImg);
+  });
 
-
-//   // show state or local file thats uploaded
   const previewFile = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file); //converts img to string
     reader.onloadend = () => {
       setPreviewSource(reader.result);
-      setProfileImg(reader.result);
-      console.log("New State:", profileImg)
+      setProfileImg(reader.result); // set base64 url to state
+      // console.log("New State:", profileImg)
       if (!previewSource) return;
-          uploadImage(previewSource);
+      uploadImage(previewSource);
     };
-};
-
-
-  
-//   const handleSubmitFile = (e) => {
-//     console.log("handle submit file works");
-//     e.preventDefault();
-//     if (!previewSource) return;
-//     uploadImage(previewSource);
-//   };
+  };
 
   const uploadImage = async (base64EncodedImage) => {
-    console.log("Upload Img works:",base64EncodedImage);
+    console.log("Upload Img works:", base64EncodedImage);
   };
 
   return (
-    <div>
-      <h1>Upload an Image</h1>
-      <form >
+    <form className="flex items-center space-x-6 mt-8 mb-10">
+      <div className="shrink-0">
+      { previewSource ? 
+        <img src={previewSource} alt="chosen"  className="object-cover w-32 h-32 rounded-full" /> : 
+        <img
+          className="object-cover w-32 h-32 rounded-full"
+          src={"https://cdn.pixabay.com/photo/2016/04/22/04/57/graduation-1345143__340.png"}
+          alt="empty profile photo"
+        />
+      }
+        
+      </div>
+      <label className="block">
+        <span className="sr-only">Choose File</span>
         <input
           id="fileInput"
           type="file"
           name="image"
           onChange={handleFileInputChange}
           value={fileInputState}
-          className="form-input"
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
         />
-        <button className="" type="submit">
-          Submit
-        </button>
-      </form>
-      {previewSource && (
-        <img src={previewSource} alt="chosen" style={{ height: "150px" }} />
-      )}
-    </div>
+      </label>
+    </form>
+
+    
   );
 };
+{
+}
 
 export default UploadProfileImg;

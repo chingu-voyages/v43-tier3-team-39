@@ -28,10 +28,6 @@ const UpdateProfile = () => {
     user.cloudinaryProfileImgUrl ? user.cloudinaryProfileImgUrl : null
   );
 
-  // useEffect(() => {
-  //   console.log("profileImg", profileImg);
-  // }, [profileImg]);
-
   useEffect(() => {
     console.log("formInfo",formInfo);
     console.log("user", user)
@@ -72,8 +68,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       await updateProfile(user._id, formInfo);
-      // console.log("formInfo:", formInfo)
-      // userState(formInfo);   removed necessary for cloudinary to work 
+      // userState(formInfo);   *removed necessary for cloudinary to work 
       navigate("/feed");
     } catch (error) {
       log(error);
