@@ -12,12 +12,20 @@ const getLocationHelper = async(address) => {
 module.exports = getLocationHelper;
 
 
-const getUsersWithinRadius = async(centerPoint) => {
+const getUsersWithinRadius = async(centerPoint, body) => {
     //message for testing
     //geoWithin centersphere // users coordinates
     
     //check all users coordinates
         //create list of users within radius
     //return new list
+
+    results = await User.places.find({
+        location: {
+            $geoWithin: {$centerSphere: [[body.location.coordinates[0], body.location.coordinates[0]]], body.radius /3963.2}
+        }});
+    return results;
+
 }
+module.exports = getUsersWithinRadius;
 
