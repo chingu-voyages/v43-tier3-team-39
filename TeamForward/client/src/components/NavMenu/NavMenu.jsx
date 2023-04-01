@@ -1,7 +1,11 @@
 import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
+import { useReactiveVar } from '@apollo/client';
+import { userState } from "../../GlobalState";
 
 const NavMenu = () => {
+
+    const user = useReactiveVar(userState);
 
     const [open,setOpen] = useState(false)
 
@@ -11,22 +15,9 @@ const NavMenu = () => {
 
   return (
     <div className="p-2 inline-block h-2/3">
-        <button onClick={dropDown}><div className="p-4 bg-blue-600 rounded-full shadow-lg inline-block">
-            <svg
-              className="h-10 w-10 text-white"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              {" "}
-              
-            </svg>
-          </div> </button> 
+        <button onClick={dropDown}>
+            <img src={user.cloudinaryProfileImgUrl} alt="" className="h-20 w-20 rounded-full shadow-lg inline-block" />
+           </button> 
         {
             open ? (
                 <div className="absolute bg-opacity-100">

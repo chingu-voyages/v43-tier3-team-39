@@ -3,6 +3,7 @@ const log = require("../helpers/logging");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const cloudinary = require("../Config/cloudinary");
 
 module.exports = {
   createNewUser: (req, res) => {
@@ -17,6 +18,7 @@ module.exports = {
         res.status(400).json(err);
       });
   },
+
 
   loggedInUser: (req, res) => {
     User.findOne({ _id: req.userId }, { password: 0 })
@@ -95,16 +97,54 @@ module.exports = {
         });
       });
   },
-  updateUser: (req, res) => {
-    User.findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then((updatedUser) => {
-        log(updatedUser);
-        res.json(updatedUser);
-      })
-      .catch((err) => {
-        res.status(400).json(err);
-        log("Something went wrong with updatedUser");
-      });
+  updateUser: async (req, res) => {
+    console.log("FIRST LOG HERE REQ.BODY:",req.body, "FIRST LOG REQ.PARAMS",req.params)
+    if (req.body.photo) {
+      //if there's an existing cloudinaryProfileImgUrl/cloudinaryId, then delete it from cloudinary
+      let userPhoto = await User.findById({_id: req.params.id });
+      cloudinary.uploader
+        .destroy(userPhoto.cloudinaryId)
+        .then((response) => console.log(response));
+        // console.log("destroy works" , userPhoto)
+      cloudinary.uploader
+        .upload(req.body.photo)
+        .then((result) => {
+          const { secure_url, public_id } = result;
+
+          req.body.cloudinaryProfileImgUrl = secure_url;
+          req.body.cloudinaryId = public_id;
+
+          delete req.body.photo;
+
+          const updateDoc = {
+            $set: req.body,
+          };
+          console.log("req.body: ", req.body);
+          User.findOneAndUpdate({ _id: req.params.id }, updateDoc)
+            .then((updatedUser) => {
+              console.log("updatedUser:" ,updatedUser);
+              res.json(updatedUser);
+            })
+            .catch((err) => {
+              // res.status(400).json(err);
+              log("Something went wrong with updatedUser");
+            });
+        })
+        .catch((err) => {
+          // res.status(400).json(err);
+          log("Something went wrong with cloudinary upload");
+        });
+    } else {
+      User.findOneAndUpdate({ _id: req.params.id }, req.body)
+        .then((updatedUser) => {
+          log(updatedUser);
+          res.json(updatedUser);
+        })
+        .catch((err) => {
+          // res.status(400).json(err);
+          log("Something went wrong with updatedUser");
+        });
+    }
   },
 
   logOut: (req, res) => {

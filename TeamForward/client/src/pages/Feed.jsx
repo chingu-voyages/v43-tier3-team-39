@@ -68,13 +68,13 @@ const Feed = () => {
               class="max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
               <a href="#!" data-te-ripple-init data-te-ripple-color="light">
                 <img
-                  class="rounded-t-lg"
-                  src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"
+                  class="rounded-t-lg h-44 w-screen"    
+                  src={user.cloudinaryProfileImgUrl ? user.cloudinaryProfileImgUrl : "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"}
                   alt="" />
               </a>
-              <div class="m-3">
+              <div className="m-3">
                 <h5
-                  class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                  className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                   {user.firstName}
                 </h5>
                 <p class="mb-4 text-base h-5 overflow-hidden text-neutral-600 dark:text-neutral-200">
