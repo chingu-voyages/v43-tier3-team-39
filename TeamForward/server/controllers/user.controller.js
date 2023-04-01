@@ -22,9 +22,10 @@ module.exports = {
 
 
   loggedInUser: (req, res) => {
+    console.log("userId", req.userId)
     User.findOne({ _id: req.userId }, { password: 0 })
       .then((loggedUser) => {
-        log(loggedUser);
+        console.log(loggedUser);
         res.json(loggedUser);
       })
       .catch((err) => {
@@ -45,6 +46,7 @@ module.exports = {
     if (!correctPassword) {
       return res.status(400).send("incorrect password");
     }
+    console.log("****** user._id", user._id)
     const userToken = jwt.sign(
       {
         id: user._id,
@@ -94,7 +96,7 @@ module.exports = {
     
     User.find({})
       .then((allUsers) => {
-        console.log(allUsers);
+        // console.log(allUsers);
         // add in above 3 functions
         res.json(allUsers);
 
@@ -160,9 +162,11 @@ module.exports = {
     };
 
     console.log("body: ", body);
-    User.findOneAndUpdate({ _id: req.params.id }, {
-      $set: body,
-    })
+    User.findOneAndUpdate(
+      { _id: req.params.id }, 
+      {$set: body},
+      {new: true}
+    )
       .then((updatedUser) => {
         console.log("updatedUser:" ,updatedUser);
         res.json(updatedUser);
