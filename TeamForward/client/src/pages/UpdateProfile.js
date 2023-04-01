@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
@@ -24,23 +24,39 @@ const UpdateProfile = () => {
     activities: user ? user.activities : "",
   });
 
+  const [profileImg, setProfileImg] = useState(
+    user.cloudinaryProfileImgUrl ? user.cloudinaryProfileImgUrl : null
+  );
+
+  useEffect(() => {
+    console.log("formInfo",formInfo);
+    console.log("user", user)
+  }, [formInfo]);
+
   const handleOnChange = (key, value) => {
     setFormInfo({ ...formInfo, [key]: value });
   };
 
   function updateProfile(id, form) {
+    const payload = {
+      firstName: form.firstName,
+      lastName: form.lastName,
+      bio: form.bio,
+      profession: form.profession,
+      zipCode: form.zipCode,
+      radius: form.radius,
+      interests: form.interests,
+      activities: form.activities,
+    };
+
+    if (profileImg.includes("base64")) {
+      payload.photo = profileImg;
+    }
+
     axios
-      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${id}`, {
-        firstName: form.firstName,
-        lastName: form.lastName,
-        bio: form.bio,
-        profession: form.profession,
-        zipCode: form.zipCode,
-        radius: form.radius,
-        interests: form.interests,
-        activities: form.activities,
-      })
+      .put(`${process.env.REACT_APP_BE_URL}/teamForward/${id}`, payload)
       .then((res) => {
+        console.log("AXIOS", res.data)
         userState(res.data);
       })
       .catch((err) => {
@@ -52,7 +68,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       await updateProfile(user._id, formInfo);
-      userState(formInfo);
+      // userState(formInfo);   *removed necessary for cloudinary to work 
       navigate("/feed");
     } catch (error) {
       log(error);
@@ -85,6 +101,8 @@ const UpdateProfile = () => {
         handleSubmit={handleSubmit}
         checkInterests={checkInterests}
         checkActivities={checkActivities}
+        profileImg={profileImg}
+        setProfileImg={setProfileImg}
       />
     </div>
   );

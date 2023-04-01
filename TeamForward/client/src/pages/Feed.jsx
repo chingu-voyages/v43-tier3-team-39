@@ -61,9 +61,9 @@ const Feed = () => {
                   src="https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"
                   alt="" />
               </a>
-              <div class="m-3">
+              <div className="m-3">
                 <h5
-                  class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                  className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                   {user.firstName}
                 </h5>
                 <p class="mb-4 text-base text-neutral-600 dark:text-neutral-200">
