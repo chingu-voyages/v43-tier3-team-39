@@ -56,7 +56,6 @@ const UpdateProfile = () => {
   };
 
   function updateProfile(form) {
-    console.log(form.interests, "updated interests");
     axios
       .put(`${process.env.REACT_APP_BE_URL}/teamForward/${user._id}`, {
         firstName: form.firstName,
@@ -77,7 +76,7 @@ const UpdateProfile = () => {
         },
       })
       .then((res) => {
-        console.log(res.data, "response from server after submit");
+        log(res.data);
         userState(res.data);
       })
       .catch((err) => {
@@ -89,7 +88,6 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       await updateProfile(formInfo);
-      userState(formInfo);
       navigate("/feed");
     } catch (error) {
       log(error);

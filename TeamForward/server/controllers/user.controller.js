@@ -96,8 +96,7 @@ module.exports = {
       });
   },
   updateUser: (req, res) => {
-    console.log(req.body, "req.body in server");
-    User.findOneAndUpdate({ _id: req.params.id }, req.body, {new: true})
+    User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then((updatedUser) => {
         log(updatedUser);
         res.json(updatedUser);
