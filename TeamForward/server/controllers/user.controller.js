@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const getLocationHelper = require("../helpers/locationHelpers");
+const cloudinary = require("../Config/cloudinary");
 
 module.exports = {
   createNewUser: (req, res) => {
@@ -18,6 +19,7 @@ module.exports = {
         res.status(400).json(err);
       });
   },
+
 
   loggedInUser: (req, res) => {
     User.findOne({ _id: req.userId }, { password: 0 })
@@ -105,39 +107,83 @@ module.exports = {
         });
       });
   },
+  
 
-  updateUser: async(req, res) => {
-    const address = req.body.zipCode;
-    const locationData = await getLocationHelper(address);
+  // updateUser: async(req, res) => {
+  //   const address = req.body.zipCode;
+  //   const locationData = await getLocationHelper(address);
 
-    let location;
-    if(locationData.length > 0){
-      location = locationData[0];
+  //   let location;
+  //   if(locationData.length > 0){
+  //     location = locationData[0];
+  //   }
+
+  //   const coordinates = [location.longitude, location.latitude];
+
+  //   const newInputInfo = {
+  //     ...req.body, 
+  //     location: {
+  //         type:'Point',
+  //         coordinates
+  //     },
+  //     location2: {
+  //       type:'Point',
+  //       coordinates
+  //     }
+  //   };
+
+  //   User.findOneAndUpdate({ _id: req.params.id }, newInputInfo)
+  //     .then((updatedUser) => {
+  //       log(updatedUser);
+  //       res.json(updatedUser);
+  //     })
+  //     .catch((err) => {
+  //       res.status(400).json(err);
+  //       log("Something went wrong with updatedUser");
+  //     });
+      
+  updateUser: async (req, res) => {
+    const body = { ...req.body };
+
+    console.log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params)
+    if (body.photo) {
+      //if there's an existing cloudinaryProfileImgUrl/cloudinaryId, then delete it from cloudinary
+      let userPhoto = await User.findById({_id: req.params.id });
+
+      try {
+        await cloudinary.uploader.destroy(userPhoto.cloudinaryId);
+      } catch (exception) {
+        // handle error
+      }
+
+      let result;
+      try {
+        result = await cloudinary.uploader.upload(body.photo);
+        const { secure_url, public_id } = result;
+
+        body.cloudinaryProfileImgUrl = secure_url;
+        body.cloudinaryId = public_id;
+
+        delete body.photo;
+      } catch (exception) {
+        // res.status(400).json(err);
+        log("Something went wrong with cloudinary upload");
+      }
     }
 
-    const coordinates = [location.longitude, location.latitude];
-
-    const newInputInfo = {
-      ...req.body, 
-      location: {
-          type:'Point',
-          coordinates
-      },
-      location2: {
-        type:'Point',
-        coordinates
-      }
-    };
-
-    User.findOneAndUpdate({ _id: req.params.id }, newInputInfo)
+    console.log("body: ", body);
+    User.findOneAndUpdate({ _id: req.params.id }, {
+      $set: body,
+    })
       .then((updatedUser) => {
-        log(updatedUser);
+        console.log("updatedUser:" ,updatedUser);
         res.json(updatedUser);
       })
       .catch((err) => {
-        res.status(400).json(err);
+        // res.status(400).json(err);
         log("Something went wrong with updatedUser");
       });
+
   },
 
   logOut: (req, res) => {

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../../GlobalState";
 import BasicButtonStyling from "../Button/BasicButtonStyling";
+import UploadProfileImg from "./UploadProfileImg";
 
 export default function ProfileForm({
   formInfo,
@@ -9,6 +10,8 @@ export default function ProfileForm({
   handleSubmit,
   checkInterests,
   checkActivities,
+  profileImg,
+  setProfileImg,
 }) {
   const user = useReactiveVar(userState);
   const INTERESTS = ["Networking", "Mentorship"];
@@ -19,6 +22,12 @@ export default function ProfileForm({
         <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
           Create/Update Profile
         </h2>
+
+          <UploadProfileImg
+            profileImg={profileImg}
+            setProfileImg={setProfileImg}
+            
+          />
         <form action="#" onSubmit={handleSubmit}>
           <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
             <div className="w-full">

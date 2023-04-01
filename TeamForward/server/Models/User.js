@@ -37,6 +37,12 @@ const UserSchema = new mongoose.Schema({
   photos: {
     type: [Photo.schema],
   },
+  cloudinaryProfileImgUrl: {
+    type: String,
+  },
+  cloudinaryId: {
+    type: String,
+  },
   profession: {
     type: String,
   },
@@ -60,8 +66,9 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     // min max radius distance
   },
+  // will be stored as an object holding all possible activities and booleans
   interests: {
-    type: [String],
+    type: [String]
   },
   activities: {
     type: [String],
