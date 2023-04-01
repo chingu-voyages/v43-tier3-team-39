@@ -108,42 +108,8 @@ module.exports = {
       });
   },
   
-
-  // updateUser: async(req, res) => {
-  //   const address = req.body.zipCode;
-  //   const locationData = await getLocationHelper(address);
-
-  //   let location;
-  //   if(locationData.length > 0){
-  //     location = locationData[0];
-  //   }
-
-  //   const coordinates = [location.longitude, location.latitude];
-
-  //   const newInputInfo = {
-  //     ...req.body, 
-  //     location: {
-  //         type:'Point',
-  //         coordinates
-  //     },
-  //     location2: {
-  //       type:'Point',
-  //       coordinates
-  //     }
-  //   };
-
-  //   User.findOneAndUpdate({ _id: req.params.id }, newInputInfo)
-  //     .then((updatedUser) => {
-  //       log(updatedUser);
-  //       res.json(updatedUser);
-  //     })
-  //     .catch((err) => {
-  //       res.status(400).json(err);
-  //       log("Something went wrong with updatedUser");
-  //     });
-      
   updateUser: async (req, res) => {
-    const body = { ...req.body };
+    let body = { ...req.body };
 
     console.log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params)
     if (body.photo) {
@@ -170,6 +136,28 @@ module.exports = {
         log("Something went wrong with cloudinary upload");
       }
     }
+
+    const address = req.body.zipCode;
+    const locationData = await getLocationHelper(address);
+
+    let location;
+    if(locationData.length > 0){
+      location = locationData[0];
+    }
+
+    const coordinates = [location.longitude, location.latitude];
+
+    body = {
+      ...body, 
+      location: {
+          type:'Point',
+          coordinates
+      },
+      location2: {
+        type:'Point',
+        coordinates
+      }
+    };
 
     console.log("body: ", body);
     User.findOneAndUpdate({ _id: req.params.id }, {
