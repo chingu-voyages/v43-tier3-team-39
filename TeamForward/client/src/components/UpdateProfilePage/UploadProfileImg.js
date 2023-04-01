@@ -8,7 +8,7 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
   const user = useReactiveVar(userState);
 
   const [fileInputState, setFileInputState] = useState("");
-  const [previewSource, setPreviewSource] = useState("");
+  const [previewSource, setPreviewSource] = useState(profileImg);
   const [selectedFile, setSelectedFile] = useState("");
 
   const handleFileInputChange = (e) => {
@@ -17,10 +17,6 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
     setSelectedFile(file);
     setFileInputState(e.target.value);
   };
-
-  useEffect(() => {
-    setPreviewSource(profileImg);
-  });
 
   const previewFile = (file) => {
     const reader = new FileReader();
