@@ -84,7 +84,7 @@ module.exports = {
   findAllUsers: (req, res) => {
     User.find({})
       .then((allUsers) => {
-        log(allUsers);
+        // log(allUsers);
         res.json(allUsers);
       })
       .catch((err) => {
@@ -97,7 +97,7 @@ module.exports = {
   },
   updateUser: (req, res) => {
     console.log(req.body, "req.body in server");
-    User.findOneAndUpdate({ _id: req.params.id }, req.body)
+    User.findOneAndUpdate({ _id: req.params.id }, req.body, {new: true})
       .then((updatedUser) => {
         log(updatedUser);
         res.json(updatedUser);
