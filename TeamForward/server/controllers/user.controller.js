@@ -20,7 +20,6 @@ module.exports = {
       });
   },
 
-
   loggedInUser: (req, res) => {
     console.log("userId", req.userId)
     User.findOne({ _id: req.userId }, { password: 0 })
@@ -98,6 +97,7 @@ module.exports = {
       .then((allUsers) => {
         // console.log(allUsers);
         // add in above 3 functions
+        // log(allUsers);
         res.json(allUsers);
 
       })
