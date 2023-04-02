@@ -22,6 +22,8 @@ const getUsersWithinRadius = async(centerPoint, body) => {
 
     results = await User.places.find({
         location: {
+            //radius is not currently working on the form to have 
+            // $geoWithin: {$centerSphere: [[body.location.coordinates[0], body.location.coordinates[0]]], body.radius /3963.2}
             $geoWithin: {$centerSphere: [[body.location.coordinates[0], body.location.coordinates[0]]], body.radius /3963.2}
         }});
     return results;
