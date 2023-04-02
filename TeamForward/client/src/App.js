@@ -85,11 +85,20 @@ function App() {
         <Route
           path="/myProfile"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <MyProfile />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
+        
+        {/* <Route
+          path="/userProfile/:id"
+          element={
+            // <ProtectedRoute>
+              <userProfile />
+            // </ProtectedRoute>
+          }
+        /> */}
       </Routes>
     </BrowserRouter>
   );
