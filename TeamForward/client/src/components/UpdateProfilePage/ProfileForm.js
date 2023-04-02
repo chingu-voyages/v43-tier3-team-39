@@ -127,7 +127,7 @@ export default function ProfileForm({
                 htmlFor="radius"
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
-                Radius (in miles):
+                Radius (in miles):    {formInfo.radius}
               </label>
               <input
                 type="range"

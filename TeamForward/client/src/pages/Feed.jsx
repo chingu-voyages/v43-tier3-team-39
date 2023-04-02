@@ -7,34 +7,33 @@ import axios from "axios";
 import NavMenu from "../components/NavMenu/NavMenu";
 import BasicButtonStyling from "../components/Button";
 
+const interests = ["chingu", "networking", "mentorship"];
+
 const Feed = () => {
   const user = userState();
-  const [activities, setActivities] = useState([
-    "running",
-    "jumping",
-    "kayaking",
-  ]);
-  const [open, setOpen] = useState(true);
-  const [interestArr, setInterestArr] = useState([
-    "Networking",
-    "Mentoring",
-    "Chingu",
-    "Local-US-Seattle",
-  ]);
-  const activityArr = [];
-  const [userList, setUserList] = useState([]);
+  const [activities,setActivities] = useState(['running','jumping','kayaking'])
+  const [open,setOpen] = useState(true)
+  const [interestArr,setInterestArr] = useState([])
+  const activityArr = []
+  const [userList,setUserList] = useState([])
 
   // grab all users from db based on filters
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BE_URL}/teamForward`)
-      .then((res) => {
-        setUserList(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  useEffect(()=>{
+    console.log(interestArr)
+    const baseUrl = `${process.env.REACT_APP_BE_URL}/teamForward`;
+    const interestQuery = interestArr.length > 0
+      ? `interests=${interestArr.join(',')}`
+      : '';
+    const url = interestQuery
+      ? `${baseUrl}?${interestQuery}`
+      : baseUrl;
+    axios.get(url)
+    .then((res)=>{
+      setUserList(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },[interestArr])
 
   return (
     <div className="">
@@ -45,24 +44,28 @@ const Feed = () => {
         </h1>
       </div>
       <div className="flex justify-center mx-auto">
-        {interestArr.map((interest) => {
-          return (
-            <>
-              <BasicButtonStyling
-                text={interest}
-                className={
-                  "text-blue-600 m-2 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+          {interests.map((interest) => {
+            const className = interestArr.includes(interest)
+              ? "bg-blue-600 text-white inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+              : "text-blue-600 inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+
+            return <BasicButtonStyling
+              text={interest}
+              className={className}
+              onClick={()=>{
+                const newInterests = [...interestArr];
+                
+                if (newInterests.includes(interest)) {
+                  // removeEntry
+                  newInterests.splice(newInterests.indexOf(interest), 1);
+                } else {
+                  newInterests.push(interest);
                 }
-                onClick={() => setInterestArr([...interestArr, interest])}
-                // className={
-                //   checkInterests(item)
-                //     ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                //     : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                // }
-              />
-            </>
-          );
-        })}
+                
+                setInterestArr(newInterests);
+              }}
+            />
+          })}
       </div>
       {/* user list */}
       {/* user list + activities div */}
