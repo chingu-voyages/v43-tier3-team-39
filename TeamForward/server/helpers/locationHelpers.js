@@ -1,33 +1,54 @@
 const fetch = require("node-fetch");
+const User = require("../Models/User");
 
 const getLocationHelper = async(address) => {
-    const url = `http://api.positionstack.com/v1/forward?access_key=${process.env.POSITIONSTACK_KEY}&query=${address}`;
-    const response = await fetch(url);
-    //TODO handle non 200 responses (200 means ok)
-    const responseJson = await response.json();
-    console.log(responseJson);
-    return responseJson.data;
-}
+    try {
+        const url = `http://api.positionstack.com/v1/forward?access_key=${process.env.POSITIONSTACK_KEY}&query=${address}`;
+        const response = await fetch(url);
+        //TODO handle non 200 responses (200 means ok)
+        const responseJson = await response.json();
+        console.log(responseJson);
+        return responseJson.data;
+    } catch (expection) {
+        console.log("something went wrong with getLocationHelper function", expection);
+    }
 
-module.exports = getLocationHelper;
+};
 
+const getUsersWithinRadius = async (coordinates, radius, interests, userId) => {
+    try{
+        let splitInterests = interests?.split(",") || [];
+        let interestQuery = [];
+        for(let interest of splitInterests){
+            const queryObject = {};
+            queryObject[`interests.${interest}`] = true;
+            interestQuery.push(queryObject);
+        }
 
-const getUsersWithinRadius = async(centerPoint, body) => {
-    //message for testing
-    //geoWithin centersphere // users coordinates
-    
-    //check all users coordinates
-        //create list of users within radius
-    //return new list
+        let findQuery = {
+            $and: [
+                {
+                    location: {
+                        $geoWithin: { $centerSphere: [ [coordinates[0], coordinates[1] ], radius/3963.2 ] }
+                    }
+                },
+                { _id: { $ne: userId}}
+            ]
+        };
+        if (interests){
+            findQuery.$and.push({ $or: interestQuery });
+        } 
+        // another if statement for activities once added
 
-    results = await User.places.find({
-        location: {
-            //radius is not currently working on the form to have 
-            // $geoWithin: {$centerSphere: [[body.location.coordinates[0], body.location.coordinates[0]]], body.radius /3963.2}
-            $geoWithin: {$centerSphere: [[body.location.coordinates[0], body.location.coordinates[0]]], body.radius /3963.2}
-        }});
-    return results;
+        let results = await User.find(findQuery);
+        return results;
+    } catch (expection) {
+        console.log("something went wrong with getUserWithRadius function", expection);
+    }  
+};
 
-}
-module.exports = getUsersWithinRadius;
+module.exports = {
+    getLocationHelper,
+    getUsersWithinRadius
+};
 

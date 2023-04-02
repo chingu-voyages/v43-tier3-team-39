@@ -3,7 +3,7 @@ const log = require("../helpers/logging");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const getLocationHelper = require("../helpers/locationHelpers");
+const locationHelpers = require("../helpers/locationHelpers");
 const cloudinary = require("../Config/cloudinary");
 
 module.exports = {
@@ -85,29 +85,19 @@ module.exports = {
       });
   },
 
-  //function for separating acitivies array
 
-  //function for separating interests array
 
-  //function for within radius search
+  findAllUsers: async(req, res) => {
 
-  findAllUsers: (req, res) => {
+    const userInfo = await User.findOne({ _id: req.userId }, { password: 0 });
+
+    // console.log(req.query);
     
-    User.find({})
-      .then((allUsers) => {
-        // console.log(allUsers);
-        // add in above 3 functions
-        // log(allUsers);
-        res.json(allUsers);
+    const interests = req.query['interests'];
 
-      })
-      .catch((err) => {
-        log("findallUsers failed");
-        res.json({
-          message: "Something went wrong with findAllUsers",
-          error: err,
-        });
-      });
+    const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, req.userId);
+    
+    res.json(results);
   },
   
   updateUser: async (req, res) => {
@@ -121,7 +111,7 @@ module.exports = {
       try {
         await cloudinary.uploader.destroy(userPhoto.cloudinaryId);
       } catch (exception) {
-        // handle error
+        console.log("something went wring with updateUser", exception);
       }
 
       let result;
@@ -134,13 +124,13 @@ module.exports = {
 
         delete body.photo;
       } catch (exception) {
-        // res.status(400).json(err);
+        res.status(400).json(exception);
         log("Something went wrong with cloudinary upload");
       }
     }
 
     const address = req.body.zipCode;
-    const locationData = await getLocationHelper(address);
+    const locationData = await locationHelpers.getLocationHelper(address);
 
     let location;
     if(locationData.length > 0){
