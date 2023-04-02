@@ -19,7 +19,6 @@ module.exports = {
       });
   },
 
-
   loggedInUser: (req, res) => {
     User.findOne({ _id: req.userId }, { password: 0 })
       .then((loggedUser) => {
@@ -86,7 +85,7 @@ module.exports = {
   findAllUsers: (req, res) => {
     User.find({})
       .then((allUsers) => {
-        log(allUsers);
+        // log(allUsers);
         res.json(allUsers);
       })
       .catch((err) => {
@@ -98,14 +97,19 @@ module.exports = {
       });
   },
   updateUser: async (req, res) => {
-    console.log("FIRST LOG HERE REQ.BODY:",req.body, "FIRST LOG REQ.PARAMS",req.params)
+    console.log(
+      "FIRST LOG HERE REQ.BODY:",
+      req.body,
+      "FIRST LOG REQ.PARAMS",
+      req.params
+    );
     if (req.body.photo) {
       //if there's an existing cloudinaryProfileImgUrl/cloudinaryId, then delete it from cloudinary
-      let userPhoto = await User.findById({_id: req.params.id });
+      let userPhoto = await User.findById({ _id: req.params.id });
       cloudinary.uploader
         .destroy(userPhoto.cloudinaryId)
         .then((response) => console.log(response));
-        // console.log("destroy works" , userPhoto)
+      // console.log("destroy works" , userPhoto)
       cloudinary.uploader
         .upload(req.body.photo)
         .then((result) => {
@@ -120,9 +124,11 @@ module.exports = {
             $set: req.body,
           };
           console.log("req.body: ", req.body);
-          User.findOneAndUpdate({ _id: req.params.id }, updateDoc)
+          User.findOneAndUpdate({ _id: req.params.id }, updateDoc, {
+            new: true,
+          })
             .then((updatedUser) => {
-              console.log("updatedUser:" ,updatedUser);
+              console.log("updatedUser:", updatedUser);
               res.json(updatedUser);
             })
             .catch((err) => {
@@ -135,7 +141,7 @@ module.exports = {
           log("Something went wrong with cloudinary upload");
         });
     } else {
-      User.findOneAndUpdate({ _id: req.params.id }, req.body)
+      User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
         .then((updatedUser) => {
           log(updatedUser);
           res.json(updatedUser);
