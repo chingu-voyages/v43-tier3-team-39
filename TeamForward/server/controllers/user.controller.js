@@ -96,7 +96,7 @@ module.exports = {
     const interests = req.query['interests'];
 
     const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, req.userId);
-    
+    console.log("controller results", results);
     res.json(results);
   },
   
@@ -133,7 +133,7 @@ module.exports = {
     const locationData = await locationHelpers.getLocationHelper(address);
 
     let location;
-    if(locationData.length > 0){
+    if(locationData?.length > 0){
       location = locationData[0];
     }
 
