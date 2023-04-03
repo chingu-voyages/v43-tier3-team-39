@@ -15,7 +15,7 @@ const MyProfile = ({}) => {
   log("this is userState", user);
 
   const [profileData, setProfileData] = useState({
-    // id: user ? user._id : "",
+    _id: user ? user._id : "",
     firstName: user ? user.firstName : "",
     lastName: user ? user.lastName : "",
     bio: user ? user.bio : "",
@@ -23,8 +23,8 @@ const MyProfile = ({}) => {
     zipCode: user ? user.zipCode : "",
     radius: user ? user.radius : "",
     cloudinaryProfileImgUrl: user ? user.cloudinaryProfileImgUrl : "",
-    // interests: user ? user.interests : "",
-    // activities: user ? user.activities : "",
+    interests: user ? user.interests : "",
+    activities: user ? user.activities : "",
   });
 
   return (

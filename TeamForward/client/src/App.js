@@ -1,15 +1,18 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useReactiveVar } from "@apollo/client";
+import { userState } from "./GlobalState";
+import log from "./helpers/logging";
+
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
 import UpdateProfile from "./pages/UpdateProfile";
 import MyProfile from "./pages/MyProfile"
-import axios from "axios";
-import { useReactiveVar } from "@apollo/client";
-import { userState } from "./GlobalState";
-import log from "./helpers/logging";
+import UserProfile from "./pages/UserProfile";
+
 
 axios.defaults.withCredentials = true;
 
@@ -82,14 +85,14 @@ function App() {
           }
         />
         
-        {/* <Route
+        <Route
           path="/userProfile/:id"
           element={
             // <ProtectedRoute>
-              <userProfile />
+              <UserProfile />
             // </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   );
