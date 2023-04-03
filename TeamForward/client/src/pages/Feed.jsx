@@ -9,6 +9,8 @@ import BasicButtonStyling from "../components/Button";
 
 const interests = ["chingu", "networking", "mentorship"];
 
+//TODO add message to for new user to update profile(zipcode & radius to find those in their area)
+
 const Feed = () => {
   const user = userState();
   const [activities,setActivities] = useState(['running','jumping','kayaking'])
@@ -35,6 +37,17 @@ const Feed = () => {
     })
   },[interestArr])
 
+ 
+
+  const userInfoNeeded = () => {
+    if(!user.location || !user.zipcode || !user.radius){
+      return <div> 
+          Please update your user info to include a zipcode and radius to tailor your feed to locals in your area. 
+          <Link  to="/updateprofile"> Edit User Info Here</Link>
+        </div>
+    }
+  }
+
   return (
     <div className="">
       
@@ -42,6 +55,7 @@ const Feed = () => {
         <NavMenu />
         <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
       </div>
+      {userInfoNeeded()}
       <div className="flex justify-center mx-auto">
           {interests.map((interest) => {
             const className = interestArr.includes(interest)
@@ -76,9 +90,10 @@ const Feed = () => {
                 className="text-blue-600 m-2 inline-flex hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">{act}</button>
             })
             } */}
+            
           </div>
       <div className="flex justify-center flex-wrap w-8/12 mx-auto m-2 mt-4">
-
+            
         {
           userList.map((user)=>{
             return <div class="flex w-60 h-72 m-2">

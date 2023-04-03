@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
 import UpdateProfile from "./pages/UpdateProfile";
+import MyProfile from "./pages/MyProfile"
 import axios from "axios";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "./GlobalState";
@@ -72,6 +73,23 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/myProfile"
+          element={
+            <ProtectedRoute>
+              <MyProfile />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* <Route
+          path="/userProfile/:id"
+          element={
+            // <ProtectedRoute>
+              <userProfile />
+            // </ProtectedRoute>
+          }
+        /> */}
       </Routes>
     </BrowserRouter>
   );

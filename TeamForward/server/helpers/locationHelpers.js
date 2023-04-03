@@ -27,14 +27,16 @@ const getUsersWithinRadius = async (coordinates, radius, interests, userId) => {
 
         let findQuery = {
             $and: [
-                {
-                    location: {
-                        $geoWithin: { $centerSphere: [ [coordinates[0], coordinates[1] ], radius/3963.2 ] }
-                    }
-                },
                 { _id: { $ne: userId}}
             ]
         };
+        if(coordinates && radius){
+            findQuery.$and.push({
+                location: {
+                    $geoWithin: { $centerSphere: [ [coordinates[0], coordinates[1] ], radius/3963.2 ] }
+                }
+            });
+        }
         if (interests){
             findQuery.$and.push({ $or: interestQuery });
         } 

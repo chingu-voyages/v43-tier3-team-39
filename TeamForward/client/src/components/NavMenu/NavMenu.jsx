@@ -23,7 +23,7 @@ const NavMenu = () => {
                 <div className="absolute bg-opacity-100">
                     <ul className="bg-opacity-100">
                         <li className="block">
-                        <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block ">Profile</button>
+                        <NavLink to="/myProfile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block ">Profile</NavLink>
                         </li>
                         <li className="block">
                         <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Virtual Meets</button>
