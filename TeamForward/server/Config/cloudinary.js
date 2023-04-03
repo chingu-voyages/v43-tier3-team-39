@@ -8,6 +8,6 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
   secure: true
 });
-console.log("cloudinary config works!" , cloudinary.config())
+// console.log("cloudinary config works!" , cloudinary.config())
 
 module.exports = cloudinary;

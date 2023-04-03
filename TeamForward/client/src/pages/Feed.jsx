@@ -1,5 +1,5 @@
 import { userState } from "../GlobalState";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useReactiveVar } from "@apollo/client";
 import log from "../helpers/logging";
@@ -12,16 +12,17 @@ const interests = ["chingu", "networking", "mentorship"];
 //TODO add message to for new user to update profile(zipcode & radius to find those in their area)
 
 const Feed = () => {
-  const user = userState();
+  const navigate = useNavigate();
+  const user = useReactiveVar(userState);
   const [activities,setActivities] = useState(['running','jumping','kayaking'])
   const [open,setOpen] = useState(true)
-  const [interestArr,setInterestArr] = useState([])
+  const [interestArr,setInterestArr] = useState([]);
   const activityArr = []
   const [userList,setUserList] = useState([])
 
   // grab all users from db based on filters
   useEffect(()=>{
-    console.log(interestArr)
+    log(interestArr);
     const baseUrl = `${process.env.REACT_APP_BE_URL}/teamForward`;
     const interestQuery = interestArr.length > 0
       ? `interests=${interestArr.join(',')}`
@@ -35,17 +36,16 @@ const Feed = () => {
     }).catch((err)=>{
       console.log(err)
     })
-  },[interestArr])
-
- 
+  },[interestArr, user?.zipCode]);
 
   const userInfoNeeded = () => {
-    if(!user.location || !user.zipcode || !user.radius){
+    if( !user.zipCode || !user.radius ){
       return <div> 
           Please update your user info to include a zipcode and radius to tailor your feed to locals in your area. 
           <Link  to="/updateprofile"> Edit User Info Here</Link>
         </div>
     }
+    return null;
   }
 
   return (
@@ -95,26 +95,28 @@ const Feed = () => {
       <div className="flex justify-center flex-wrap w-8/12 mx-auto m-2 mt-4">
             
         {
-          userList.map((user)=>{
+          userList.map((userProfileData)=>{
             return <div class="flex w-60 h-72 m-2">
             <div
               class="max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
               <a href="#!" data-te-ripple-init data-te-ripple-color="light">
                 <img
                   class="rounded-t-lg h-40 object-cover w-screen"    
-                  src={user.cloudinaryProfileImgUrl ? user.cloudinaryProfileImgUrl : "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"}
+                  src={userProfileData.cloudinaryProfileImgUrl ? userProfileData.cloudinaryProfileImgUrl : "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"}
                   alt="" />
               </a>
               <div className="m-3">
                 <h5
                   className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  {user.firstName}
+                  {userProfileData.firstName}
                 </h5>
                 <p class="mb-4 text-base h-5 overflow-hidden text-neutral-600 dark:text-neutral-200">
-                 {user.bio} 
+                  {userProfileData.bio} 
                 </p>
                 <div className="flex">
                   <button
+                    //TODO connect to userProfile and connect on App.js
+                    // onClick={()=>{ navigate(/userProfile/:id)}
                     type="button"
                     class="inline-block rounded bg-primary mx-auto px-1 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                     data-te-ripple-init
