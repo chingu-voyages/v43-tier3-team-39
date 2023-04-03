@@ -21,10 +21,10 @@ module.exports = {
   },
 
   loggedInUser: (req, res) => {
-    console.log("userId", req.userId)
+    log("userId", req.userId)
     User.findOne({ _id: req.userId }, { password: 0 })
       .then((loggedUser) => {
-        console.log(loggedUser);
+        log(loggedUser);
         res.json(loggedUser);
       })
       .catch((err) => {
@@ -85,25 +85,18 @@ module.exports = {
       });
   },
 
-
-
   findAllUsers: async(req, res) => {
-
     const userInfo = await User.findOne({ _id: req.userId }, { password: 0 });
-
-    // console.log(req.query);
-    
     const interests = req.query['interests'];
-
+    console.log("*****", userInfo.location.coordinates, userInfo.radius );
     const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, req.userId);
-    console.log("controller results", results);
     res.json(results);
   },
   
   updateUser: async (req, res) => {
     let body = { ...req.body };
 
-    console.log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params)
+    log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params)
     if (body.photo) {
       //if there's an existing cloudinaryProfileImgUrl/cloudinaryId, then delete it from cloudinary
       let userPhoto = await User.findById({_id: req.params.id });
@@ -129,41 +122,47 @@ module.exports = {
       }
     }
 
-    const address = req.body.zipCode;
-    const locationData = await locationHelpers.getLocationHelper(address);
+    
+    if(body.zipCode){
+      const address = body.zipCode;
+      const locationData = await locationHelpers.getLocationHelper(address);
 
-    let location;
-    if(locationData?.length > 0){
-      location = locationData[0];
+      let location;
+      if(locationData?.length > 0){
+        location = locationData[0];
+      }
+
+      const coordinates = [location.longitude, location.latitude];
+
+      body = {
+        ...body, 
+        location: {
+            type:'Point',
+            coordinates
+        },
+        // location2: {
+        //   type:'Point',
+        //   coordinates
+        // }
+      };
     }
 
-    const coordinates = [location.longitude, location.latitude];
+    if( !body.zipCode ){
+      body.location = {undefined};
+    }
 
-    body = {
-      ...body, 
-      location: {
-          type:'Point',
-          coordinates
-      },
-      location2: {
-        type:'Point',
-        coordinates
-      }
-    };
-
-    console.log("body: ", body);
     User.findOneAndUpdate(
       { _id: req.params.id }, 
       {$set: body},
       {new: true}
     )
       .then((updatedUser) => {
-        console.log("updatedUser:" ,updatedUser);
+        log("updatedUser:" ,updatedUser);
         res.json(updatedUser);
       })
       .catch((err) => {
-        // res.status(400).json(err);
-        log("Something went wrong with updatedUser");
+        res.status(400).json(err);
+        console.log("Something went wrong with updatedUser");
       });
 
   },

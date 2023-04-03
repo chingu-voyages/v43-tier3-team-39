@@ -12,7 +12,7 @@ import { useReactiveVar } from "@apollo/client";
 const MyProfile = ({}) => {
   // const user = userState()
   const user = useReactiveVar(userState);
-  console.log("this is userState", user);
+  log("this is userState", user);
 
   const [profileData, setProfileData] = useState({
     // id: user ? user._id : "",

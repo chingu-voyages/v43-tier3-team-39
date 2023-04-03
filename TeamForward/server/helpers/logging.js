@@ -1,4 +1,4 @@
-const LOGGING_ENABLED = true;
+const LOGGING_ENABLED = false;
 
 const log = (...messages) => {
   if (LOGGING_ENABLED) {

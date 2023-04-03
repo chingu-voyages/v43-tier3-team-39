@@ -12,7 +12,7 @@ module.exports = {
         //TODO: make key in URL env variable
         const response = await fetch(url);
         const responseJson = await response.json();
-        console.log(responseJson);
+        log(responseJson);
         res.json(responseJson);
     }
 };

@@ -1,5 +1,6 @@
 const fetch = require("node-fetch");
 const User = require("../Models/User");
+const log = require("../helpers/logging");
 
 const getLocationHelper = async(address) => {
     try {
@@ -7,7 +8,7 @@ const getLocationHelper = async(address) => {
         const response = await fetch(url);
         //TODO handle non 200 responses (200 means ok)
         const responseJson = await response.json();
-        console.log(responseJson);
+        log(responseJson);
         return responseJson.data;
     } catch (expection) {
         console.log("something went wrong with getLocationHelper function", expection);
@@ -30,7 +31,7 @@ const getUsersWithinRadius = async (coordinates, radius, interests, userId) => {
                 { _id: { $ne: userId}}
             ]
         };
-        if(coordinates && radius){
+        if(coordinates.length === 2 && radius){
             findQuery.$and.push({
                 location: {
                     $geoWithin: { $centerSphere: [ [coordinates[0], coordinates[1] ], radius/3963.2 ] }
@@ -42,7 +43,10 @@ const getUsersWithinRadius = async (coordinates, radius, interests, userId) => {
         } 
         // another if statement for activities once added
 
-        let results = await User.find(findQuery);
+        let results = await User.find(
+            findQuery
+        );
+
         return results;
     } catch (expection) {
         console.log("something went wrong with getUserWithRadius function", expection);
