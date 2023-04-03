@@ -1,12 +1,12 @@
 const BasicButtonStyling = (props) => {
-  const { text, className } = props;
+  const { text, ...otherProps } = props;
   return (
     <button
       type="button"
-      className={className}
       data-te-ripple-init
       data-mdb-ripple="true"
       data-mdb-ripple-color="light"
+      {...otherProps}
     >
       {text}
     </button>

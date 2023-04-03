@@ -6,7 +6,13 @@ const PhotoSchema = new mongoose.Schema({
     },
     profile: {
         type: Boolean
-    }
+    },
+      // Do we need this to establish relationship between user and photo?
+    // userId: {
+    //   type: mongoose.Schema.Types.ObjectId, 
+    //   ref: "User",
+    //   require: true,
+    // },
 });
 
 const Photo = mongoose.model('photo',PhotoSchema);

@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Feed from "./pages/Feed";
 import UpdateProfile from "./pages/UpdateProfile";
+import MyProfile from "./pages/MyProfile"
 import axios from "axios";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "./GlobalState";
@@ -14,6 +15,16 @@ axios.defaults.withCredentials = true;
 
 const ProtectedRoute = ({ children }) => {
   const user = useReactiveVar(userState);
+
+  if (!user) {
+    return <Navigate to="/signin" />;
+  }
+
+  return children;
+};
+
+function App() {
+  const user = useReactiveVar(userState);
   const [apiComplete, setApiComplete] = useState(user ? true : false);
 
   useEffect(() => {
@@ -22,7 +33,7 @@ const ProtectedRoute = ({ children }) => {
         // .get(`${process.env.REACT_APP_BE_URL}/signin/success`)
         .get(`${process.env.REACT_APP_BE_URL}/teamForward/loggedInUser`)
         .then((res) => {
-          userState(res.data.user);
+          userState(res.data);
           setApiComplete(true);
         })
         .catch((err) => {
@@ -35,16 +46,6 @@ const ProtectedRoute = ({ children }) => {
   if (!apiComplete) {
     return null;
   }
-
-  if (!user) {
-    return <Navigate to="/signin" />;
-  }
-
-  return children;
-};
-
-function App() {
-  const user = useReactiveVar(userState);
 
   return (
     <BrowserRouter>
@@ -67,11 +68,28 @@ function App() {
         <Route
           path="/updateprofile"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
             <UpdateProfile />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
+        <Route
+          path="/myProfile"
+          element={
+            <ProtectedRoute>
+              <MyProfile />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* <Route
+          path="/userProfile/:id"
+          element={
+            // <ProtectedRoute>
+              <userProfile />
+            // </ProtectedRoute>
+          }
+        /> */}
       </Routes>
     </BrowserRouter>
   );
