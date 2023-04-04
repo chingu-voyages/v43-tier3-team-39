@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SignInWEmail from "../components/SignUpAndSignInPopUps/SignInWEmail";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import { userState } from "../GlobalState";
 import log from "../helpers/logging";
@@ -17,6 +17,7 @@ const SignIn = () => {
 
   return (
     <div className="bg-white flex flex-col h-screen">
+      <Link to="/" >Back to Home</Link>
       <header className="m-5 bg-white">Team Forward</header>
       <div className="h-screen bg-white relative flex flex-col space-y-10 justify-center items-center">
         <div className="bg-white shadow-none flex flex-col justify-center items-center rounded p-6 w-80">
