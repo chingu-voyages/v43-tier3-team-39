@@ -6,13 +6,11 @@ import ConnectButton from "../components/Button/ConnectButton";
 import { useReactiveVar } from "@apollo/client";
 
 
-// axios .get 
-// route would be process.env.REACT_APP__URL / teamForward/ :id
 
 const MyProfile = ({}) => {
-  // const user = userState()
+
   const user = useReactiveVar(userState);
-  log("this is userState", user);
+  
 
   const [profileData, setProfileData] = useState({
     _id: user ? user._id : "",

@@ -88,9 +88,9 @@ function App() {
         <Route
           path="/userProfile/:id"
           element={
-            // <ProtectedRoute>
+            <ProtectedRoute>
               <UserProfile />
-            // </ProtectedRoute>
+            </ProtectedRoute>
           }
         />
       </Routes>

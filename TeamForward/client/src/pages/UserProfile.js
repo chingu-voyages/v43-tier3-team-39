@@ -8,15 +8,10 @@ import { useLocation } from 'react-router-dom';
 
 const UserProfile = () => {
 
-  
-  const [userData, setUserData] = useState()
   const {state} = useLocation();
-
-  console.log("user profile data:",state)
 
   return (
     <div>
-        this is users profile
       <Profile 
       profileData={state}/>
     </div>
