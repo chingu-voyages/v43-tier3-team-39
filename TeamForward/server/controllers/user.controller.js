@@ -41,11 +41,12 @@ module.exports = {
     if (user === null) {
       return res.status(400).send("incorrect email");
     }
-    const correctPassword = await (req.body.password === user.password);
-    if (!correctPassword) {
-      return res.status(400).send("incorrect password");
-    }
-    console.log("****** user._id", user._id)
+
+    const correctPassword = await bcrypt.compare(req.body.password, user.password);
+        if ( !correctPassword) {
+            return res.status(400).send("incorrect password");
+        }
+
     const userToken = jwt.sign(
       {
         id: user._id,
