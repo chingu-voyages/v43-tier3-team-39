@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SignUpWEmail from "../components/SignUpAndSignInPopUps/SignUpWEmail";
 import { userState } from "../GlobalState";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 const SignUp = () => {
   const [emailSignUpForm, setEmailSignUpForm] = useState(false);
@@ -36,6 +36,10 @@ const SignUp = () => {
           <a href="/signin" className="p-1 underline">
             Sign in
           </a>
+          <Link 
+            to="/" 
+            className="p-1 underline"
+          >Home</Link>
         </div>
       </div>
     </div>
