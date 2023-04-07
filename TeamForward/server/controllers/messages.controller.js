@@ -13,7 +13,7 @@ module.exports ={
             userIds: [req.userId, otherUserId]
         })
         .then((newChatRoom)=>{
-            io.emit(newChatRoom);
+            res.json(newChatRoom);
         }).catch((err) => {
             console.log("createNewChatRoom is not working", err);
         });
