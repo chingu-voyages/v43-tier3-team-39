@@ -32,7 +32,7 @@ const NavMenu = () => {
                         <NavLink to="/updateprofile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Edit User Info</NavLink>
                         </li>
                         <li className="">
-                        <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Messages</button>
+                        <NavLink to="/messages" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Messages</NavLink>
                         </li>
                         <li className="">
                         <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Logout</button>
