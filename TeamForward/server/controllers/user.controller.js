@@ -1,4 +1,4 @@
-const User = require("../Models/User");
+const User = require("../models/User");
 const log = require("../helpers/logging");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
