@@ -24,7 +24,7 @@ const Chat = () => {
                 <div className="w-8 h-8 rounded-full bg-gray-500"></div>
                 <div className="flex flex-col items-start">
                   <div className="relative px-4 py-2 max-w-xs rounded-lg">
-                    <div className="text-sm leading-tight mb-2">
+                    <div className="text-med leading-tight mb-2">
                       Likewise! What time works best for the bike ride?
                     </div>
                     <div className="text-xs text-gray-500">2 mins ago</div>

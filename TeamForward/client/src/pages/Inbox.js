@@ -1,7 +1,7 @@
 import InboxList from "../components/Messages/InboxList";
-import ProfileImg from "../components/ProfilePage/ProfileImg";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
+import Search from "../components/Messages/Search";
 
 
 const Inbox = () => {
@@ -11,10 +11,10 @@ const Inbox = () => {
     <section className="flex flex-col justify-center antialiased bg-gray-50 text-gray-600 min-h-screen p-4">
       <div className="h-full">
         {/* <!-- Card --> */}
-        <div className="relative max-w-screen-sm mx-auto bg-white shadow-lg rounded-lg">
+        <div className="relative max-w-screen-sm mx-auto bg-white shadow-lg rounded-lg ">
           {/* <!-- Card header --> */}
           <header className="pt-6 pb-4 px-5 border-b border-gray-200">
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex space-y-8 items-center mb-3 flex-col">
               {/* <!-- Image + name --> */}
               <div className="flex items-center">
                 <a className="inline-flex items-start mr-3" href="#0">
@@ -32,13 +32,14 @@ const Inbox = () => {
                     className="inline-flex text-gray-800 hover:text-gray-900"
                     href="#0"
                   >
-                    <h2 class="text-xl leading-snug font-bold">
+                    <h2 className="text-xl leading-snug font-bold">
                       {`${user.firstName} ${user.lastName}`}
                     </h2>
                   </a>
                 </div>
               </div>
-              {/* Possibly notification here */}
+              
+              <Search />
             </div>
           </header>
           {/* <!-- Card body --> */}

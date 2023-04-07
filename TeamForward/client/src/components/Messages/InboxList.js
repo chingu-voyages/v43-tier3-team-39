@@ -1,4 +1,19 @@
+import axios from 'axios';
+
 const InboxList = () => {
+
+    // TODO: Retrieve each users data to display (firstName, lastName, mostRecentMessage,timestamps)
+    
+    // axios.get('/api/users/profile/' + userId)
+    // .then(response => {
+    //   const userData = response.data;
+    //   // handle the retrieved profile data here
+    // })
+    // .catch(error => {
+    //   console.error('Error fetching user profile:', error);
+    // });
+
+
   return (
     <button className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
       <div className="flex items-center">
@@ -10,8 +25,8 @@ const InboxList = () => {
           alt="Nhu Cassel"
         />
         <div>
-          <h4 className="text-sm font-semibold text-gray-900">Nhu Cassel</h4>
-          <div className="text-[13px]">Hello Lauren 👋, · 24 Mar</div>
+          <h4 className="text-med font-semibold text-gray-900">Nhu Cassel</h4>
+          <div className="text-[14px]">Hello Lauren 👋, · 24 Mar</div>
         </div>
       </div>
     </button>
