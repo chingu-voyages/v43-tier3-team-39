@@ -1,17 +1,19 @@
 import React from 'react'
 import Profile from '../components/ProfilePage/Profile'
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useReactiveVar } from "@apollo/client";
+import { userState } from "../GlobalState";
+import { useLocation } from 'react-router-dom';
 
 const UserProfile = () => {
 
-// TODO: this is incomplete - use axios to send a get request and grab other user data
-// route would be process.env.REACT_APP_BE_URL  /teamForward/ :id
-
-
+  const {state} = useLocation();
 
   return (
     <div>
-        this is users profile
-      <Profile />
+      <Profile 
+      profileData={state}/>
     </div>
   )
 }
