@@ -33,7 +33,7 @@ const Testimonials = () => {
                   </div>
                   <div className="p-6">
                     <h5 className="text-lg font-bold mb-2">John Doe</h5>
-                    <h6 className="font-medium text-blue-600 mb-4">
+                    <h6 className="font-medium text-green-700 mb-4">
                       Senior Developer
                     </h6>
                     <ul className="flex justify-center mb-6">
@@ -97,7 +97,7 @@ const Testimonials = () => {
                   </div>
                   <div className="p-6">
                     <h5 className="text-lg font-bold mb-2">Halley Frank</h5>
-                    <h6 className="font-medium text-blue-600 mb-4">
+                    <h6 className="font-medium text-green-700 mb-4">
                       Product Owner
                     </h6>
                     <ul className="flex justify-center mb-6">
@@ -147,7 +147,7 @@ const Testimonials = () => {
                   </div>
                   <div className="p-6">
                     <h5 className="text-lg font-bold mb-2">Lisa Trey</h5>
-                    <h6 className="font-medium text-blue-600 mb-4">
+                    <h6 className="font-medium text-green-700 mb-4">
                       Lead Designer
                     </h6>
                     <ul className="flex justify-center mb-6">

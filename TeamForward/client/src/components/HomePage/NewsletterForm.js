@@ -7,7 +7,7 @@ const NewsletterForm = () => {
           <section className="mb-32 text-gray-800 text-center">
             <div className="flex flex-wrap justify-center">
               <div className="grow-0 shrink-0 flex-basis w-full lg:w-6/12 px-3">
-                <div className="p-4 bg-blue-600 rounded-full shadow-lg inline-block mb-6">
+                <div className="p-4 bg-green-900 rounded-full shadow-lg inline-block mb-6">
                   <svg
                     aria-hidden="true"
                     focusable="false"
@@ -43,7 +43,7 @@ const NewsletterForm = () => {
                   <Button
                     text="Subscribe"
                     type="submit"
-                    className="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+                    className="inline-block px-7 py-3 bg-green-900 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-green-700 hover:shadow-lg focus:bg-green-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                     data-mdb-ripple="true"
                     data-mdb-ripple-color="light"
                   />
