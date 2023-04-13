@@ -12,6 +12,8 @@ import Feed from "./pages/Feed";
 import UpdateProfile from "./pages/UpdateProfile";
 import MyProfile from "./pages/MyProfile"
 import UserProfile from "./pages/UserProfile";
+import Inbox from "./pages/Inbox"
+import Chat from "./components/Messages/Chat"
 
 
 axios.defaults.withCredentials = true;
@@ -90,6 +92,30 @@ function App() {
           element={
             <ProtectedRoute>
               <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/userProfile/:id"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            <ProtectedRoute>
+              <Inbox />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <ProtectedRoute>
+              <Chat />
             </ProtectedRoute>
           }
         />

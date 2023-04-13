@@ -12,7 +12,7 @@ module.exports = {
       .then((newUser) => {
         const payload = { id: newUser._id };
         const userToken = jwt.sign(payload, process.env.SecretKeyOne);
-        res.cookie("jwt-token", userToken, { httpOnly: true }).json(newUser);
+        res.cookie("jwt-token", userToken, { httpOnly: true, secure: true, sameSite: "none" }).json(newUser);
       })
       .catch((err) => {
         log("something went wrong with createNewUser");
@@ -41,10 +41,13 @@ module.exports = {
     if (user === null) {
       return res.status(400).send("incorrect email");
     }
-    const correctPassword = await (req.body.password === user.password);
-    if (!correctPassword) {
-      return res.status(400).send("incorrect password");
-    }
+
+
+    const correctPassword = await bcrypt.compare(req.body.password, user.password);
+        if ( !correctPassword) {
+            return res.status(400).send("incorrect password");
+        }
+        
     const userToken = jwt.sign(
       {
         id: user._id,
@@ -54,6 +57,8 @@ module.exports = {
     res
       .cookie("jwt-token", userToken, {
         httpOnly: true,
+        secure: true,
+        sameSite: "none"
       })
       .json({ msg: "success!", user: user });
   },
