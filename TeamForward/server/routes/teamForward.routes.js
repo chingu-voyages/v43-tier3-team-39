@@ -10,20 +10,22 @@ module.exports = (app) => {
   app.post("/teamForward/logout", UserController.logOut); 
   
   //autheticated routes
-  //user
+
+  //User
   app.get("/teamForward/location", authenticate, LocationController.getLocation);
   app.get("/teamForward/loggedInUser", authenticate, UserController.loggedInUser);
   app.get("/teamForward/:id", authenticate, UserController.findOneUser);
   app.get("/teamForward", authenticate, UserController.findAllUsers);
   app.put("/teamForward/:id", authenticate, UserController.updateUser);
   app.delete("/teamForward/:id", authenticate, UserController.deleteUser);
-  //messages
-  app.post("/teamForward/chatRoom/Message", authenticate, MessagingController.createNewMessage);
-  app.post("/teamForward/newChat/:otherUserId", authenticate, MessagingController.createNewChatRoom);
-  app.get("/teamForward/chatRoom", authenticate, MessagingController.findInbox);
-  app.put("/teamForward/updateMessage/:messageId", authenticate, MessagingController.updateMessage);
-  app.get("/teamForward/chatRoomMessages/:chatRoomId", authenticate, MessagingController.findAllUserConversations);
-  app.get("/teamForward/messageUnreadCount", authenticate, MessagingController.unreadCount);
-  app.delete("/teamForward/chatRoom/:messageId", authenticate, MessagingController.deleteMessage);
-  app.delete("/teamForward/chatRoom/:chatRoomId", authenticate, MessagingController.deleteChat);
+
+  //Messaging
+  app.post("/messaging/chatRoom/:chatRoomId/message", authenticate, MessagingController.createNewMessage);
+  app.post("/messaging/chatRoom", authenticate, MessagingController.createNewChatRoom);
+  app.get("/messaging/inbox", authenticate, MessagingController.findInbox);
+  app.get("/messaging/user/message/unreadCount", authenticate, MessagingController.unreadCount);
+  app.get("/messaging/chatRoom/:chatRoomId/allMessages", authenticate, MessagingController.findAllChatRoomMessages);
+  app.put("/messaging/message/:messageId/update", authenticate, MessagingController.updateMessage);
+  app.delete("/messaging/chatRoom/:chatRoomId/delete", authenticate, MessagingController.deleteChat);
+  app.delete("/messaging/chatRoom/message/:messageId/delete", authenticate, MessagingController.deleteMessage);
 };

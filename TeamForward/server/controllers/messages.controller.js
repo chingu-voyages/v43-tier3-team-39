@@ -6,23 +6,23 @@ const mongoose = require("mongoose");
 module.exports ={
 
     //CHATROOM
-    createNewChatRoom: (req, res) => {
-        // the user id of the person we're starting a chat with
-        const { otherUserId } = req.params;
-        ChatRoom.create({
-            userIds: [req.userId, otherUserId]
-        })
-        .then((newChatRoom)=>{
+    createNewChatRoom: async (req, res) => {
+        // TODO look at maybe checking if one already exists before creating
+        try{
+            const { otherUserId } = req.body;
+            let newChatRoom = await ChatRoom.create({
+                userIds: [req.userId, otherUserId]
+            });
             res.json(newChatRoom);
-        }).catch((err) => {
+        } catch(err){
             console.log("createNewChatRoom is not working", err);
-        });
+        }
     },
 
     findInbox: async (req, res) => {
         try {
             //finds all chatRoom instances where logged in user is listed in userIds
-            let ChatRoomList = await ChatRoom.find({
+            let chatRoomList = await ChatRoom.find({
                 userIds: {$in: [req.userId]}
                 //sorts by updated at date
             }).sort({ updatedAt: -1});
@@ -30,31 +30,34 @@ module.exports ={
             //create set for all userIds gathered and does not allow duplicates
             let userIdSet = new Set();
             // iterate through each chatRoom to get the user ids listed in userIds array
-            for(let oneChatRoom of ChatRoomList){
+            chatRoomList.forEach(oneChatRoom => {
                 for( let userId of oneChatRoom.userIds){
                     // adds userId to set 
-                    userIdSet.add(userId);
+                    userIdSet.add(userId.toString());
                 }
-            }
+            });
             // removes the logged in user from the set
             userIdSet.delete(req.userId);
             //turns set into an array
-            let userIdArray = Array.from(userIdSet);
+            let userIdArray = Array.from(userIdSet).map((oneUserId)=> new mongoose.Types.ObjectId(oneUserId));
 
             //finds user objects by each _id in userIdArray
             let otherUsers = await User.find({
                 _id: {$in: userIdArray}
-            });
+            }, {password: 0});
             let returnList = [];
+            let otherUserId;
+            let user;
+
             //iterate through chatRooms
-            for(let oneChatRoom of ChatRoomList){
+            for(let oneChatRoom of chatRoomList){
                 //sets otherUserId to _id listed when oneChatRoom.userIds is not the logged in user i.e. other person's id
-                let otherUserId = oneChatRoom.userIds.find((userId)=>{
-                    return userId !== req.userId;
+                otherUserId = oneChatRoom.userIds.find((userId)=>{
+                    return userId.toString() !== req.userId;
                 });
                 //searches through otherUsers array to find where userObject id matches the other person's id and returns true
-                let user = otherUsers.find((userObject)=>{
-                    return userObject._id === otherUserId;
+                user = otherUsers.find((userObject)=>{
+                    return userObject._id.toString() === otherUserId.toString();
                 });
                 if( otherUserId !== undefined && user !== undefined){
                     returnList.push({
@@ -70,23 +73,28 @@ module.exports ={
         }
     },
 
-    deleteChat: (req, res) => {
-        chatRoom.deleteOne({_id: req.params.chatRoomId})
-            .then((deletedChat) => {
-                res.json(deletedChat);
-            }).catch((err) => console.log("Deleting the chat room failed.", err));
+    deleteChat: async (req, res) => {
+        try{
+            console.log(req.params);
+            let messagesDeleted = await IndividualMessage.deleteMany({chatRoomId: req.params.chatRoomId});
+            let chatRoomDeleted = await ChatRoom.deleteOne({_id: req.params.chatRoomId});
+            res.status(200).json({ messagesDeleted, chatRoomDeleted });
+        }
+        catch(err){
+            console.log("Deleting the chat room failed.", err);
+        }
     },
 
     //Messaging
     createNewMessage: (req,res) => {
-        const { message, chatRoomId } = req.body;
+        const { message, to } = req.body;
         IndividualMessage.create({
-            chatRoomId,
+            chatRoomId: req.params.chatRoomId,
             from: req.userId,
-            message,
-            unread: false
-        }).then((NewMessage) => {
-            res.json(NewMessage);
+            to,
+            message
+        }).then((newMessage) => {
+            res.json(newMessage);
         }).catch((err) =>{
             console.log("createNewMessage is not working", err);
         });
@@ -102,28 +110,28 @@ module.exports ={
         ).catch((err)=> console.log("update message failed"));
     },
 
-    findAllUserConversations: async (req, res) => {
+    findAllChatRoomMessages: async (req, res) => {
         try{
             //user sends in chatRoomId
             //findOne chatRoom
-            let oneChatRoom = await chatRoom.findOne({chatRoomId: req.params.chatRoomId});
+            let oneChatRoom = await ChatRoom.findOne({chatRoomId: req.params.chatRoomId});
             if(!oneChatRoom){
                 res.status(404).json("chatroom could not be found.");
             }
             //find user by chatRoom.userIds
             let otherUserId;
             for(let userId of oneChatRoom.userIds){
-                if(userId !== req.userId){
+                if(userId.toString() !== req.userId){
                     otherUserId = userId;
                 }
             }
-            let otherUserObject = await User.findOne({_id: otherUserId});
+            let otherUserObject = await User.findOne({_id: otherUserId}, {password: 0});
             if(!otherUserObject){
                 res.status(404).json("The other user could not be found.");
             }
             //find all messages by chatRoomId
             let chatRoomMessages = await IndividualMessage.find({chatRoomId: oneChatRoom._id})
-            .sort({ updatedAt: -1});
+            .sort({ createdAt: 1});
             if(!chatRoomMessages){
                 res.status(404).json("Your messages could not be found.");
             }
@@ -135,8 +143,9 @@ module.exports ={
             }];
             res.json(chatRoomInfo);
         }
-        catch (expection) {
-            res.status(500).json("There was a problem with finding this chat room.", expection);
+        catch (err) {
+            console.error(err);
+            res.status(500).json("There was a problem with finding this chat room.");
         }
     },
 
@@ -147,15 +156,17 @@ module.exports ={
             }).catch((err) => console.log("Deleting the message room failed.", err));
     },
 
-    //unread counts
+    //TODO - add a unread message in chatroom controller
     
-    unreadCount: (req, res) => {
-        IndividualMessage.count({from: req.userId}, {unread: true})
-            .then((count)=> {
-                res.json(count);
-            }).catch(expection)(
-                res.status(500).json("There was a problem with find your unread count.", expection)
-            );
+    //unread counts
+    unreadCount: async(req, res) => {
+        try{
+            let count = await IndividualMessage.count({to: req.userId, unread: true});
+            res.json(count);
+        }
+        catch(err) {
+            console.error(err);
+            res.status(500).json("There was a problem with find your unread count.");
+        }
     }
 };
-

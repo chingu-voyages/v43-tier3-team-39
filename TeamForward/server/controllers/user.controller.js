@@ -45,7 +45,6 @@ module.exports = {
     if (!correctPassword) {
       return res.status(400).send("incorrect password");
     }
-    console.log("****** user._id", user._id)
     const userToken = jwt.sign(
       {
         id: user._id,
@@ -60,14 +59,14 @@ module.exports = {
   },
 
   findOneUser: (req, res) => {
-    let findId;
-    try {
-      findId = new mongoose.Types.ObjectID(req.params.id);
-    } catch (err) {
-      res.status(404).json("this user could not be found");
-      return;
-    }
-    User.findOne({ _id: findId })
+    // let findId;
+    // try {
+    //   findId = new mongoose.Types.ObjectId(req.params.id);
+    // } catch (err) {
+    //   res.status(404).json("this user could not be found");
+    //   return;
+    // }
+    User.findOne({ _id: req.params.id })
       .then((oneUser) => {
         log(oneUser);
         if (oneUser === null) {
@@ -88,7 +87,6 @@ module.exports = {
   findAllUsers: async(req, res) => {
     const userInfo = await User.findOne({ _id: req.userId }, { password: 0 });
     const interests = req.query['interests'];
-    console.log("*****", userInfo.location.coordinates, userInfo.radius );
     const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, req.userId);
     res.json(results);
   },
