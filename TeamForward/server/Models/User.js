@@ -49,9 +49,6 @@ const UserSchema = new mongoose.Schema({
   zipCode: {
     type: Number,
   },
-  // location2: {
-  //   type: mongoose.Schema.Types.Point 
-  // },
   location: {
     type: {
       type: String, // Don't do `{ location: { type: String } }`

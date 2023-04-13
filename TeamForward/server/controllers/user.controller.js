@@ -1,4 +1,4 @@
-const User = require("../Models/User");
+const User = require("../models/User");
 const log = require("../helpers/logging");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
@@ -42,11 +42,12 @@ module.exports = {
       return res.status(400).send("incorrect email");
     }
 
+
     const correctPassword = await bcrypt.compare(req.body.password, user.password);
         if ( !correctPassword) {
             return res.status(400).send("incorrect password");
         }
-
+        
     const userToken = jwt.sign(
       {
         id: user._id,
@@ -63,14 +64,14 @@ module.exports = {
   },
 
   findOneUser: (req, res) => {
-    let findId;
-    try {
-      findId = new mongoose.Types.ObjectID(req.params.id);
-    } catch (err) {
-      res.status(404).json("this user could not be found");
-      return;
-    }
-    User.findOne({ _id: findId })
+    // let findId;
+    // try {
+    //   findId = new mongoose.Types.ObjectId(req.params.id);
+    // } catch (err) {
+    //   res.status(404).json("this user could not be found");
+    //   return;
+    // }
+    User.findOne({ _id: req.params.id })
       .then((oneUser) => {
         log(oneUser);
         if (oneUser === null) {
@@ -91,7 +92,6 @@ module.exports = {
   findAllUsers: async(req, res) => {
     const userInfo = await User.findOne({ _id: req.userId }, { password: 0 });
     const interests = req.query['interests'];
-    console.log("*****", userInfo.location.coordinates, userInfo.radius );
     const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, req.userId);
     res.json(results);
   },
