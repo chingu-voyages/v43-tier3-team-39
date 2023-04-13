@@ -7,23 +7,28 @@ import ProfileImg from "./ProfileImg";
 
 const Profile = ({ profileData, setProfileData }) => {
   const user = useReactiveVar(userState);
+  // console.log("this is userState", user);
+  console.log("this is profileData", profileData);
 
   return (
     <div className="p-16">
       <div className="p-8 bg-white shadow mt-24">
         <div className="grid grid-cols-1 md:grid-cols-3 ">
-          <div className="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0"></div>
+          <div className="grid grid-cols-3 text-center order-last md:order-first md:mt-0"></div>
           <div className="relative ">
             <ProfileImg profileData={profileData} />
           </div>
           {/* BUTTONS */}
-          <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-            <ConnectButton />
-            <Link to="/updateprofile">
-              <button className="text-white py-2 px-4 h-10 w-30 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg text-sm  transition transform hover:-translate-y-0.5">
-                Edit
-              </button>
-            </Link>
+          <div className="space-x-8 flex justify-between mt-32 lg:justify-end md:mt-0 md:justify-end sm:justify-center xs:justify-center">
+            {user._id === profileData._id ? (
+              <Link to="/updateprofile">
+                <button className="text-white py-2 px-4 h-10 w-30 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg text-sm  transition transform hover:-translate-y-0.5">
+                  Edit
+                </button>
+              </Link>
+            ) : (
+              <ConnectButton />
+            )}
           </div>
         </div>
 
@@ -47,12 +52,32 @@ const Profile = ({ profileData, setProfileData }) => {
         {/* TODO: Hook up interests/activities */}
         <div className="mt-12 flex flex-col justify-center  text-gray-500">
           <h3>Interests:</h3>
+          <div className=" p-1 flex flex-row ">
+            {Object.keys(profileData.interests).map((interest) =>
+              profileData.interests[interest] ? (
+                <p className=" p-1 my-3 mr-2 border border-black rounded-md">
+                  {interest}
+                </p>
+              ) : null
+            )}
+          </div>
         </div>
         <div className="mt-12 flex flex-col justify-center  text-gray-500">
           <h3>Activities:</h3>
+          <div className=" p-1 flex flex-row ">
+            {Object.keys(profileData.activities).map((activity) =>
+              profileData.activities[activity] ? (
+                <p className=" p-1 my-3 mr-2 border border-black rounded-md">
+                  {activity}
+                </p>
+              ) : null
+            )}
+          </div>
         </div>
       </div>
-      <Link to="/feed">Back to feed</Link>
+      <Link to="/feed" className="text-gray-800 flex justify-center">
+        Back to feed
+      </Link>
     </div>
   );
 };
