@@ -7,7 +7,7 @@ const ChatRoomSchema = new mongoose.Schema ({
         ref: 'User',
         required: true
     }]
-});
+}, {timestamps: true});
 
 const IndividualMessageSchema = new mongoose.Schema({
     chatRoomId: {
