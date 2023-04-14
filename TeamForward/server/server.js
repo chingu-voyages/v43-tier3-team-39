@@ -46,26 +46,26 @@ app.use((req, res, next) => {
 require("./Config/mongoose.config");
 require("./routes/teamForward.routes")(app);
 
-const io = socketio(server, {
-  cors: {
-    // origin needs env variable for test/deployed environments?
-      origin: 'http://localhost:3000',
-      methods: ['GET', 'POST'],
-      allowedHeaders: ['*'],
-      credentials: true,
-  }
-});
+// const io = socketio(server, {
+//   cors: {
+//     // origin needs env variable for test/deployed environments?
+//       origin: 'http://localhost:3000',
+//       methods: ['GET', 'POST'],
+//       allowedHeaders: ['*'],
+//       credentials: true,
+//   }
+// });
 
-io.on("connection", (socket) => {
-  console.log("New connection at" + socket.id);
+// io.on("connection", (socket) => {
+//   console.log("New connection at" + socket.id);
 
-  socket.on("clientEvent", (data) => {
-    // this should run controller function to add new message
-    // into the db
+//   socket.on("clientEvent", (data) => {
+//     // this should run controller function to add new message
+//     // into the db
 
-      // ChatController.addConversation(io, data);
-  })
-})
+//       // ChatController.addConversation(io, data);
+//   })
+// })
 // app.use("/", require("./routes/oauth.routes"));
 
 app.listen(port, () => console.log(`listening on port: ${port}`));
