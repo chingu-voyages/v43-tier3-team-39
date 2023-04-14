@@ -112,7 +112,7 @@ function App() {
           }
         />
         <Route
-          path="/chat"
+          path="/chat/:id"
           element={
             <ProtectedRoute>
               <Chat />

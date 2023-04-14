@@ -27,7 +27,7 @@ const Profile = ({ profileData, setProfileData }) => {
                 </button>
               </Link>
             ) : (
-              <ConnectButton />
+              <ConnectButton user={user._id} />
             )}
           </div>
         </div>
