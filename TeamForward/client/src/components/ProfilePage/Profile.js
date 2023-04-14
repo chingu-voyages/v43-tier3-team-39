@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { userState } from "../../GlobalState";
 import { useReactiveVar } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ConnectButton from "../Button/ConnectButton";
 import ProfileImg from "./ProfileImg";
 
 const Profile = ({ profileData, setProfileData }) => {
   const user = useReactiveVar(userState);
+  // console.log("this is profileData", profileData);
 
   return (
     <div className="p-16">
@@ -34,12 +35,11 @@ const Profile = ({ profileData, setProfileData }) => {
           <h1 className="text-4xl font-medium text-gray-700">
             {`${profileData.firstName} ${profileData.lastName}`}
           </h1>
-          <p className="font-light text-gray-600 mt-6">
+          <p className=" text-gray-600 mt-6  font-semibold">
             Location: {`${profileData.zipCode}`}
           </p>
 
-          <p className="mt-5 text-gray-500">{profileData.profession}</p>
-          {/* <p className="mt-2 text-gray-500">University of Computer Science</p> */}
+          <p className="mt-5 text-gray-500 font-bold ">{profileData.profession}</p>
         </div>
 
         <div className="mt-12 flex flex-col justify-center ">
@@ -47,13 +47,12 @@ const Profile = ({ profileData, setProfileData }) => {
             {profileData.bio}
           </p>
         </div>
-        {/* TODO: Hook up interests/activities */}
         <div className="mt-12 flex flex-col justify-center  text-gray-500">
-          <h3>Interests:</h3>
+          <h3 className="font-bold uppercase">Interests:</h3>
           <div className=" p-1 flex flex-row ">
             {Object.keys(profileData.interests).map((interest) =>
               profileData.interests[interest] ? (
-                <p className=" p-1 my-3 mr-2 border border-black rounded-md">
+                <p className=" p-1 my-3 mr-2 border bg-green-700 text-white rounded-md">
                   {interest}
                 </p>
               ) : null
@@ -61,11 +60,11 @@ const Profile = ({ profileData, setProfileData }) => {
           </div>
         </div>
         <div className="mt-12 flex flex-col justify-center  text-gray-500">
-          <h3>Activities:</h3>
+          <h3 className="font-bold uppercase">Activities:</h3>
           <div className=" p-1 flex flex-row ">
             {Object.keys(profileData.activities).map((activity) =>
               profileData.activities[activity] ? (
-                <p className=" p-1 my-3 mr-2 border border-black rounded-md">
+                <p className=" p-1 my-3 mr-2 border bg-green-700 text-white rounded-md">
                   {activity}
                 </p>
               ) : null
@@ -73,9 +72,9 @@ const Profile = ({ profileData, setProfileData }) => {
           </div>
         </div>
       </div>
-      <Link to="/feed" className="text-gray-800 flex justify-center">
+      <NavLink to="/feed" className="text-gray-800 text-sm flex justify-center underline mt-2">
         Back to feed
-      </Link>
+      </NavLink>
     </div>
   );
 };

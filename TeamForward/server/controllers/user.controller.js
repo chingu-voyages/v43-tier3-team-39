@@ -12,7 +12,7 @@ module.exports = {
       .then((newUser) => {
         const payload = { id: newUser._id };
         const userToken = jwt.sign(payload, process.env.SecretKeyOne);
-        res.cookie("jwt-token", userToken, { httpOnly: true }).json(newUser);
+        res.cookie("jwt-token", userToken, { httpOnly: true, secure: true, sameSite: "none" }).json(newUser);
       })
       .catch((err) => {
         log("something went wrong with createNewUser");
@@ -56,6 +56,8 @@ module.exports = {
     res
       .cookie("jwt-token", userToken, {
         httpOnly: true,
+        secure: true,
+        sameSite: "none"
       })
       .json({ msg: "success!", user: user });
   },
