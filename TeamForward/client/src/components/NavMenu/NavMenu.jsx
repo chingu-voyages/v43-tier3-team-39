@@ -20,17 +20,18 @@ const NavMenu = () => {
            </button> 
         {
             open ? (
-                <div className="absolute bg-opacity-100">
+                <div className="absolute bg-opacity-100 mt-1">
                     <ul className="bg-opacity-100">
                         <li className="block">
-                        <NavLink to="/myProfile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block ">Profile</NavLink>
-                        </li>
-                        <li className="block">
-                        <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Virtual Meets</button>
+                        <NavLink to="/myProfile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block ">My Profile</NavLink>
                         </li>
                         <li className="">
-                        <NavLink to="/updateprofile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Edit User Info</NavLink>
+                        <NavLink to="/updateprofile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Edit Profile</NavLink>
                         </li>
+                        <li className="block">
+                        <NavLink to="/feed" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Dashboard</NavLink>
+                        </li>
+                        {/* TODO: Link messages when finished with message feature */}
                         <li className="">
                         <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Messages</button>
                         </li>

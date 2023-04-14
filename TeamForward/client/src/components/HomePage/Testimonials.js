@@ -1,9 +1,13 @@
 import React from 'react'
 import FullStar from "../../components/FullStar";
 
+import hikerImg from "../../assets/home/hike.jpg"
+import yogaImg from "../../assets/home/yoga.jpg"
+import cycleImg from "../../assets/home/cycling.jpg"
+
 const Testimonials = () => {
     return (
-        <div className="container my-24 px-6 mx-auto">
+        <div id="testimonials" className="container my-24 px-6 mx-auto">
           <section className="mb-32 text-gray-800 text-center">
             <h2 className="text-3xl font-bold mb-12 pb-4 text-center">
               HEAR FROM OUR MEMBERS
@@ -19,8 +23,8 @@ const Testimonials = () => {
                       data-mdb-ripple-color="light"
                     >
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/8.jpg"
-                        className="w-full"
+                        src={cycleImg}
+                        className="w-full h-96 object-cover"
                         alt="a man with glasses"
                       />
                       <a href="#!">
@@ -34,7 +38,7 @@ const Testimonials = () => {
                   <div className="p-6">
                     <h5 className="text-lg font-bold mb-2">John Doe</h5>
                     <h6 className="font-medium text-green-700 mb-4">
-                      Senior Developer
+                      Product Owner
                     </h6>
                     <ul className="flex justify-center mb-6">
                       <li>
@@ -68,7 +72,7 @@ const Testimonials = () => {
                       </li>
                     </ul>
                     <p>
-                    As a junior PO networking and finding mentors can be a challenging task. However, Team forward has made it a lot easier for me to connect and engage with the community. With the app's features, I'm able to create a support system and connect with like-minded individuals who share the same interests and hobbies. I've also been able to find new jogging buddies, which has been a great way to stay active while building strong relationships with my colleagues. The app has helped me stay active, find new friends create a safe space where I can learn and thrive, while also allowing me to expand my network and stay connected with the industry. Overall, this app has been a game-changer in my career as a new PO.
+                    As a junior PO networking and finding mentors can be a challenging task. However, Team forward has made it easier for me to connect and engage with the community. With the app's features, I'm able to create a support system and connect with like-minded individuals who share the same interests and hobbies. I've also been able to find new jogging buddies, which has been a great way to stay active while building strong relationships with my colleagues. The app has helped me find new friends, create a safe space where I can learn and thrive, while also allowing me to expand my network and stay connected with the industry. Overall, this app has been a game-changer in my career as a new PO.
                     </p>
                   </div>
                 </div>
@@ -83,8 +87,8 @@ const Testimonials = () => {
                       data-mdb-ripple-color="light"
                     >
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/6.jpg"
-                        className="w-full"
+                        src={yogaImg}
+                        className="h-96 object-cover"
                         alt="lady with brown hair"
                       />
                       <a href="#!">
@@ -98,7 +102,7 @@ const Testimonials = () => {
                   <div className="p-6">
                     <h5 className="text-lg font-bold mb-2">Halley Frank</h5>
                     <h6 className="font-medium text-green-700 mb-4">
-                      Product Owner
+                      Senior Developer
                     </h6>
                     <ul className="flex justify-center mb-6">
                       <li>
@@ -118,7 +122,8 @@ const Testimonials = () => {
                       </li>
                     </ul>
                     <p>
-                    Team Forward has truly transformed my onboarding experience when joining a new company, especially during the pandemic where connecting with coworkers has been challenging due to remote work. With this app, I can now easily connect with my colleagues, join clubs, and create a support system. I've found like-minded buddies who share similar interests, such as jogging in the morning, and I'm now able to jog with my teammate who happens to be my neighbor. This has been a great opportunity for us to bond and discuss both work and personal life. Thanks to your app, I no longer feel like an outsider at work..
+                    Team Forward has truly transformed my onboarding experience when joining a new company, especially during the pandemic where connecting with coworkers has been challenging due to remote work. With this app, I can now easily connect with my colleagues, join clubs, and create a support system. I've found like-minded buddies who share similar interests, such as jogging in the morning, and I'm now able to jog with my teammate who happens to be my neighbor. This has been a great opportunity for us to bond and discuss both work and personal life. Thanks to your app, I no longer feel like an outsider at work.
+                    
                     </p>
                   </div>
                 </div>
@@ -133,8 +138,8 @@ const Testimonials = () => {
                       data-mdb-ripple-color="light"
                     >
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/18.jpg"
-                        className="w-full"
+                        src={hikerImg}
+                        className="w-full h-96 object-cover"
                         alt="young-lady-looking-away"
                       />
                       <a href="#!">

@@ -6,6 +6,7 @@ import log from "../helpers/logging";
 import axios from "axios";
 import NavMenu from "../components/NavMenu/NavMenu";
 import BasicButtonStyling from "../components/Button";
+import blankProfileImg from "../../src/assets/home/blank-profile.png"
 
 const interests = ["chingu", "networking", "mentorship"];
 
@@ -103,7 +104,7 @@ const Feed = () => {
               <a href="#!" data-te-ripple-init data-te-ripple-color="light">
                 <img
                   class="rounded-t-lg h-40 object-cover w-screen"    
-                  src={userProfileData.cloudinaryProfileImgUrl ? userProfileData.cloudinaryProfileImgUrl : "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"}
+                  src={userProfileData.cloudinaryProfileImgUrl ? userProfileData.cloudinaryProfileImgUrl : blankProfileImg}
                   alt="" />
               </a>
               <div className="m-3">
