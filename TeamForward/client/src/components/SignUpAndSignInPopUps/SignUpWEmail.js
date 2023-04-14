@@ -37,7 +37,6 @@ const SignUpWEmail = () => {
     e.preventDefault();
     if (!emailValid.isValid || emailValid.isEmpty) {
       setError({ email: true });
-      console.log("newError");
       return;
     }
     // if(passwordMatches){
@@ -63,9 +62,9 @@ const SignUpWEmail = () => {
   };
 
   return (
-    <div class="block max-w-sm rounded-lg bg-white p-6 shadow-lg ">
+    <div className="block max-w-sm rounded-lg bg-white p-6 shadow-lg ">
       <form onSubmit={newUserSubmitHandler}>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="First Name:"
             type="text"
@@ -79,7 +78,7 @@ const SignUpWEmail = () => {
             {error.firstName ? <div>{error.firstName.message}</div> : null}
           </div>
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Last Name:"
             type="text"
@@ -93,7 +92,7 @@ const SignUpWEmail = () => {
             {error.lastName ? <div>{error.lastName.message}</div> : null}
           </div>
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Email:"
             type="text"
@@ -109,7 +108,7 @@ const SignUpWEmail = () => {
             ) : null}
           </div>
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Password:"
             type="password"
@@ -120,7 +119,7 @@ const SignUpWEmail = () => {
             placeholder="Enter Your Password"
           />
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Confirm Password:"
             type="password"
@@ -134,16 +133,16 @@ const SignUpWEmail = () => {
         <div>
           {!passwordMatches ? <div>{"Your passwords do not match"}</div> : null}
         </div>
-        <div class="mb-2 flex items-center justify-between" />
+        <div className="mb-2 flex items-center justify-between" />
         <button
           type="submit"
-          class="inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+          className="inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
           data-te-ripple-init
           data-te-ripple-color="light"
         >
           Sign Up
         </button>
-        <div class="mb-6 flex items-center justify-between" />
+        <div className="mb-6 flex items-center justify-between" />
       </form>
     </div>
   );

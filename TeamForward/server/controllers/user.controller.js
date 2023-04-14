@@ -90,7 +90,7 @@ module.exports = {
     const userInfo = await User.findOne({ _id: req.userId }, { password: 0 });
     const interests = req.query['interests'];
     const activities = req.query['activities'];
-    console.log(interests, activities);
+    // console.log(interests, activities);
     const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, activities, req.userId);
     res.json(results);
   },

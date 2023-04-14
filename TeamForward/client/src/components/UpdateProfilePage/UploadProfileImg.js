@@ -31,7 +31,7 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
   };
 
   const uploadImage = async (base64EncodedImage) => {
-    console.log("Upload Img works:", base64EncodedImage);
+    // console.log("Upload Img works:", base64EncodedImage);
   };
 
   return (

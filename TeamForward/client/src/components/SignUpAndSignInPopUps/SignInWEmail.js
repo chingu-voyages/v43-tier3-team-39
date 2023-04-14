@@ -13,9 +13,6 @@ const SignInWEmail = () => {
   const navigate = useNavigate();
   const user = useReactiveVar(userState);
 
-  console.log("password", userPassword);
-  console.log("email", userEmail);
-
   const onLoginHandler = (e) => {
     e.preventDefault();
     axios

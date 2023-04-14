@@ -125,12 +125,12 @@ const Feed = () => {
             
         {
           userList.map((userProfileData)=>{
-            return <div class="flex w-60 h-72 m-2">
+            return <div className="flex w-60 h-72 m-2">
             <div
-              class="max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
+              className="max-w-sm rounded-lg bg-white shadow-lg dark:bg-neutral-700">
               <a href="#!" data-te-ripple-init data-te-ripple-color="light">
                 <img
-                  class="rounded-t-lg h-40 object-cover w-screen"    
+                  className="rounded-t-lg h-40 object-cover w-screen"    
                   src={userProfileData.cloudinaryProfileImgUrl ? userProfileData.cloudinaryProfileImgUrl : "https://tecdn.b-cdn.net/img/new/standard/nature/186.jpg"}
                   alt="" />
               </a>
@@ -139,14 +139,14 @@ const Feed = () => {
                   className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
                   {userProfileData.firstName}
                 </h5>
-                <p class="mb-4 text-base h-5 overflow-hidden text-neutral-600 dark:text-neutral-200">
+                <p className="mb-4 text-base h-5 overflow-hidden text-neutral-600 dark:text-neutral-200">
                   {userProfileData.bio} 
                 </p>
                 <div className="flex">
                   <button
                     onClick={() => { navigate(`/userProfile/${userProfileData._id}`, { state: userProfileData }) }}
                     type="button"
-                    class="inline-block rounded bg-primary mx-auto px-1 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                    className="inline-block rounded bg-primary mx-auto px-1 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                     data-te-ripple-init
                     data-te-ripple-color="light">
                     View Profile
