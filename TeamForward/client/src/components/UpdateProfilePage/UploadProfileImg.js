@@ -31,7 +31,7 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
   };
 
   const uploadImage = async (base64EncodedImage) => {
-    console.log("Upload Img works:", base64EncodedImage);
+    // console.log("Upload Img works:", base64EncodedImage);
   };
 
   return (
@@ -55,7 +55,7 @@ const UploadProfileImg = ({ profileImg, setProfileImg }) => {
           name="image"
           onChange={handleFileInputChange}
           value={fileInputState}
-          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-green-900 hover:file:bg-blue-100"
         />
       </label>
     </form>

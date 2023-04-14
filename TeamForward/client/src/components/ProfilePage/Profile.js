@@ -7,7 +7,7 @@ import ProfileImg from "./ProfileImg";
 
 const Profile = ({ profileData, setProfileData }) => {
   const user = useReactiveVar(userState);
-  console.log("this is profileData", profileData);
+  // console.log("this is profileData", profileData);
 
   return (
     <div className="p-16">

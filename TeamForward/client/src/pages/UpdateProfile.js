@@ -79,7 +79,7 @@ const UpdateProfile = () => {
       },
     };
 
-    if (profileImg.includes("base64")) {
+    if (profileImg?.includes("base64")) {
       payload.photo = profileImg;
     }
 
