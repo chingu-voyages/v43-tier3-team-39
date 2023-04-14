@@ -62,68 +62,62 @@ const Feed = () => {
         <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
       </div>
       {userInfoNeeded()}
-      <div className="flex justify-center mx-auto">
-          {interests.map((interest) => {
-            const className = interestArr.includes(interest)
-              ? "bg-blue-600 text-white inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
-              : "text-blue-600 inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+      <div className="flex justify-center grid grid-rows-5 w-30">
+        <h3 className=" flex justify-center mt-2 font-bold uppercase border-b-2 border-green-900">Filters</h3>
+        <h3 className="mt-1 font-bold justify-start ">Interests:</h3>
+        <div className="flex justify-center mt-0">
+            {interests.map((interest) => {
+              const className = interestArr.includes(interest)
+                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
 
-            return <BasicButtonStyling
-              text={interest}
-              className={className}
-              onClick={()=>{
-                const newInterests = [...interestArr];
-                
-                if (newInterests.includes(interest)) {
-                  // removeEntry
-                  newInterests.splice(newInterests.indexOf(interest), 1);
-                } else {
-                  newInterests.push(interest);
-                }
-                
-                setInterestArr(newInterests);
-              }}
-            />
-          })}
-      </div>
-      <div className="flex justify-center my-1 ">
-          {activities.map((activity) => {
-            const className = activityArr.includes(activity)
-              ? "bg-blue-600 text-white inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
-              : "text-blue-600 inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+              return <BasicButtonStyling
+                text={interest}
+                className={className}
+                onClick={()=>{
+                  const newInterests = [...interestArr];
+                  
+                  if (newInterests.includes(interest)) {
+                    newInterests.splice(newInterests.indexOf(interest), 1);
+                  } else {
+                    newInterests.push(interest);
+                  }
+                  
+                  setInterestArr(newInterests);
+                }}
+              />
+            })}
+        </div>
+        <h3 className="mt-1  font-bold">Activities:</h3>
+        <div className="flex justify-start mt-0 ">
+            {activities.map((activity) => {
+              const className = activityArr.includes(activity)
+                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
 
-            return <BasicButtonStyling
-              text={activity}
-              className={className}
-              onClick={()=>{
-                const newActivity = [...activityArr];
-                
-                if (newActivity.includes(activity)) {
-                  // removeEntry
-                  newActivity.splice(newActivity.indexOf(activity), 1);
-                } else {
-                  newActivity.push(activity);
-                }
-                
-                setActivityArr(newActivity);
-              }}
-            />
-          })}
+              return <BasicButtonStyling
+                text={activity}
+                className={className}
+                onClick={()=>{
+                  const newActivity = [...activityArr];
+                  
+                  if (newActivity.includes(activity)) {
+                    // removeEntry
+                    newActivity.splice(newActivity.indexOf(activity), 1);
+                  } else {
+                    newActivity.push(activity);
+                  }
+                  
+                  setActivityArr(newActivity);
+                }}
+              />
+            })}
+        </div>
       </div>
-        {/* user list */}
-        {/* user list + activities div */}
         <div >
           <div className="flex-col justify-center inline-flex w-36">
-            {/* {
-              activities.map((act)=>{
-                return <button
-                className="text-blue-600 m-2 inline-flex hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900">{act}</button>
-            })
-            } */}
-            
           </div>
       <div className="flex justify-center flex-wrap w-8/12 mx-auto m-2 mt-4">
-            
         {
           userList.map((userProfileData)=>{
             return <div className="flex w-60 h-72 m-2">
@@ -147,7 +141,7 @@ const Feed = () => {
                   <button
                     onClick={() => { navigate(`/userProfile/${userProfileData._id}`, { state: userProfileData }) }}
                     type="button"
-                    className="inline-block rounded bg-primary mx-auto px-1 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+                    className="inline-block rounded bg-green-900 mx-auto px-1 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-green-900 hover:shadow-[0_8px_9px_-4px_rgba(52,211,153,0.3),0_4px_18px_0_rgba(52,211,153,0.2)] focus:bg-green-900 focus:shadow-[0_8px_9px_-4px_rgba(52,211,153,0.3),0_4px_18px_0_rgba(52,211,153,0.2)] focus:outline-none focus:ring-0 active:bg-green-1000 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
                     data-te-ripple-init
                     data-te-ripple-color="light">
                     View Profile
