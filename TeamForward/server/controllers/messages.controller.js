@@ -11,7 +11,7 @@ module.exports ={
         try{
             const { otherUserId } = req.body;
             let newChatRoom = await ChatRoom.create({
-                userIds: [req.userId, otherUserId]
+                userIds: [new mongoose.Types.ObjectId(req.userId), new mongoose.Types.ObjectId(otherUserId)]
             });
             res.json(newChatRoom);
         } catch(err){
@@ -114,24 +114,29 @@ module.exports ={
         try{
             //user sends in chatRoomId
             //findOne chatRoom
-            let oneChatRoom = await ChatRoom.findOne({chatRoomId: req.params.chatRoomId});
+            let oneChatRoom = await ChatRoom.findOne({_id: req.params.chatRoomId});
+            console.log('one');
             if(!oneChatRoom){
                 res.status(404).json("chatroom could not be found.");
             }
             //find user by chatRoom.userIds
             let otherUserId;
             for(let userId of oneChatRoom.userIds){
+                console.log('two');
                 if(userId.toString() !== req.userId){
+                    console.log('three');
                     otherUserId = userId;
                 }
             }
             let otherUserObject = await User.findOne({_id: otherUserId}, {password: 0});
+            console.log('four');
             if(!otherUserObject){
                 res.status(404).json("The other user could not be found.");
             }
             //find all messages by chatRoomId
             let chatRoomMessages = await IndividualMessage.find({chatRoomId: oneChatRoom._id})
             .sort({ createdAt: 1});
+            console.log('five');
             if(!chatRoomMessages){
                 res.status(404).json("Your messages could not be found.");
             }
