@@ -8,6 +8,7 @@ const passport = require("passport");
 const app = express();
 const socketio = require('socket.io')
 const port = process.env.PORTKEY;
+const ChatController = require("../Controllers/messages/controller")
 
 // configure Passport
 require("./Config/passport");
@@ -46,6 +47,9 @@ app.use((req, res, next) => {
 require("./Config/mongoose.config");
 require("./routes/teamForward.routes")(app);
 
+const server = app.listen(port, () => console.log(`listening on port: ${port}`));
+
+
 const io = socketio(server, {
   cors: {
     // origin needs env variable for test/deployed environments?
@@ -63,9 +67,7 @@ io.on("connection", (socket) => {
     // this should run controller function to add new message
     // into the db
 
-      // ChatController.addConversation(io, data);
+    ChatController.createNewMessage(io, data);
   })
 })
 // app.use("/", require("./routes/oauth.routes"));
-
-app.listen(port, () => console.log(`listening on port: ${port}`));
