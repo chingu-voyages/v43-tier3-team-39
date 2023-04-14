@@ -94,6 +94,7 @@ module.exports ={
             to,
             message
         }).then((newMessage) => {
+            // socket.emit("message")
             res.json(newMessage);
         }).catch((err) =>{
             console.log("createNewMessage is not working", err);

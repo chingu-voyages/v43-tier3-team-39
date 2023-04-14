@@ -1,12 +1,32 @@
 import InboxList from "../components/Messages/InboxList";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
+import {useEffect, useState} from 'react'
+import axios from 'axios'
 import Search from "../components/Messages/Search";
+import {useNavigate} from 'react-router-dom';
+import NavMenu from '../components/NavMenu/NavMenu'
 
 
 const Inbox = () => {
     const user = useReactiveVar(userState);
     console.log("Inbox user",user)
+    const id = user._id
+
+    const navigate = useNavigate()
+
+    const [chats,setChats] = useState([])
+
+    useEffect(()=>{
+      axios.get(`${process.env.REACT_APP_BE_URL}/messaging/inbox`)
+      .then((res)=>{
+        console.log("returned chats")
+        setChats(res.data)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    },[])
+
   return (
     <section className="flex flex-col justify-center antialiased bg-gray-50 text-gray-600 min-h-screen p-4">
       <div className="h-full">
@@ -18,14 +38,14 @@ const Inbox = () => {
               {/* <!-- Image + name --> */}
               <div className="flex items-center">
                 <a className="inline-flex items-start mr-3" href="#0">
-                
-                  <img
+                  <NavMenu />
+                  {/* <img
                     className="rounded-full"
                     src={user.cloudinaryProfileImgUrl}
                     width="48"
                     height="48"
                     alt="user profile picture"
-                  />
+                  /> */}
                 </a>
                 <div className="pr-1">
                   <a
@@ -50,12 +70,17 @@ const Inbox = () => {
             {/* <!-- Chat list --> */}
             <div className="divide-y divide-gray-200">
               {/* <!-- User --> */}
+              {/* <InboxList />
               <InboxList />
               <InboxList />
               <InboxList />
               <InboxList />
-              <InboxList />
-              <InboxList />
+              <InboxList /> */}
+              {
+                chats.map((chat)=>{
+                  return <InboxList user={chat} />
+                })
+              }
               
             </div>
           </div>

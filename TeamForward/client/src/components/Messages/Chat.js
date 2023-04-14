@@ -1,8 +1,47 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
+import axios from 'axios'
+import {io} from 'socket.io-client'
+import { useParams } from 'react-router-dom';
 
 const Chat = () => {
+
+  const {id} = useParams()
+
+  const [message,setMessage] = useState()
+
+  const [messageList,setMessageList] = useState([])
+ 
+  // useEffect(()=>{
+  //   axios.get(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom/${id}/allMessages`)
+  //   .then((res)=>{
+  //     setMessageList(res.data)
+  //   }).catch((err)=>{
+  //     console.log(err)
+  //   })
+  // },[])
+
+   const submitMessage = () => {
+    // io.emit("clientMessage",{
+    //   // where do we get all of this data from?
+    //   chatRoomId: ,
+    //   from: ,
+    //   to: ,
+    //   message: "",
+    //   unread:false
+    // })
+
+  }
+
   return (
 <div className="w-full max-w-sm mx-auto">
+{/* <div>
+      <input type="text"  />
+      {
+        messageList.map((message)=>(
+          <div></div>
+        ))
+      }
+    </div> */}
       <div className="flex flex-col h-screen #a1a1aa">
         <div className="flex flex-col flex-1 overflow-y-auto">
           <div className="flex flex-col h-full overflow-x-auto">
@@ -49,6 +88,8 @@ const Chat = () => {
           <div className="relative flex-grow">
             <input
               type="text"
+              onSubmit={submitMessage} 
+              onChange={(e)=>setMessage(e.target.value)}
               className="w-full border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-300"
               placeholder="Type your message..."
             />

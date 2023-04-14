@@ -8,6 +8,7 @@ const passport = require("passport");
 const app = express();
 const socketio = require('socket.io')
 const port = process.env.PORTKEY;
+const ChatController = require("./Controllers/messages.controller")
 
 // configure Passport
 require("./Config/passport");
@@ -59,7 +60,7 @@ require("./routes/teamForward.routes")(app);
 // io.on("connection", (socket) => {
 //   console.log("New connection at" + socket.id);
 
-//   socket.on("clientEvent", (data) => {
+//   socket.on("clientMessage", (data) => {
 //     // this should run controller function to add new message
 //     // into the db
 
