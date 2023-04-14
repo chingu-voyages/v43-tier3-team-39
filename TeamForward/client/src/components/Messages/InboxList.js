@@ -13,9 +13,13 @@ const InboxList = () => {
     //   console.error('Error fetching user profile:', error);
     // });
 
+    const selectChatRoom = () => {
+      
+    }
+
 
   return (
-    <button className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
+    <button onClick={selectChatRoom} className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50">
       <div className="flex items-center">
         <img
           className="rounded-full items-start flex-shrink-0 mr-3"

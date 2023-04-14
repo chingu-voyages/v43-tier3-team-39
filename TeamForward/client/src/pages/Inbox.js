@@ -18,8 +18,9 @@ const Inbox = () => {
     const [chats,setChats] = useState([])
 
     useEffect(()=>{
-      axios.post(`${process.env.REACT_APP_BE_URL}/messaging/inbox`,{userId:id})
+      axios.get(`${process.env.REACT_APP_BE_URL}/messaging/inbox`)
       .then((res)=>{
+        console.log("returned chats")
         setChats(res.data)
       }).catch((err)=>{
         console.log(err)
@@ -69,12 +70,17 @@ const Inbox = () => {
             {/* <!-- Chat list --> */}
             <div className="divide-y divide-gray-200">
               {/* <!-- User --> */}
+              {/* <InboxList />
               <InboxList />
               <InboxList />
               <InboxList />
               <InboxList />
-              <InboxList />
-              <InboxList />
+              <InboxList /> */}
+              {
+                chats.map((chat)=>{
+                  return <InboxList user={chat} />
+                })
+              }
               
             </div>
           </div>
