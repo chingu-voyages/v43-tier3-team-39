@@ -8,42 +8,46 @@ import NavMenu from "../components/NavMenu/NavMenu";
 import BasicButtonStyling from "../components/Button";
 
 const interests = ["chingu", "networking", "mentorship"];
+const activities = ["VirtualCoffee", "Hiking", "Running"];
 
 //TODO add message to for new user to update profile(zipcode & radius to find those in their area)
 
 const Feed = () => {
   const navigate = useNavigate();
   const user = useReactiveVar(userState);
-  const [activities,setActivities] = useState(['running','jumping','kayaking'])
   const [open,setOpen] = useState(true)
   const [interestArr,setInterestArr] = useState([]);
-  const activityArr = []
-  const [userList,setUserList] = useState([])
+  const [activityArr, setActivityArr] = useState([]);
+  const [userList,setUserList] = useState([]);
 
   // grab all users from db based on filters
   useEffect(()=>{
     log(interestArr);
-    const baseUrl = `${process.env.REACT_APP_BE_URL}/teamForward`;
+    const baseUrl = `${process.env.REACT_APP_BE_URL}/teamForward?`;
     const interestQuery = interestArr.length > 0
-      ? `interests=${interestArr.join(',')}`
+      ? `&interests=${interestArr.join(',')}`
       : '';
-    const url = interestQuery
-      ? `${baseUrl}?${interestQuery}`
-      : baseUrl;
+    const activityQuery = activityArr.length > 0
+      ? `&activities=${activityArr.join(',')}`
+      : '';
+    let url =`${baseUrl}${interestQuery}${activityQuery}`;
     axios.get(url)
     .then((res)=>{
-      console.log("res.data:",res.data)
-      setUserList(res.data)
+      setUserList(res.data);
     }).catch((err)=>{
-      console.log(err)
+      console.log(err);
     })
-  },[interestArr, user?.zipCode]);
+  },[interestArr, activityArr, user?.zipCode]);
 
   const userInfoNeeded = () => {
     if( !user.zipCode || !user.radius ){
-      return <div> 
-          Please update your user info to include a zipcode and radius to tailor your feed to locals in your area. 
-          <Link  to="/updateprofile"> Edit User Info Here</Link>
+      return <div className="flex justify-center my-2"> 
+          <div className="block max-w-sm rounded-lg bg-slate-200 shadow-lg text-center">
+            Please update your user info to include a zipcode and radius to tailor your feed to locals in your area. 
+            <div className="p-1 underline">
+              <Link  to="/updateprofile"> Edit User Info Here</Link>
+            </div>
+          </div>
         </div>
     }
     return null;
@@ -77,6 +81,30 @@ const Feed = () => {
                 }
                 
                 setInterestArr(newInterests);
+              }}
+            />
+          })}
+      </div>
+      <div className="flex justify-center my-1 ">
+          {activities.map((activity) => {
+            const className = activityArr.includes(activity)
+              ? "bg-blue-600 text-white inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+              : "text-blue-600 inline-flex items-center border border-blue-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+
+            return <BasicButtonStyling
+              text={activity}
+              className={className}
+              onClick={()=>{
+                const newActivity = [...activityArr];
+                
+                if (newActivity.includes(activity)) {
+                  // removeEntry
+                  newActivity.splice(newActivity.indexOf(activity), 1);
+                } else {
+                  newActivity.push(activity);
+                }
+                
+                setActivityArr(newActivity);
               }}
             />
           })}
