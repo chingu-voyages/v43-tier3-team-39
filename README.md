@@ -17,34 +17,29 @@ Team Forward allows users to:
 
 
 ### Dependencies:
+
 Frontend
-1. HTML
-2. CSS
-3. JavaScript
-4. Ant-Design
-5. Styled-Components
-6. React
-7. Redux-Toolkit
-8. Next.js
-9. Firebase
+- JavaScript
+- React
+- Tailwind.css
+- Tailwind-Elements
+- React-router-dom
+- Axios
 
 Backend
-1. Twilio API
-2. MongoDB
-3. Firebase Admin SDK
-4. Lodash
-5. Pino Logger
-6. Next.js
-
-
-- Passport js
+- MongoDB
+- Express.js
+- Node.js
+- Mongoose
 - Bcrypt
-- mongoose
-- cors
-- dotenv
-- express
-- react-router-dom
-- cloudinary 
+- Passport.js
+- Cors
+- Dotenv
+- Cloudinary
+- JWT
+- Socket.io
+
+
 
 
 ## Run Locally:
