@@ -30,6 +30,10 @@ Frontend
   <summary>Client</summary>
   <ul>
     <li>React.js</</li>
+    <li>React.js</</li>
+    <li>React.js</</li>
+    <li>React.js</</li>
+    <li>React.js</</li>
   </ul>
 </details>
 
