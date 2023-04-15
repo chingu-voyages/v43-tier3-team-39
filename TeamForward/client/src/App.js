@@ -15,6 +15,9 @@ import UserProfile from "./pages/UserProfile";
 import Inbox from "./pages/Inbox"
 import Chat from "./components/Messages/Chat"
 
+import {io} from 'socket.io-client'
+
+const socket = io(process.env.REACT_APP_BE_URL)
 
 axios.defaults.withCredentials = true;
 
@@ -47,6 +50,17 @@ function App() {
         });
     }
   }, [user]);
+
+
+  // Socket.on("message",()=>{
+  //   axios.get(`${REACT_APP_BE_URL}/messaging/user/message/unreadCount`)
+  // //   .then((res)=>{
+
+  // //   }).catch((err)=>{
+  // //     console.log(err)
+  // //   })
+  // })
+
 
   if (!apiComplete) {
     return null;
@@ -112,10 +126,10 @@ function App() {
           }
         />
         <Route
-          path="/chat/:id"
+          path="/chat/:chatId"
           element={
             <ProtectedRoute>
-              <Chat />
+              <Chat socket={socket} />
             </ProtectedRoute>
           }
         />

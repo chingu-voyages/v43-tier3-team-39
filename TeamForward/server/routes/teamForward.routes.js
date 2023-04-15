@@ -18,6 +18,7 @@ module.exports = (app) => {
   app.get("/teamForward", authenticate, UserController.findAllUsers);
   app.put("/teamForward/:id", authenticate, UserController.updateUser);
   app.delete("/teamForward/:id", authenticate, UserController.deleteUser);
+  app.get("/teamForward/logout", UserController.logOut)
 
   //Messaging
   app.post("/messaging/chatRoom/:chatRoomId/message", authenticate, MessagingController.createNewMessage);

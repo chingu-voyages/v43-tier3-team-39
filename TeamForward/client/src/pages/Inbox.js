@@ -70,15 +70,10 @@ const Inbox = () => {
             {/* <!-- Chat list --> */}
             <div className="divide-y divide-gray-200">
               {/* <!-- User --> */}
-              {/* <InboxList />
-              <InboxList />
-              <InboxList />
-              <InboxList />
-              <InboxList />
-              <InboxList /> */}
+             
               {
                 chats.map((chat)=>{
-                  return <InboxList user={chat} />
+                  return <InboxList key={chat._id} user={chat} />
                 })
               }
               

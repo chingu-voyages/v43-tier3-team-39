@@ -7,15 +7,23 @@ module.exports ={
 
     //CHATROOM
     createNewChatRoom: async (req, res) => {
-        // TODO look at maybe checking if one already exists before creating
-        try{
-            const { otherUserId } = req.body;
-            let newChatRoom = await ChatRoom.create({
-                userIds: [new mongoose.Types.ObjectId(req.userId), new mongoose.Types.ObjectId(otherUserId)]
-            });
-            res.json(newChatRoom);
-        } catch(err){
-            console.log("createNewChatRoom is not working", err);
+        const { otherUserId } = req.body;
+        // console.log("controller user objects", req.userId, otherUserId)
+        let chatRoomExists = await ChatRoom.findOne({userIds: {$all:[req.userId, otherUserId]}})
+
+        if(chatRoomExists){
+            console.log("Chat room already exists:",chatRoomExists)
+            res.json(chatRoomExists);
+        } else{
+            try{
+                console.log("Creating new chatroom...")
+                let newChatRoom = await ChatRoom.create({
+                    userIds: [new mongoose.Types.ObjectId(req.userId), new mongoose.Types.ObjectId(otherUserId)]
+                });
+                res.json(newChatRoom);
+            } catch(err){
+                console.log("createNewChatRoom is not working", err);
+            }
         }
     },
 
@@ -23,7 +31,8 @@ module.exports ={
         try {
             //finds all chatRoom instances where logged in user is listed in userIds
             let chatRoomList = await ChatRoom.find({
-                userIds: {$in: [req.userId]}
+                // userIds: {$in: [req.userId]}
+                userIds: {$in: [new mongoose.Types.ObjectId(req.userId)]}
                 //sorts by updated at date
             }).sort({ updatedAt: -1});
 
@@ -86,16 +95,17 @@ module.exports ={
     },
 
     //Messaging
-    createNewMessage: (req,res) => {
-        const { message, to } = req.body;
+    createNewMessage: (io,data) => {
+        const { message, to, chatRoomId,from } = data;
+        console.log("message from socket to controller:",data)
         IndividualMessage.create({
-            chatRoomId: req.params.chatRoomId,
-            from: req.userId,
+            chatRoomId,
+            from,
             to,
             message
         }).then((newMessage) => {
-            // socket.emit("message")
-            res.json(newMessage);
+            io.to(chatRoomId).emit("message",newMessage)
+            // res.json(newMessage);
         }).catch((err) =>{
             console.log("createNewMessage is not working", err);
         });
