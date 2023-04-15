@@ -16,7 +16,19 @@ const SignUpWEmail = () => {
     email: "",
     password: "",
   });
-  const passwordMatches = confirmedPassword === newUser.password;
+
+  console.log(confirmedPassword)
+  console.log(newUser.password)
+
+  const passwordMatches = (confirmedPassword, newUser) =>{
+    if (!confirmedPassword || !newUser.password){
+      return true;
+    }
+    if(confirmedPassword === newUser.password){
+      return true;
+    }
+    return false;
+  }; 
 
   const navigate = useNavigate();
 
@@ -75,7 +87,7 @@ const SignUpWEmail = () => {
             placeholder="Enter your First Name"
           />
           <div>
-            {error.firstName ? <div>{error.firstName.message}</div> : null}
+            {error.firstName ? <div className="text-red-400 font-bold">{error.firstName.message}</div> : null}
           </div>
         </div>
         <div className="relative mb-6" data-te-input-wrapper-init>
@@ -89,7 +101,7 @@ const SignUpWEmail = () => {
             placeholder="Enter Your Last Name"
           />
           <div>
-            {error.lastName ? <div>{error.lastName.message}</div> : null}
+            {error.lastName ? <div className="text-red-400 font-bold">{error.lastName.message}</div> : null}
           </div>
         </div>
         <div className="relative mb-6" data-te-input-wrapper-init>
@@ -104,7 +116,7 @@ const SignUpWEmail = () => {
           />
           <div>
             {!!error.email || (!emailValid.isValid && !emailValid.isEmpty) ? (
-              <div>{"You must enter a valid and unique email."}</div>
+              <div className="text-red-400 font-bold">{"You must enter a valid and unique email."}</div>
             ) : null}
           </div>
         </div>
@@ -131,7 +143,7 @@ const SignUpWEmail = () => {
           />
         </div>
         <div>
-          {!passwordMatches ? <div>{"Your passwords do not match"}</div> : null}
+          {passwordMatches(confirmedPassword, newUser) ? null : <div className="text-red-400 font-bold">{"Your passwords do not match."} </div>}
         </div>
         <div className="mb-2 flex items-center justify-between" />
         <button
