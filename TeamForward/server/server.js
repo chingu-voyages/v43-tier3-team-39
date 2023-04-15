@@ -10,6 +10,8 @@ const socketio = require('socket.io')
 const port = process.env.PORTKEY;
 const ChatController = require("./Controllers/messages.controller")
 
+
+
 // configure Passport
 require("./Config/passport");
 
@@ -47,26 +49,39 @@ app.use((req, res, next) => {
 require("./Config/mongoose.config");
 require("./routes/teamForward.routes")(app);
 
-// const io = socketio(server, {
-//   cors: {
-//     // origin needs env variable for test/deployed environments?
-//       origin: 'http://localhost:3000',
-//       methods: ['GET', 'POST'],
-//       allowedHeaders: ['*'],
-//       credentials: true,
-//   }
-// });
+const server = app.listen(port, () => console.log(`listening on port: ${port}`));
 
-// io.on("connection", (socket) => {
-//   console.log("New connection at" + socket.id);
+const io = socketio(server, {
+  cors: {
+    // origin needs env variable for test/deployed environments?
+      origin: 'http://localhost:3000',
+      methods: ['GET', 'POST'],
+      allowedHeaders: ['*'],
+      credentials: true,
+  }
+});
 
-//   socket.on("clientMessage", (data) => {
-//     // this should run controller function to add new message
-//     // into the db
+io.on("connection", async (socket) => {
+  console.log("New connection at" + socket.id);
 
-//       // ChatController.createNewMessage(io, data);
-//   })
-// })
+  // const chatRooms = await ChatController.findInbox();
+  // console.log("server.js, chatRooms call", chatRooms);
+
+  // chatRooms.forEach(chatRoom => socket.join("chatRoom:" + chatRoom._id));
+  socket.on("join", (chatRoomId) => {
+    console.log("join: " + chatRoomId);
+    socket.join(chatRoomId);
+  });
+  
+  // });
+
+  socket.on("clientMessage", (data) => {
+
+    // console.log(data)
+    // this should run controller function to add new message
+    // into the db
+
+      ChatController.createNewMessage(io, data);
+  })
+})
 // app.use("/", require("./routes/oauth.routes"));
-
-app.listen(port, () => console.log(`listening on port: ${port}`));
