@@ -131,7 +131,7 @@ export default function ProfileForm({
               </label>
               <input
                 type="range"
-                className="transparent h-1.5 w-full cursor-pointer appearance-none rounded-lg border-transparent bg-neutral-200"
+                className="transparent h-1.5 w-full cursor-pointer accent-green-700 appearance-none rounded-lg border-transparent bg-neutral-200"
                 id="radius"
                 min="0"
                 max="5"
@@ -159,8 +159,8 @@ export default function ProfileForm({
                       value={value}
                       className={
                         value
-                          ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                          : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                          ? "bg-green-700 text-white inline-flex items-center hover:text-white border border-green-700 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-green-600 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900"
+                          : "text-green-700 inline-flex items-center hover:text-white border border-green-700 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-green-700 dark:text-green-700 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900"
                       }
                     >
                       {key}
@@ -188,8 +188,8 @@ export default function ProfileForm({
                       value={value}
                       className={
                         value
-                          ? "bg-blue-600 text-white inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
-                          : "text-blue-600 inline-flex items-center hover:text-white border border-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-900"
+                        ? "bg-green-700 text-white inline-flex items-center hover:text-white border border-green-700 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-600 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-green-600 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900"
+                        : "text-green-700 inline-flex items-center hover:text-white border border-green-700 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-green-700 dark:text-green-700 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900"
                       }
                     >
                       {key}
@@ -202,7 +202,7 @@ export default function ProfileForm({
           <div className="flex items-center space-x-4">
             <button
               type="submit"
-              className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+              className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
               Submit
             </button>
