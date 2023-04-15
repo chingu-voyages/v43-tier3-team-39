@@ -1,6 +1,6 @@
 # Team Forward
 
-Our goal at Team Forward is to connect local professionals through wellness activities, fostering meaningful relationships and personal growth. Our dynamic web app offers opportunities to network, build friendships, and have fun while prioritizing social interactions and physical activity. By promoting positivity and support, we empower individuals to achieve their goals and create thriving communities.
+Team Forward is a social platform designed to connect local professionals through wellness activities, fostering meaningful relationships and personal growth. Our dynamic web app offers opportunities to network, build friendships, and have fun while prioritizing social interactions and physical activity. By promoting positivity and support, we empower individuals to achieve their goals and create thriving communities.
 
 # Overview
 
@@ -8,8 +8,9 @@ Our goal at Team Forward is to connect local professionals through wellness acti
 
 Team Forward allows users to:
 - Ability to create/update account
-- Upload / update a profile picture
-- Find like-minded users based on proximity and activity
+- Upload / update profile picture
+- Filter users based on proximity 
+- Find like-minded users who share the same interests & activities
 - Connect via private messaging with users
 
 
@@ -23,6 +24,29 @@ Team Forward allows users to:
 - express
 - react-router-dom
 - cloudinary 
+
+
+<!-- Contributing -->
+## :wave: Contributing
+
+<a href="https://github.com/chingu-voyages/v43-tier3-team-39/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=chingu-voyages/v43-tier3-team-39" />
+</a>
+
+## Pictured from 👈 Left to Right 👉
+- [Sarah](https://github.com/marksist300](https://github.com/smurph7894)
+- [Aya](https://github.com/adbshiau) 
+- [Andrew](https://github.com/Andrewgl22)
+- [Hanson](https://github.com/hansontram)
+- [Bahareh](https://github.com/onetoughcookie226)
+
+
+Project Link: [Team Forward](https://zippy-kangaroo-408751.netlify.app/)
+
+<!-- Acknowledgments -->
+## :gem: Acknowledgements
+
+Thank you to Jim and the [Chingu](https://www.chingu.io/) team!
 
 
 ## Run Locally:
