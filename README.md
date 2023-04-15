@@ -18,38 +18,31 @@ Team Forward allows users to:
 
 ### Dependencies:
 
-Frontend
-- JavaScript
-- React
-- Tailwind.css
-- Tailwind-Elements
-- React-router-dom
-- Axios
-
 <details>
   <summary>Client</summary>
   <ul>
+    <li>Javascript</li>
     <li>React.js</li>
-    <li>React.js</</li>
-    <li>React.js</</li>
-    <li>React.js</</li>
-    <li>React.js</</li>
+    <li>Tailwind.css</li>
+    <li>React-router-dom</li>
+    <li>Axios</li>
   </ul>
 </details>
 
-Backend
-- MongoDB
-- Express.js
-- Node.js
-- Mongoose
-- Bcrypt
-- Passport.js
-- Cors
-- Dotenv
-- Cloudinary
-- JWT
-- Socket.io
-
+<details>
+  <summary>Server</summary>
+  <ul>
+    <li>MongoDB</li>
+    <li>Express.js</li>
+    <li>Node.js</li>
+    <li>Mongoose</li>
+    <li>Passport.js</li>
+    <li>Dotenv</li>
+    <li>Cloudinary</li>
+    <li>JWT</li>
+    <li>Socket.io</li>
+  </ul>
+</details>
 
 
 
