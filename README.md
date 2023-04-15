@@ -2,11 +2,11 @@
 
 Team Forward is a social platform designed to connect local professionals through wellness activities, fostering meaningful relationships and personal growth. Our dynamic web app offers opportunities to network, build friendships, and have fun while prioritizing social interactions and physical activity. By promoting positivity and support, we empower individuals to achieve their goals and create thriving communities.
 
-### [Live Site](https://zippy-kangaroo-408751.netlify.app/)
+### 🔗[Live Site](https://zippy-kangaroo-408751.netlify.app/)
 
 # Overview
 
-### Features:
+### 📨Features:
 
 Team Forward allows users to:
 - Ability to create/update account
@@ -17,6 +17,25 @@ Team Forward allows users to:
 
 
 ### Dependencies:
+Frontend
+1. HTML
+2. CSS
+3. JavaScript
+4. Ant-Design
+5. Styled-Components
+6. React
+7. Redux-Toolkit
+8. Next.js
+9. Firebase
+
+Backend
+1. Twilio API
+2. MongoDB
+3. Firebase Admin SDK
+4. Lodash
+5. Pino Logger
+6. Next.js
+
 
 - Passport js
 - Bcrypt
