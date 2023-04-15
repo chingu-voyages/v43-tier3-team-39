@@ -16,7 +16,7 @@ Team Forward allows users to:
 - Connect via private messaging with users
 
 
-### :space_invader: Dependencies:
+### Dependencies:
 
 Frontend
 - JavaScript
