@@ -7,9 +7,15 @@ module.exports ={
 
     //CHATROOM
     createNewChatRoom: async (req, res) => {
-        // TODO look at maybe checking if one already exists before creating
+        const { otherUserId } = req.body;
+        console.log("controller user objects", req.userId, otherUserId)
+        let chatRoomExists = await ChatRoom.findOne({userIds: [req.userId, otherUserId]})
+
+        if(chatRoomExists){
+            res.json(chatRoomExists);
+        }
+
         try{
-            const { otherUserId } = req.body;
             let newChatRoom = await ChatRoom.create({
                 userIds: [new mongoose.Types.ObjectId(req.userId), new mongoose.Types.ObjectId(otherUserId)]
             });
@@ -23,7 +29,8 @@ module.exports ={
         try {
             //finds all chatRoom instances where logged in user is listed in userIds
             let chatRoomList = await ChatRoom.find({
-                userIds: {$in: [req.userId]}
+                // userIds: {$in: [req.userId]}
+                userIds: {$in: [new mongoose.Types.ObjectId(req.userId)]}
                 //sorts by updated at date
             }).sort({ updatedAt: -1});
 
@@ -86,10 +93,10 @@ module.exports ={
     },
 
     //Messaging
-    createNewMessage: (req,res) => {
-        const { message, to } = req.body;
+    createNewMessage: (io,data) => {
+        const { message, to, chatRoomId } = data;
         IndividualMessage.create({
-            chatRoomId: req.params.chatRoomId,
+            chatRoomId,
             from: req.userId,
             to,
             message

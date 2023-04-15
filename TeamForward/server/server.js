@@ -64,7 +64,7 @@ require("./routes/teamForward.routes")(app);
 //     // this should run controller function to add new message
 //     // into the db
 
-//       // ChatController.addConversation(io, data);
+//       // ChatController.createNewMessage(io, data);
 //   })
 // })
 // app.use("/", require("./routes/oauth.routes"));

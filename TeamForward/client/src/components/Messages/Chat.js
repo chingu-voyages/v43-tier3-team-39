@@ -2,33 +2,41 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios'
 import {io} from 'socket.io-client'
 import { useParams } from 'react-router-dom';
+import { useReactiveVar } from "@apollo/client";
+import { userState } from "../../GlobalState";
+
 
 const Chat = () => {
 
-  const {id} = useParams()
+  const user = useReactiveVar(userState);
+
+  const {chatId} = useParams()
 
   const [message,setMessage] = useState()
 
   const [messageList,setMessageList] = useState([])
+  const [otherUser,setOtherUser] = useState([])
  
-  // useEffect(()=>{
-  //   axios.get(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom/${id}/allMessages`)
-  //   .then((res)=>{
-  //     setMessageList(res.data)
-  //   }).catch((err)=>{
-  //     console.log(err)
-  //   })
-  // },[])
+  useEffect(()=>{
+    axios.get(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom/${chatId}/allMessages`)
+    .then((res)=>{
+      console.log("grabbed messages from db:",res.data)
+      setMessageList(res.data)
+      setOtherUser(res.data[0].otherUser)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },[])
 
    const submitMessage = () => {
-    // io.emit("clientMessage",{
-    //   // where do we get all of this data from?
-    //   chatRoomId: ,
-    //   from: ,
-    //   to: ,
-    //   message: "",
-    //   unread:false
-    // })
+  //   io.emit("clientMessage",{
+  //     // where do we get all of this data from?
+  //     chatRoomId: chatId,
+  //     from: user._id,
+  //     to: otherUser._id,
+  //     message,
+  //     unread:false
+  //   })
 
   }
 
