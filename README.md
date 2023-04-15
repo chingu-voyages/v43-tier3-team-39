@@ -7,10 +7,11 @@ Our goal at Team Forward is to connect local professionals through wellness acti
 ### Features:
 
 Team Forward allows users to:
+- Ability to create/update account
+- Upload / update a profile picture
+- Find like-minded users based on proximity and activity
+- Connect via private messaging with users
 
-- find like-minded users based on proximity and activity
-- connect via private messaging with users
-- video chat with connections
 
 ### Dependencies:
 
@@ -21,6 +22,7 @@ Team Forward allows users to:
 - dotenv
 - express
 - react-router-dom
+- cloudinary 
 
 
 ## Run Locally:
