@@ -6,7 +6,7 @@ Team Forward is a social platform designed to connect local professionals throug
 
 # Overview
 
-### 📨 Features:
+### :dart: Features:
 
 Team Forward allows users to:
 - Ability to create/update account
@@ -64,8 +64,7 @@ node server.js
 ```
 
 <!-- Contributing -->
-## 🛠 Contributors
-## 🗺 The Team
+## 🛠 The Team
 
 ### Developers
 - [Sarah](https://github.com/smurph7894)
@@ -73,14 +72,13 @@ node server.js
 - [Aya](https://github.com/adbshiau) 
 - [Andrew](https://github.com/Andrewgl22)
 
-
 ### Product Owners
 - [Bahareh](https://github.com/onetoughcookie226)
-- [Mirza]
-- [Phuong]
+- Mirza
+- Phuong
 
 ### QA Engineer
-- [Ali]
+- Ali
 
 <br/>
 
