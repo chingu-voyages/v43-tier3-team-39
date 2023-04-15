@@ -34,7 +34,7 @@ Team Forward allows users to:
 </a>
 
 ## Pictured from 👈 Left to Right 👉
-- [Sarah](https://github.com/marksist300](https://github.com/smurph7894)
+- [Sarah](https://github.com/smurph7894)
 - [Aya](https://github.com/adbshiau) 
 - [Andrew](https://github.com/Andrewgl22)
 - [Hanson](https://github.com/hansontram)
