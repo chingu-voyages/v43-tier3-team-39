@@ -50,6 +50,7 @@ cd server
 npm i 
 node server.js
 ```
+
 <!-- Contributing -->
 ## 🛠 Contributors
 
@@ -63,8 +64,7 @@ node server.js
   <img src="https://contrib.rocks/image?repo=chingu-voyages/v43-tier3-team-39" />
 </a>
 
-<!-- Acknowledgments -->
-## :gem: Acknowledgements
+
 
 Thank you to Jim and the [Chingu](https://www.chingu.io/) team!
 
