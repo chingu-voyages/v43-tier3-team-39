@@ -51,7 +51,7 @@ npm i
 node server.js
 ```
 <!-- Contributing -->
-## :ManTechnologist: contributors
+## 🛠 Contributors
 
 - [Sarah](https://github.com/smurph7894)
 - [Aya](https://github.com/adbshiau) 
