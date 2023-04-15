@@ -42,11 +42,11 @@ const Feed = () => {
 
   const userInfoNeeded = () => {
     if( !user.zipCode || !user.radius ){
-      return <div className="flex justify-center my-2"> 
-          <div className="block max-w-sm rounded-lg bg-slate-200 shadow-lg text-center">
+      return <div className="flex justify-center my-10"> 
+          <div className="block max-w-sm rounded-lg bg-slate-200 shadow-lg text-center text-sm px-3 py-3">
             Please update your user info to include a zipcode and radius to tailor your feed to locals in your area. 
             <div className="p-1 underline">
-              <Link  to="/updateprofile"> Edit User Info Here</Link>
+              <Link to="/updateprofile"> Edit Here</Link>
             </div>
           </div>
         </div>
@@ -62,14 +62,14 @@ const Feed = () => {
         <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
       </div>
       {userInfoNeeded()}
-      <div className="flex justify-center grid grid-rows-5 w-30">
-        <h3 className=" flex justify-center mt-2 font-bold uppercase border-b-2 border-green-900">Filters</h3>
-        <h3 className="mt-1 font-bold justify-start ">Interests:</h3>
+      <div className="flex justify-center grid grid-rows-5 w-30 ">
+        <h3 className=" flex justify-center mt-2 font-bold uppercase border-b-2 border-green-900 ">Filters</h3>
+        <h3 className="mt-1 font-bold justify-start mt-3 mb-3">Interests:</h3>
         <div className="flex justify-center mt-0">
             {interests.map((interest) => {
               const className = interestArr.includes(interest)
-                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
-                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
+                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
 
               return <BasicButtonStyling
                 text={interest}
@@ -88,12 +88,12 @@ const Feed = () => {
               />
             })}
         </div>
-        <h3 className="mt-1  font-bold">Activities:</h3>
-        <div className="flex justify-start mt-0 ">
+        <h3 className="mt-1 font-bold mt-3 mb-3">Activities:</h3>
+        <div className="flex justify-start  ">
             {activities.map((activity) => {
               const className = activityArr.includes(activity)
-                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
-                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center"
+                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
+                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
 
               return <BasicButtonStyling
                 text={activity}
@@ -131,11 +131,12 @@ const Feed = () => {
               </a>
               <div className="m-3">
                 <h5
-                  className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                  {userProfileData.firstName}
+                  className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50 text-center">
+                  {/* {userProfileData.firstName} */}
+                  {`${userProfileData.firstName} ${userProfileData.lastName}`}
                 </h5>
-                <p className="mb-4 text-base h-5 overflow-hidden text-neutral-600 dark:text-neutral-200">
-                  {userProfileData.bio} 
+                <p className="mb-4 text-base h-5 overflow-hidden text-neutral-600 dark:text-neutral-200 text-center">
+                  {userProfileData.profession} 
                 </p>
                 <div className="flex">
                   <button
