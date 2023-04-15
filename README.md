@@ -4,6 +4,29 @@ Team Forward is a social platform designed to connect local professionals throug
 
 ### 🔗 [Live Site](https://zippy-kangaroo-408751.netlify.app/)
 
+## Demo Login Credentials:
+<details>
+  <summary>Los Angeles</summary>
+  <ul>
+    <li>Email: demo@la.com</li>
+    <li>Password: 123</li>
+  </ul>
+</details>
+<details>
+  <summary>San Francisco</summary>
+  <ul>
+    <li>Email: demo@sf.com</li>
+    <li>Password: 123</li>
+  </ul>
+</details>
+<details>
+  <summary>Seattle</summary>
+  <ul>
+    <li>Email: demo@sea.com</li>
+    <li>Password: 123</li>
+  </ul>
+</details>
+
 # Overview
 
 ### :dart: Features:
