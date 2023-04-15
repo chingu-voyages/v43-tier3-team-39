@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import SignUpWEmail from "../components/SignUpAndSignInPopUps/SignUpWEmail";
 import { userState } from "../GlobalState";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import BasicButtonStyling from "../components/Button/BasicButtonStyling";
 
 const SignUp = () => {
   const [emailSignUpForm, setEmailSignUpForm] = useState(false);
-
+  const navigate = useNavigate();
   const user = userState();
 
   const google = async () => {
@@ -14,28 +15,27 @@ const SignUp = () => {
   };
 
   return (
-    <div className="bg-white flex flex-col h-screen">
-      <header className="m-5 bg-white">Team Forward</header>
-      <div className="h-screen bg-white relative flex flex-col space-y-10 justify-center items-center">
+    <div className="bg-white flex flex-col h-screen ">
+      <header className="m-5 bg-white font-bold text-xl">Team Forward</header>      
+      <div className="h-screen bg-white relative flex flex-col space-y-4 justify-center items-center ">
         <div className="bg-white shadow-none flex flex-col justify-center items-center rounded p-6 w-80">
-          <h1 className="text-3xl font-bold leading-normal mb-3">Sign Up</h1>
-          <button
-            className="bg-white p-1 my-3 w-full border border-black"
-            onClick={() => setEmailSignUpForm(true)}
-          >
-            Sign up with Email
-          </button>
-          {emailSignUpForm ? <SignUpWEmail /> : null}
-          {/* <button
-            className="bg-white p-1 w-full border border-black"
-            onClick={google}
-          >
-            Sign up with Google
-          </button> */}
-          <p>Already have an account?</p>
-          <a href="/signin" className="p-1 underline">
-            Sign in
-          </a>
+          <div className="place-self-start">
+            <button
+              type="button"
+              onClick={() => {
+                navigate("/");
+              }}
+              // value={value}
+              className="items-start my-0 btext-blue-600 inline-flex items-center hover:text-white border border-green-900 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-800 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center dark:border-green-900 dark:text-green-900 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-900"
+            > Home
+            </button>
+          </div>
+          <h1 className="text-3xl font-bold leading-normal mt-2 mb-3">Sign Up</h1>
+          <SignUpWEmail />
+            <p className="mt-3">Already have an account?</p>
+            <a href="/signin" className="p-1 underline">
+              Sign in
+            </a>
         </div>
       </div>
     </div>

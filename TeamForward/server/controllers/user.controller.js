@@ -41,11 +41,12 @@ module.exports = {
     if (user === null) {
       return res.status(400).send("incorrect email");
     }
-    const correctPassword = await (req.body.password === user.password);
-    if (!correctPassword) {
-      return res.status(400).send("incorrect password");
-    }
-    console.log("****** user._id", user._id)
+
+    const correctPassword = await bcrypt.compare(req.body.password, user.password);
+        if ( !correctPassword) {
+            return res.status(400).send("incorrect password");
+        }
+
     const userToken = jwt.sign(
       {
         id: user._id,
@@ -90,15 +91,16 @@ module.exports = {
   findAllUsers: async(req, res) => {
     const userInfo = await User.findOne({ _id: req.userId }, { password: 0 });
     const interests = req.query['interests'];
-    console.log("*****", userInfo.location.coordinates, userInfo.radius );
-    const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, req.userId);
+    const activities = req.query['activities'];
+    // console.log(interests, activities);
+    const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, activities, req.userId);
     res.json(results);
   },
   
   updateUser: async (req, res) => {
     let body = { ...req.body };
 
-    log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params)
+    log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params);
     if (body.photo) {
       //if there's an existing cloudinaryProfileImgUrl/cloudinaryId, then delete it from cloudinary
       let userPhoto = await User.findById({_id: req.params.id });
@@ -106,7 +108,7 @@ module.exports = {
       try {
         await cloudinary.uploader.destroy(userPhoto.cloudinaryId);
       } catch (exception) {
-        console.log("something went wring with updateUser", exception);
+        console.log("something went wrong with updateUser", exception);
       }
 
       let result;

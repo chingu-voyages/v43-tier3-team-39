@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
 import log from "../helpers/logging";
-import Jumbotron from "../components/UpdateProfilePage/Jumbotron";
 import ProfileForm from "../components/UpdateProfilePage/ProfileForm";
+import NavMenu from "../components/NavMenu/NavMenu";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ const UpdateProfile = () => {
       },
     };
 
-    if (profileImg.includes("base64")) {
+    if (profileImg?.includes("base64")) {
       payload.photo = profileImg;
     }
 
@@ -106,7 +106,10 @@ const UpdateProfile = () => {
 
   return (
     <div>
-      <Jumbotron />
+      <div className="inline-block ml-4">
+        <NavMenu />
+        <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
+      </div>
       <ProfileForm
         formInfo={formInfo}
         setFormInfo={setFormInfo}

@@ -16,14 +16,22 @@ const getLocationHelper = async(address) => {
 
 };
 
-const getUsersWithinRadius = async (coordinates, radius, interests, userId) => {
+const getUsersWithinRadius = async (coordinates, radius, interests, activities, userId) => {
     try{
         let splitInterests = interests?.split(",") || [];
         let interestQuery = [];
         for(let interest of splitInterests){
-            const queryObject = {};
-            queryObject[`interests.${interest}`] = true;
-            interestQuery.push(queryObject);
+            const queryInterestObject = {};
+            queryInterestObject[`interests.${interest}`] = true;
+            interestQuery.push(queryInterestObject);
+        }
+
+        let splitActivities = activities?.split(",") || [];
+        let activityQuery = [];
+        for(let activity of splitActivities){
+            const queryActivityObject = {};
+            queryActivityObject[`activities.${activity}`] = true;
+            activityQuery.push(queryActivityObject);
         }
 
         let findQuery = {
@@ -41,7 +49,9 @@ const getUsersWithinRadius = async (coordinates, radius, interests, userId) => {
         if (interests){
             findQuery.$and.push({ $or: interestQuery });
         } 
-        // another if statement for activities once added
+        if (activities){
+            findQuery.$and.push({ $or: activityQuery });
+        } 
 
         let results = await User.find(
             findQuery
