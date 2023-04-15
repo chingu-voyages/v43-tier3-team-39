@@ -8,13 +8,15 @@ module.exports ={
     //CHATROOM
     createNewChatRoom: async (req, res) => {
         const { otherUserId } = req.body;
-        console.log("controller user objects", req.userId, otherUserId)
+        // console.log("controller user objects", req.userId, otherUserId)
         let chatRoomExists = await ChatRoom.findOne({userIds: {$all:[req.userId, otherUserId]}})
 
         if(chatRoomExists){
+            console.log("Chat room already exists:",chatRoomExists)
             res.json(chatRoomExists);
         } else{
             try{
+                console.log("Creating new chatroom...")
                 let newChatRoom = await ChatRoom.create({
                     userIds: [new mongoose.Types.ObjectId(req.userId), new mongoose.Types.ObjectId(otherUserId)]
                 });
