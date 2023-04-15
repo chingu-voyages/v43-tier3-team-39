@@ -31,23 +31,23 @@ const NavMenu = () => {
             </button> 
         {
             open ? (
-                <div className="absolute bg-opacity-100 mt-1">
-                    <ul className="bg-opacity-100">
+                <div className="absolute w-25 border p-1 rounded-lg shadow-lg block bg-white mt-1">
+                    <ul className="bg-white">
                         <li className="block">
-                        <NavLink to="/myProfile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block ">My Profile</NavLink>
+                        <NavLink to="/myProfile" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full ">My Profile</NavLink>
                         </li>
                         <li className="">
-                        <NavLink to="/updateprofile" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Edit Profile</NavLink>
+                        <NavLink to="/updateprofile" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full">Edit Profile</NavLink>
                         </li>
                         <li className="block">
-                        <NavLink to="/feed" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Dashboard</NavLink>
+                        <NavLink to="/feed" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full">Dashboard</NavLink>
                         </li>
                         {/* TODO: Link messages when finished with message feature */}
                         <li className="">
-                        <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Messages</button>
+                        <button className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full">Messages</button>
                         </li>
                         <li className="">
-                        <NavLink onClick={logout} className="text-lg font-semibold border p-1 rounded-lg shadow-lg block" >Logout</NavLink>
+                        <NavLink onClick={logout} className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full" >Logout</NavLink>
                         </li>
                     </ul>
                 </div>

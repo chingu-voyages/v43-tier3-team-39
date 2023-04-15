@@ -42,7 +42,7 @@ const Feed = () => {
 
   const userInfoNeeded = () => {
     if( !user.zipCode || !user.radius ){
-      return <div className="flex justify-center my-10"> 
+      return <div className="mx-auto my-4"> 
           <div className="block max-w-sm rounded-lg bg-slate-200 shadow-lg text-center text-sm px-3 py-3">
             Please update your user info to include a zipcode and radius to tailor your feed to locals in your area. 
             <div className="p-1 underline">
@@ -56,68 +56,72 @@ const Feed = () => {
 
   return (
     <div className="">
-      
-      <div className="inline-block ml-4">
-        <NavMenu />
-        <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
-      </div>
-      {userInfoNeeded()}
-      <div className="flex justify-center grid grid-rows-5 w-30 ">
-        <h3 className=" flex justify-center mt-2 font-bold uppercase border-b-2 border-green-900 ">Filters</h3>
-        <h3 className="mt-1 font-bold justify-start mt-3 mb-3">Interests:</h3>
-        <div className="flex justify-center mt-0">
-            {interests.map((interest) => {
-              const className = interestArr.includes(interest)
-                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
-                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
-
-              return <BasicButtonStyling
-                text={interest}
-                className={className}
-                onClick={()=>{
-                  const newInterests = [...interestArr];
-                  
-                  if (newInterests.includes(interest)) {
-                    newInterests.splice(newInterests.indexOf(interest), 1);
-                  } else {
-                    newInterests.push(interest);
-                  }
-                  
-                  setInterestArr(newInterests);
-                }}
-              />
-            })}
+      <div className="flex flex-col">
+        <div className='md:absolute'>
+          <NavMenu />
+          <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
         </div>
-        <h3 className="mt-1 font-bold mt-3 mb-3">Activities:</h3>
-        <div className="flex justify-start  ">
-            {activities.map((activity) => {
-              const className = activityArr.includes(activity)
-                ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
-                : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
+        <div className="mx-auto">
+          <div> {userInfoNeeded()} </div>
+          <div className="flex justify-center grid grid-rows-5 w-30 ">
+            <h3 className=" flex justify-center mt-2 font-bold uppercase border-b-2 border-green-900 ">Filters</h3>
+            <h3 className="mt-1 font-bold justify-start mt-3 mb-3">Interests:</h3>
+            <div className="flex justify-center mt-0">
+                {interests.map((interest) => {
+                  const className = interestArr.includes(interest)
+                    ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
+                    : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
 
-              return <BasicButtonStyling
-                text={activity}
-                className={className}
-                onClick={()=>{
-                  const newActivity = [...activityArr];
-                  
-                  if (newActivity.includes(activity)) {
-                    // removeEntry
-                    newActivity.splice(newActivity.indexOf(activity), 1);
-                  } else {
-                    newActivity.push(activity);
-                  }
-                  
-                  setActivityArr(newActivity);
-                }}
-              />
-            })}
+                  return <BasicButtonStyling
+                    text={interest}
+                    className={className}
+                    onClick={()=>{
+                      const newInterests = [...interestArr];
+                      
+                      if (newInterests.includes(interest)) {
+                        newInterests.splice(newInterests.indexOf(interest), 1);
+                      } else {
+                        newInterests.push(interest);
+                      }
+                      
+                      setInterestArr(newInterests);
+                    }}
+                  />
+                })}
+          </div>
+          <h3 className="mt-1 font-bold mt-3 mb-3">Activities:</h3>
+          <div className="flex justify-start  ">
+              {activities.map((activity) => {
+                const className = activityArr.includes(activity)
+                  ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
+                  : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
+
+                return <BasicButtonStyling
+                  text={activity}
+                  className={className}
+                  onClick={()=>{
+                    const newActivity = [...activityArr];
+                    
+                    if (newActivity.includes(activity)) {
+                      // removeEntry
+                      newActivity.splice(newActivity.indexOf(activity), 1);
+                    } else {
+                      newActivity.push(activity);
+                    }
+                    
+                    setActivityArr(newActivity);
+                  }}
+                />
+              })}
+          </div>
+          </div>
         </div>
+
       </div>
         <div >
           <div className="flex-col justify-center inline-flex w-36">
           </div>
-      <div className="flex justify-center flex-wrap w-8/12 mx-auto m-2 mt-4">
+      <div className="flex justify-center flex-wrap w-11/12 mx-auto m-2 mt-4">
         {
           userList.map((userProfileData)=>{
             return <div className="flex w-60 h-72 m-2">
@@ -148,7 +152,6 @@ const Feed = () => {
                     View Profile
                   </button>
                 </div>
-                
               </div>
             </div>
           </div>
