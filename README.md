@@ -15,18 +15,18 @@ Team Forward is a social platform designed to connect local professionals throug
 <details>
   <summary>San Francisco</summary>
   <ul>
-    <li>TBA</li>
-<!--     <li>Email: demo@sf.com</li>
-    <li>Password: 123</li> -->
+    <li>** not set up yet **</li>
+    <li>Email: demo@sf.com</li>
+    <li>Password: 123</li>
   </ul>
 </details>
 <details>
   <summary>Seattle</summary>
   <ul>
-    <li>TBA</li>
-<!--     <li>*not yet setup*</li>
+    <li>** not set up yet **</li>
+    <li>*not yet setup*</li>
     <li>Email: demo@sea.com</li>
-    <li>Password: 123</li> -->
+    <li>Password: 123</li>
   </ul>
 </details>
 
