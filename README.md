@@ -3,6 +3,7 @@
 Team Forward is a social platform designed to connect local professionals through wellness activities, fostering meaningful relationships and personal growth. Our dynamic web app offers opportunities to network, build friendships, and have fun while prioritizing social interactions and physical activity. By promoting positivity and support, we empower individuals to achieve their goals and create thriving communities.
 
 Project Link: [Team Forward](https://zippy-kangaroo-408751.netlify.app/)
+### [Live Site](https://zippy-kangaroo-408751.netlify.app/)
 
 # Overview
 
@@ -27,8 +28,6 @@ Team Forward allows users to:
 - react-router-dom
 - cloudinary 
 
-
-Project Link: [Team Forward](https://zippy-kangaroo-408751.netlify.app/)
 
 ## Run Locally:
 
