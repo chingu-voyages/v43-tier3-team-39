@@ -104,22 +104,26 @@ const UpdateProfile = () => {
     }
   };
 
+  
+
   return (
-    <div>
-      <div className="inline-block ml-4">
+    <div className="flex flex-col">
+      <div className="lg:absolute">
         <NavMenu />
         <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
       </div>
-      <ProfileForm
-        formInfo={formInfo}
-        setFormInfo={setFormInfo}
-        handleFormInfoChange={handleFormInfoChange}
-        handleInterests={handleInterests}
-        handleActivities={handleActivities}
-        handleSubmit={handleSubmit}
-        profileImg={profileImg}
-        setProfileImg={setProfileImg}
-      />
+      <div className="m-0">
+        <ProfileForm
+          formInfo={formInfo}
+          setFormInfo={setFormInfo}
+          handleFormInfoChange={handleFormInfoChange}
+          handleInterests={handleInterests}
+          handleActivities={handleActivities}
+          handleSubmit={handleSubmit}
+          profileImg={profileImg}
+          setProfileImg={setProfileImg}
+        />
+      </div>
     </div>
   );
 };
