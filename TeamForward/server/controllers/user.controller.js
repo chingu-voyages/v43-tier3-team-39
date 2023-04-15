@@ -172,7 +172,11 @@ module.exports = {
   },
 
   logOut: (req, res) => {
-    res.clearCookie("jwt-token");
+    res.clearCookie("jwt-token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none"
+    });
     res.sendStatus(200);
   },
 
