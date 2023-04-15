@@ -68,9 +68,9 @@ node server.js
 
 ### Developers
 - [Sarah](https://github.com/smurph7894)
-- [Hanson](https://github.com/hansontram)
 - [Aya](https://github.com/adbshiau) 
 - [Andrew](https://github.com/Andrewgl22)
+- [Hanson](https://github.com/hansontram)
 
 ### Product Owners
 - [Bahareh](https://github.com/onetoughcookie226)
