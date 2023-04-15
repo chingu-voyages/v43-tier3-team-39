@@ -26,6 +26,13 @@ Frontend
 - React-router-dom
 - Axios
 
+<details>
+  <summary>Client</summary>
+  <ul>
+    <li>React.js</</li>
+  </ul>
+</details>
+
 Backend
 - MongoDB
 - Express.js
