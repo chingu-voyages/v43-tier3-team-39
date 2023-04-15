@@ -24,6 +24,7 @@ Team Forward allows users to:
     <li>Javascript</li>
     <li>React.js</li>
     <li>Tailwind.css</li>
+    <li>Tailwind-elements</li>
     <li>React-router-dom</li>
     <li>Axios</li>
   </ul>
