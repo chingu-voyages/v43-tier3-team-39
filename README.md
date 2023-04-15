@@ -64,7 +64,7 @@ node server.js
 
 
 
-# Thank you to Jim and the [Chingu](https://www.chingu.io/) team!
+#### Thank you to Jim and the [Chingu](https://www.chingu.io/) team!
 
 
 
