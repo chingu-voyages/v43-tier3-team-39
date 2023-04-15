@@ -35,24 +35,25 @@ const Profile = ({ profileData, setProfileData }) => {
           <h1 className="text-4xl font-medium text-gray-700">
             {`${profileData.firstName} ${profileData.lastName}`}
           </h1>
-          <p className=" text-gray-600 mt-6  font-semibold">
-            Location: {`${profileData.zipCode}`}
+          <p className="mt-5 text-gray-500 font-bold text-xl ">
+            {profileData.profession}
           </p>
-
-          <p className="mt-5 text-gray-500 font-bold ">{profileData.profession}</p>
+          <p className="text-gray-600 mt-6 font-semibold">
+            {profileData.zipCode ? `Location: ${profileData.zipCode}` : null}
+          </p>
         </div>
 
         <div className="mt-12 flex flex-col justify-center ">
-          <p className="text-gray-600 text-center font-light lg:px-16">
+          <p className="text-gray-800 text-center text-xl font-medium ">
             {profileData.bio}
           </p>
         </div>
         <div className="mt-12 flex flex-col justify-center  text-gray-500">
           <h3 className="font-bold uppercase">Interests:</h3>
-          <div className=" p-1 flex flex-row ">
+          <div className="p-1 flex flex-col sm:flex-row ">
             {Object.keys(profileData.interests).map((interest) =>
               profileData.interests[interest] ? (
-                <p className=" p-1 my-3 mr-2 border bg-green-700 text-white rounded-md">
+                <p className="p-1 my-3 mr-2 border bg-green-800 text-white rounded-md">
                   {interest}
                 </p>
               ) : null
@@ -64,7 +65,7 @@ const Profile = ({ profileData, setProfileData }) => {
           <div className=" p-1 flex flex-row ">
             {Object.keys(profileData.activities).map((activity) =>
               profileData.activities[activity] ? (
-                <p className=" p-1 my-3 mr-2 border bg-green-700 text-white rounded-md">
+                <p className=" p-1 my-3 mr-2 border bg-green-800 text-white rounded-md">
                   {activity}
                 </p>
               ) : null

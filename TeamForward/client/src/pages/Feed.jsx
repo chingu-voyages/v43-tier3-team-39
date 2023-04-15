@@ -8,7 +8,7 @@ import NavMenu from "../components/NavMenu/NavMenu";
 import BasicButtonStyling from "../components/Button";
 import blankProfileImg from "../../src/assets/home/blank-profile.png"
 
-const interests = ["chingu", "networking", "mentorship"];
+const interests = ["Chingu", "Networking", "Mentorship"];
 const activities = ["VirtualCoffee", "Hiking", "Running"];
 
 //TODO add message to for new user to update profile(zipcode & radius to find those in their area)

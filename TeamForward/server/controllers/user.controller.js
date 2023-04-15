@@ -108,7 +108,7 @@ module.exports = {
       try {
         await cloudinary.uploader.destroy(userPhoto.cloudinaryId);
       } catch (exception) {
-        console.log("something went wring with updateUser", exception);
+        console.log("something went wrong with updateUser", exception);
       }
 
       let result;

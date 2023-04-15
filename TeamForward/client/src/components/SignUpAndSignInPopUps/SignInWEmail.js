@@ -61,7 +61,7 @@ const SignInWEmail = () => {
                         Sign In
                     </button>
                 <div className="mb-6 flex items-center justify-between"/>
-                <div>{ error ? <span>{error}</span>:null}</div>
+                <div>{ error ? <span className="text-red-400 font-bold">{error}</span>:null}</div>
             </form>
         </div>
   );
