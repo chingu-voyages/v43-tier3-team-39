@@ -24,7 +24,6 @@ Team Forward is a social platform designed to connect local professionals throug
   <summary>Seattle</summary>
   <ul>
     <li>** not set up yet **</li>
-    <li>*not yet setup*</li>
     <li>Email: demo@sea.com</li>
     <li>Password: 123</li>
   </ul>
