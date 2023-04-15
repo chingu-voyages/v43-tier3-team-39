@@ -37,9 +37,9 @@ const Hero = () => {
     
             <div className="px-6 py-12 mt-20 md:px-12 bg-gray-50 text-gray-800 text-center lg:text-left">
               <div className="container mx-auto xl:px-32">
-                <div className="grid lg:grid-cols-2 gap-12 flex items-center">
-                  <div className="mt-12 lg:mt-0">
-                    <h1 className="text-5xl   font-bold tracking-tight mb-12">
+                <div className="grid lg:grid-cols-2 gap-12 flex-col items-center">
+                  <div className="mt-12 lg:mt-0 flex flex-col items-center">
+                    <h1 className="text-5xl font-bold tracking-tight mb-12">
                       Time for wellness <br />
                       <span className="text-green-900 text-base font-medium xs:text-sm md:text-lg lg:text-lg xl:text-lg ">
                         Find your wellness buddy at work and exercise together.
