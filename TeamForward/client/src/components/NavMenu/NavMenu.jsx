@@ -2,8 +2,12 @@ import React, {useState} from 'react'
 import { NavLink } from 'react-router-dom'
 import { useReactiveVar } from '@apollo/client';
 import { userState } from "../../GlobalState";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const NavMenu = () => {
+
+    const navigate = useNavigate()
 
     const user = useReactiveVar(userState);
 
@@ -11,6 +15,16 @@ const NavMenu = () => {
 
     const dropDown = () => {
         setOpen(!open)
+    }
+
+    const logout = () => {
+        axios.get(`${process.env.REACT_APP_BE_URL}/teamForward/logout`)
+        .then((res)=>{
+            console.log("user logged out")
+            navigate("/signin")
+        }).catch((err)=>{
+            console.log(err)
+        })
     }
 
   return (
@@ -35,7 +49,7 @@ const NavMenu = () => {
                         <NavLink to="/messages" className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Messages</NavLink>
                         </li>
                         <li className="">
-                        <button className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Logout</button>
+                        <button onClick={logout} className="text-lg font-semibold border p-1 rounded-lg shadow-lg block">Logout</button>
                         </li>
                     </ul>
                 </div>

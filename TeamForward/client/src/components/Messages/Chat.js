@@ -32,6 +32,7 @@ const Chat = ({socket}) => {
   useEffect(()=>{
     
     console.log('other user:',otherUser._id)
+    
     socket.on("message",(data)=>{
       const newFrom = otherUser._id == data.from ? otherUser.firstName : data.from
       // console.log("received message from server!",data)
@@ -44,6 +45,7 @@ const Chat = ({socket}) => {
   },[socket])
 
   useEffect(()=>{
+    // on component load user joins private room based on chatRoomId
     socket.emit('join',chatId)
   },[])
   
@@ -54,6 +56,7 @@ const Chat = ({socket}) => {
       console.log("no message")
       return
     }
+    // emits message to server which is sent to shared private room
     socket.emit("clientMessage",{
       chatRoomId: chatId,
       from: user._id,
@@ -63,27 +66,29 @@ const Chat = ({socket}) => {
     })
     setMessage("")
   }
-  let messageSide = user._id == message.from ? "flex flex-row justify-start items-end mb-2" :"flex flex-row justify-start items-center mb-2"
-
   return (
 <div className="w-full max-w-sm mx-auto">
-<div>
-      {
-        messageList.map((message)=>(
-          <div className={messageSide}>
-                <img className="w-8 h-8 rounded-full" src={user.cloudinaryProfileImgUrl} alt={user.firstName} />
-                <div className="flex flex-col items-start">
-                  <div className="relative px-4 py-2 max-w-xs rounded-lg">
-                    <div className="text-med leading-tight mb-2">
-                     {message.message}
+      <div>
+          {
+            messageList.map((message)=>{
+              // conditionally renders message on either side depending on user
+              let messageSide = user._id === message.from ? "flex flex-row justify-start items-end mb-2" :"flex flex-row justify-end mb-2";
+              // conditionally renders avatar for each user
+              let image = user._id === message.from ? user.cloudinaryProfileImgUrl : otherUser.cloudinaryProfileImgUrl;
+              return <div key={message._id} className={messageSide}>
+                    <img className="w-8 h-8 rounded-full align-middle" src={image} alt={user.firstName} />
+                    <div className="flex flex-col items-start">
+                      <div className="relative px-4 py-2 max-w-xs rounded-lg">
+                        <div className="text-med leading-tight mb-2">
+                        {message.message}
+                        </div>
+                        <div className="text-xs text-gray-500">{dateformat(message.createdAt, "dddd, h:MM TT") }</div>
+                      </div>
                     </div>
-                    <div className="text-xs text-gray-500">{dateformat(message.createdAt, "dddd, h:MM TT") }</div>
                   </div>
-                </div>
-              </div>
-        ))
-      }
-    </div>
+            })
+          }
+      </div>
       <div className="flex flex-col h-screen #a1a1aa">
       
         <div className="flex-shrink-0 flex p-4 border-t bg-white">

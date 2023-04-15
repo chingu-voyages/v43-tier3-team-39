@@ -9,13 +9,9 @@ const ConnectButton = ({otherUserId}) => {
   const navigate = useNavigate()
 
   const user = useReactiveVar(userState);
-  
-
-  // create a new chatRoom model with both user IDs
-      // navigate to the chat room
 
   const createChatRoom = () => {
-    // create chat room
+    // creates new chatRoom or returns existing
     axios.post(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom`,{otherUserId})
     .then((res)=>{
       console.log("created chat room:",res.data)
