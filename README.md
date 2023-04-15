@@ -53,10 +53,11 @@ node server.js
 ## 🛠 Contributors
 
 - [Sarah](https://github.com/smurph7894)
+- [Hanson](https://github.com/hansontram)
 - [Aya](https://github.com/adbshiau) 
 - [Andrew](https://github.com/Andrewgl22)
-- [Hanson](https://github.com/hansontram)
 - [Bahareh](https://github.com/onetoughcookie226)
+
 
 <a href="https://github.com/chingu-voyages/v43-tier3-team-39/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=chingu-voyages/v43-tier3-team-39" />
