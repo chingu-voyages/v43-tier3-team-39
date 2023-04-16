@@ -12,14 +12,14 @@ Team Forward is a social platform designed to connect local professionals throug
     <li>Password: 123</li>
   </ul>
 </details>
-<details>
+<!-- <details>
   <summary>San Francisco</summary>
   <ul>
     <li>** not set up yet **</li>
     <li>Email: demo@sf.com</li>
     <li>Password: 123</li>
   </ul>
-</details>
+</details> -->
 <details>
   <summary>Seattle</summary>
   <ul>
