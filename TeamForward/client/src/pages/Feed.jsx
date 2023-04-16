@@ -8,10 +8,8 @@ import NavMenu from "../components/NavMenu/NavMenu";
 import BasicButtonStyling from "../components/Button";
 import blankProfileImg from "../../src/assets/home/blank-profile.png"
 
-const interests = ["Chingu", "Networking", "Mentorship"];
-const activities = ["VirtualCoffee", "Hiking", "Running"];
-
-//TODO add message to for new user to update profile(zipcode & radius to find those in their area)
+const interests = ["chingu", "networking", "mentorship"];
+const activities = ["virtualCoffee", "hiking", "running"];
 
 const Feed = () => {
   const navigate = useNavigate();
@@ -21,7 +19,6 @@ const Feed = () => {
   const [activityArr, setActivityArr] = useState([]);
   const [userList,setUserList] = useState([]);
 
-  // grab all users from db based on filters
   useEffect(()=>{
     log(interestArr);
     const baseUrl = `${process.env.REACT_APP_BE_URL}/teamForward?`;
@@ -69,8 +66,8 @@ const Feed = () => {
             <div className="flex justify-center mt-0">
                 {interests.map((interest) => {
                   const className = interestArr.includes(interest)
-                    ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
-                    : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
+                    ? "bg-green-900 text-white inline-flex capitalize items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
+                    : "text-green-900 inline-flex items-center capitalize border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3"
 
                   return <BasicButtonStyling
                     text={interest}
@@ -83,7 +80,6 @@ const Feed = () => {
                       } else {
                         newInterests.push(interest);
                       }
-                      
                       setInterestArr(newInterests);
                     }}
                   />
@@ -93,8 +89,8 @@ const Feed = () => {
           <div className="flex justify-start  ">
               {activities.map((activity) => {
                 const className = activityArr.includes(activity)
-                  ? "bg-green-900 text-white inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
-                  : "text-green-900 inline-flex items-center border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
+                  ? "bg-green-900 text-white inline-flex items-center capitalize border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
+                  : "text-green-900 inline-flex items-center capitalize border border-green-900 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-3 "
 
                 return <BasicButtonStyling
                   text={activity}
@@ -103,12 +99,10 @@ const Feed = () => {
                     const newActivity = [...activityArr];
                     
                     if (newActivity.includes(activity)) {
-                      // removeEntry
                       newActivity.splice(newActivity.indexOf(activity), 1);
                     } else {
                       newActivity.push(activity);
                     }
-                    
                     setActivityArr(newActivity);
                   }}
                 />

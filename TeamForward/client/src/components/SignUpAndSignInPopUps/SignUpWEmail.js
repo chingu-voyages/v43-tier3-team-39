@@ -17,9 +17,6 @@ const SignUpWEmail = () => {
     password: "",
   });
 
-  console.log(confirmedPassword)
-  console.log(newUser.password)
-
   const passwordMatches = (confirmedPassword, newUser) =>{
     if (!confirmedPassword || !newUser.password){
       return true;
