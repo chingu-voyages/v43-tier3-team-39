@@ -49,7 +49,7 @@ function App() {
     return null;
   }
 
-  console.log("user", user);
+
   return (
     <BrowserRouter>
       <Routes>

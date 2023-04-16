@@ -31,7 +31,7 @@ const NavMenu = () => {
             </button> 
         {
             open ? (
-                <div className="absolute w-25 border p-1 rounded-lg shadow-lg block bg-white mt-1">
+                <div className="absolute w-25 border p-1 rounded-lg shadow-lg block bg-white mt-1 z-40">
                     <ul className="bg-white">
                         <li className="block">
                         <NavLink to="/myProfile" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full ">My Profile</NavLink>

@@ -15,7 +15,7 @@ module.exports = {
         res.cookie("jwt-token", userToken, { httpOnly: true, secure: true, sameSite: "none" }).json(newUser);
       })
       .catch((err) => {
-        log("something went wrong with createNewUser");
+        log("Something went wrong with createNewUser");
         res.status(400).json(err);
       });
   },
@@ -28,23 +28,23 @@ module.exports = {
         res.json(loggedUser);
       })
       .catch((err) => {
-        log("find logged In user failed");
+        log("Find logged In user failed");
       });
   },
 
   login: async (req, res) => {
     log(req.body.email, req.body.password);
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send("something went wrong with login");
+      return res.status(400).send("Something went wrong with login");
     }
     const user = await User.findOne({ email: req.body.email });
     if (user === null) {
-      return res.status(400).send("incorrect email");
+      return res.status(400).send("Incorrect Email");
     }
 
     const correctPassword = await bcrypt.compare(req.body.password, user.password);
         if ( !correctPassword) {
-            return res.status(400).send("incorrect password");
+            return res.status(400).send("Incorrect Password");
         }
 
     const userToken = jwt.sign(
@@ -67,7 +67,7 @@ module.exports = {
     try {
       findId = new mongoose.Types.ObjectID(req.params.id);
     } catch (err) {
-      res.status(404).json("this user could not be found");
+      res.status(404).json("This user could not be found");
       return;
     }
     User.findOne({ _id: findId })
@@ -108,7 +108,7 @@ module.exports = {
       try {
         await cloudinary.uploader.destroy(userPhoto.cloudinaryId);
       } catch (exception) {
-        console.log("something went wrong with updateUser", exception);
+        console.log("Something went wrong with updateUser", exception);
       }
 
       let result;
