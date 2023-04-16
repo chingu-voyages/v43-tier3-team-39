@@ -110,7 +110,7 @@ const UpdateProfile = () => {
     <div className="flex flex-col">
       <div className="lg:absolute">
         <NavMenu />
-        <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
+        <h1 className="font-bold inline-block">{user ? `${user.firstName} ${user.lastName}`: ""}</h1>
       </div>
       <div className="m-0">
         <ProfileForm
