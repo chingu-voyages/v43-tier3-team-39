@@ -59,7 +59,7 @@ const getUsersWithinRadius = async (coordinates, radius, interests, activities, 
 
         return results;
     } catch (expection) {
-        console.log("something went wrong with getUserWithRadius function", expection);
+        console.log("Something went wrong with getUserWithRadius function", expection);
     }  
 };
 
