@@ -59,7 +59,7 @@ const Feed = () => {
       <div className="flex flex-col">
         <div className='md:absolute'>
           <NavMenu />
-          <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
+          <h1 className="font-bold inline-block">{user ? `${user.firstName} ${user.lastName}`: ""}</h1>
         </div>
         <div className="mx-auto">
           <div> {userInfoNeeded()} </div>

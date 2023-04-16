@@ -14,7 +14,7 @@ const Profile = ({ profileData, setProfileData }) => {
     <div className="">
       <div className="inline-block ml-4">
         <NavMenu />
-        <h1 className="font-bold inline-block">Hello {user ? user.firstName : ""}</h1>
+        <h1 className="font-bold inline-block">{user ? `${user.firstName} ${user.lastName}`: ""}</h1>
       </div>
       <div className="px-16">
         <div className="p-8 bg-white shadow mt-24">
@@ -59,7 +59,7 @@ const Profile = ({ profileData, setProfileData }) => {
               {Object.keys(profileData.interests).map((interest) =>
                 profileData.interests[interest] ? (
                   <p className="p-1 my-3 mr-2 border bg-green-800 text-white rounded-md">
-                    {interest}
+                    {interest.charAt(0).toUpperCase() + interest.slice(1)}
                   </p>
                 ) : null
               )}
@@ -71,7 +71,7 @@ const Profile = ({ profileData, setProfileData }) => {
               {Object.keys(profileData.activities).map((activity) =>
                 profileData.activities[activity] ? (
                   <p className=" p-1 my-3 mr-2 border bg-green-800 text-white rounded-md">
-                    {activity}
+                    {activity.charAt(0).toUpperCase() + activity.slice(1)}
                   </p>
                 ) : null
               )}
