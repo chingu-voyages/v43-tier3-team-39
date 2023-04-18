@@ -9,7 +9,6 @@ module.exports = {
         const address = "98034";
         //TODO: get address of of request ie user.address
         const url = `http://api.positionstack.com/v1/forward?access_key=${process.env.POSITIONSTACK_KEY}&query=${address}`;
-        //TODO: make key in URL env variable
         const response = await fetch(url);
         const responseJson = await response.json();
         log(responseJson);
