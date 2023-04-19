@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { userState } from "../../GlobalState";
 import { useReactiveVar } from "@apollo/client";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ConnectButton from "../Button/ConnectButton";
 import ProfileImg from "./ProfileImg";
+import NavMenu from "../NavMenu/NavMenu";
 
 const Profile = ({ profileData, setProfileData }) => {
   const user = useReactiveVar(userState);
-  // console.log("this is userState", user);
-  console.log("this is profileData", profileData);
+  // console.log("this is profileData", profileData);
 
   return (
     <div className="p-16">
@@ -33,51 +33,51 @@ const Profile = ({ profileData, setProfileData }) => {
         </div>
 
         <div className="mt-20 text-center border-b pb-12">
-          <h1 className="text-4xl font-medium text-gray-700">
-            {`${profileData.firstName} ${profileData.lastName}`}
-          </h1>
-          <p className="font-light text-gray-600 mt-6">
-            Location: {`${profileData.zipCode}`}
-          </p>
-
-          <p className="mt-5 text-gray-500">{profileData.profession}</p>
-          {/* <p className="mt-2 text-gray-500">University of Computer Science</p> */}
+            <h1 className="text-4xl font-medium text-gray-700">
+              {`${profileData.firstName} ${profileData.lastName}`}
+            </h1>
+            <p className="mt-5 text-gray-500 font-bold text-xl ">
+              {profileData.profession}
+            </p>
+            <p className="text-gray-600 mt-6 font-semibold">
+              {profileData.zipCode ? `Location: ${profileData.zipCode}` : null}
+            </p>
         </div>
 
         <div className="mt-12 flex flex-col justify-center ">
-          <p className="text-gray-600 text-center font-light lg:px-16">
-            {profileData.bio}
-          </p>
+            <p className="text-gray-800 text-center text-xl font-medium ">
+              {profileData.bio}
+            </p>
         </div>
-        {/* TODO: Hook up interests/activities */}
-        <div className="mt-12 flex flex-col justify-center  text-gray-500">
-          <h3>Interests:</h3>
-          <div className=" p-1 flex flex-row ">
-            {Object.keys(profileData.interests).map((interest) =>
-              profileData.interests[interest] ? (
-                <p className=" p-1 my-3 mr-2 border border-black rounded-md">
-                  {interest}
-                </p>
-              ) : null
-            )}
+        
+          <div className="mt-12 flex flex-col justify-center  text-gray-500">
+            <h3 className="font-bold uppercase">Interests:</h3>
+            <div className="p-1 flex flex-col sm:flex-row min-w-fit text-center">
+              {Object.keys(profileData.interests).map((interest) =>
+                profileData.interests[interest] ? (
+                  <p className="p-1 my-3 mr-2 border bg-green-800 text-white rounded-md">
+                    {interest.charAt(0).toUpperCase() + interest.slice(1)}
+                  </p>
+                ) : null
+              )}
+            </div>
           </div>
-        </div>
-        <div className="mt-12 flex flex-col justify-center  text-gray-500">
-          <h3>Activities:</h3>
-          <div className=" p-1 flex flex-row ">
-            {Object.keys(profileData.activities).map((activity) =>
-              profileData.activities[activity] ? (
-                <p className=" p-1 my-3 mr-2 border border-black rounded-md">
-                  {activity}
-                </p>
-              ) : null
-            )}
+          <div className="mt-12 flex flex-col justify-center  text-gray-500">
+            <h3 className="font-bold uppercase">Activities:</h3>
+            <div className="p-1 flex flex-col sm:flex-row min-w-fit text-center">
+              {Object.keys(profileData.activities).map((activity) =>
+                profileData.activities[activity] ? (
+                  <p className=" p-1 my-3 mr-2 border bg-green-800 text-white rounded-md">
+                    {activity.charAt(0).toUpperCase() + activity.slice(1)}
+                  </p>
+                ) : null
+              )}
+            </div>
           </div>
-        </div>
       </div>
-      <Link to="/feed" className="text-gray-800 flex justify-center">
-        Back to feed
-      </Link>
+      <NavLink to="/feed" className="text-gray-800 text-sm flex justify-center underline mt-2">
+          Back to feed
+      </NavLink>
     </div>
   );
 };

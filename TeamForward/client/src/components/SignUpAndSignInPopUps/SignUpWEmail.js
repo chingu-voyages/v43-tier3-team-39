@@ -16,7 +16,16 @@ const SignUpWEmail = () => {
     email: "",
     password: "",
   });
-  const passwordMatches = confirmedPassword === newUser.password;
+
+  const passwordMatches = (confirmedPassword, newUser) =>{
+    if (!confirmedPassword || !newUser.password){
+      return true;
+    }
+    if(confirmedPassword === newUser.password){
+      return true;
+    }
+    return false;
+  }; 
 
   const navigate = useNavigate();
 
@@ -37,7 +46,6 @@ const SignUpWEmail = () => {
     e.preventDefault();
     if (!emailValid.isValid || emailValid.isEmpty) {
       setError({ email: true });
-      console.log("newError");
       return;
     }
     // if(passwordMatches){
@@ -63,9 +71,9 @@ const SignUpWEmail = () => {
   };
 
   return (
-    <div class="block max-w-sm rounded-lg bg-white p-6 shadow-lg ">
+    <div className="block max-w-sm rounded-lg bg-white p-6 shadow-lg ">
       <form onSubmit={newUserSubmitHandler}>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="First Name:"
             type="text"
@@ -76,10 +84,10 @@ const SignUpWEmail = () => {
             placeholder="Enter your First Name"
           />
           <div>
-            {error.firstName ? <div>{error.firstName.message}</div> : null}
+            {error.firstName ? <div className="text-red-400 font-bold">{error.firstName.message}</div> : null}
           </div>
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Last Name:"
             type="text"
@@ -90,10 +98,10 @@ const SignUpWEmail = () => {
             placeholder="Enter Your Last Name"
           />
           <div>
-            {error.lastName ? <div>{error.lastName.message}</div> : null}
+            {error.lastName ? <div className="text-red-400 font-bold">{error.lastName.message}</div> : null}
           </div>
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Email:"
             type="text"
@@ -105,11 +113,11 @@ const SignUpWEmail = () => {
           />
           <div>
             {!!error.email || (!emailValid.isValid && !emailValid.isEmpty) ? (
-              <div>{"You must enter a valid and unique email."}</div>
+              <div className="text-red-400 font-bold">{"You must enter a valid and unique email."}</div>
             ) : null}
           </div>
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Password:"
             type="password"
@@ -120,7 +128,7 @@ const SignUpWEmail = () => {
             placeholder="Enter Your Password"
           />
         </div>
-        <div class="relative mb-6" data-te-input-wrapper-init>
+        <div className="relative mb-6" data-te-input-wrapper-init>
           <Input
             title="Confirm Password:"
             type="password"
@@ -132,18 +140,18 @@ const SignUpWEmail = () => {
           />
         </div>
         <div>
-          {!passwordMatches ? <div>{"Your passwords do not match"}</div> : null}
+          {passwordMatches(confirmedPassword, newUser) ? null : <div className="text-red-400 font-bold">{"Your passwords do not match."} </div>}
         </div>
-        <div class="mb-2 flex items-center justify-between" />
+        <div className="mb-2 flex items-center justify-between" />
         <button
           type="submit"
-          class="inline-block w-full rounded bg-primary px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
+          class="inline-block w-full rounded bg-green-900 px-6 pt-2.5 pb-2 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-green-700 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-green-700 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-green-800 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]"
           data-te-ripple-init
           data-te-ripple-color="light"
         >
           Sign Up
         </button>
-        <div class="mb-6 flex items-center justify-between" />
+        <div className="mb-6 flex items-center justify-between" />
       </form>
     </div>
   );

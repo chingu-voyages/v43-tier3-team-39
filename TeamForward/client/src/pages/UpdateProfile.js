@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../GlobalState";
 import log from "../helpers/logging";
-import Jumbotron from "../components/UpdateProfilePage/Jumbotron";
 import ProfileForm from "../components/UpdateProfilePage/ProfileForm";
+import NavMenu from "../components/NavMenu/NavMenu";
 
 const UpdateProfile = () => {
   const navigate = useNavigate();
@@ -79,7 +79,7 @@ const UpdateProfile = () => {
       },
     };
 
-    if (profileImg.includes("base64")) {
+    if (profileImg?.includes("base64")) {
       payload.photo = profileImg;
     }
 
@@ -104,19 +104,26 @@ const UpdateProfile = () => {
     }
   };
 
+  
+
   return (
-    <div>
-      <Jumbotron />
-      <ProfileForm
-        formInfo={formInfo}
-        setFormInfo={setFormInfo}
-        handleFormInfoChange={handleFormInfoChange}
-        handleInterests={handleInterests}
-        handleActivities={handleActivities}
-        handleSubmit={handleSubmit}
-        profileImg={profileImg}
-        setProfileImg={setProfileImg}
-      />
+    <div className="flex flex-col">
+      <div className="lg:absolute">
+        <NavMenu />
+        <h1 className="font-bold inline-block">{user ? `${user.firstName} ${user.lastName}`: ""}</h1>
+      </div>
+      <div className="m-0">
+        <ProfileForm
+          formInfo={formInfo}
+          setFormInfo={setFormInfo}
+          handleFormInfoChange={handleFormInfoChange}
+          handleInterests={handleInterests}
+          handleActivities={handleActivities}
+          handleSubmit={handleSubmit}
+          profileImg={profileImg}
+          setProfileImg={setProfileImg}
+        />
+      </div>
     </div>
   );
 };
