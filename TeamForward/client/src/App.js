@@ -4,7 +4,6 @@ import axios from "axios";
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "./GlobalState";
 import log from "./helpers/logging";
-
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
@@ -65,6 +64,7 @@ function App() {
   if (!apiComplete) {
     return null;
   }
+
 
   return (
     <BrowserRouter>

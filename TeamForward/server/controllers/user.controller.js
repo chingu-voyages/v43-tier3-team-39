@@ -15,7 +15,7 @@ module.exports = {
         res.cookie("jwt-token", userToken, { httpOnly: true, secure: true, sameSite: "none" }).json(newUser);
       })
       .catch((err) => {
-        log("something went wrong with createNewUser");
+        log("Something went wrong with createNewUser");
         res.status(400).json(err);
       });
   },
@@ -28,24 +28,24 @@ module.exports = {
         res.json(loggedUser);
       })
       .catch((err) => {
-        log("find logged In user failed");
+        log("Find logged In user failed");
       });
   },
 
   login: async (req, res) => {
     log(req.body.email, req.body.password);
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send("something went wrong with login");
+      return res.status(400).send("Something went wrong with login");
     }
     const user = await User.findOne({ email: req.body.email });
     if (user === null) {
-      return res.status(400).send("incorrect email");
+      return res.status(400).send("Incorrect Email");
     }
 
 
     const correctPassword = await bcrypt.compare(req.body.password, user.password);
         if ( !correctPassword) {
-            return res.status(400).send("incorrect password");
+            return res.status(400).send("Incorrect Password");
         }
         
     const userToken = jwt.sign(
@@ -64,14 +64,14 @@ module.exports = {
   },
 
   findOneUser: (req, res) => {
-    // let findId;
-    // try {
-    //   findId = new mongoose.Types.ObjectId(req.params.id);
-    // } catch (err) {
-    //   res.status(404).json("this user could not be found");
-    //   return;
-    // }
-    User.findOne({ _id: req.params.id })
+    let findId;
+    try {
+      findId = new mongoose.Types.ObjectID(req.params.id);
+    } catch (err) {
+      res.status(404).json("This user could not be found");
+      return;
+    }
+    User.findOne({ _id: findId })
       .then((oneUser) => {
         log(oneUser);
         if (oneUser === null) {
@@ -92,14 +92,15 @@ module.exports = {
   findAllUsers: async(req, res) => {
     const userInfo = await User.findOne({ _id: req.userId }, { password: 0 });
     const interests = req.query['interests'];
-    const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, req.userId);
+    const activities = req.query['activities'];
+    const results = await locationHelpers.getUsersWithinRadius(userInfo.location.coordinates, userInfo.radius, interests, activities, req.userId);
     res.json(results);
   },
   
   updateUser: async (req, res) => {
     let body = { ...req.body };
 
-    log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params)
+    log("FIRST LOG HERE REQ.BODY:",body, "FIRST LOG REQ.PARAMS",req.params);
     if (body.photo) {
       //if there's an existing cloudinaryProfileImgUrl/cloudinaryId, then delete it from cloudinary
       let userPhoto = await User.findById({_id: req.params.id });
@@ -107,7 +108,7 @@ module.exports = {
       try {
         await cloudinary.uploader.destroy(userPhoto.cloudinaryId);
       } catch (exception) {
-        console.log("something went wring with updateUser", exception);
+        console.log("Something went wrong with updateUser", exception);
       }
 
       let result;
@@ -171,7 +172,11 @@ module.exports = {
   },
 
   logOut: (req, res) => {
-    res.clearCookie("jwt-token");
+    res.clearCookie("jwt-token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none"
+    });
     res.sendStatus(200);
   },
 

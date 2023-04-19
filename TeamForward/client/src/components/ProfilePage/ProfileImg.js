@@ -4,10 +4,10 @@ import { userState } from "../../GlobalState";
 const ProfileImg = ({profileData, setProfileData}) => {
   const user = useReactiveVar(userState);
   return (
-    <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center  text-indigo-500">
+    <div className="w-48 h-48 overflow-hidden bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center  text-indigo-500">
       {profileData.cloudinaryProfileImgUrl ? (
         <img
-          className="rounded-full"
+          className="object-cover w-48 h-48 rounded-full"
           src={profileData.cloudinaryProfileImgUrl}
         />
       ) : (
