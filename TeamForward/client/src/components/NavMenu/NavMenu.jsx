@@ -3,13 +3,8 @@ import axios from 'axios';
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useReactiveVar } from '@apollo/client';
 import { userState } from "../../GlobalState";
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const NavMenu = () => {
-
-    const navigate = useNavigate()
-
     const user = useReactiveVar(userState);
     const navigate = useNavigate();
     const [open,setOpen] = useState(false)
@@ -40,17 +35,16 @@ const NavMenu = () => {
                         <li className="block">
                         <NavLink to="/myProfile" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full ">My Profile</NavLink>
                         </li>
-                        <li className="">
+                        <li className="block">
                         <NavLink to="/updateprofile" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full">Edit Profile</NavLink>
                         </li>
                         <li className="block">
                         <NavLink to="/feed" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full">Dashboard</NavLink>
                         </li>
-                        {/* TODO: Link messages when finished with message feature */}
-                        <li className="">
-                        <button className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full">Messages</button>
+                        <li className="block">
+                        <NavLink to="/messages" className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full" >Messages</NavLink>
                         </li>
-                        <li className="">
+                        <li className="block">
                         <NavLink onClick={logout} className="text-lg text-start font-semibold border p-1 rounded-lg shadow-lg block w-full" >Logout</NavLink>
                         </li>
                     </ul>
