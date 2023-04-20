@@ -62,14 +62,14 @@ const io = socketio(server, {
 });
 
 io.on("connection", async (socket) => {
-  console.log("New connection at" + socket.id);
+  // console.log("New connection at" + socket.id);
 
   // const chatRooms = await ChatController.findInbox();
   // console.log("server.js, chatRooms call", chatRooms);
 
   // chatRooms.forEach(chatRoom => socket.join("chatRoom:" + chatRoom._id));
   socket.on("join", (chatRoomId) => {
-    console.log("join: " + chatRoomId);
+    // console.log("join: " + chatRoomId);
     socket.join(chatRoomId);
   });
   

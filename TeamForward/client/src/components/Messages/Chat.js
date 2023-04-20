@@ -21,25 +21,17 @@ const Chat = ({socket}) => {
   useEffect(()=>{
     axios.get(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom/${chatId}/allMessages`)
     .then((res)=>{
-      console.log("grabbed messages from db:",res)
       setMessageList(res.data[0].messages)
       setOtherUser(res.data[0].otherUser)
-      console.log('other user:',otherUser._id)
     }).catch((err)=>{
       console.log(err)
     })
   },[])
 
   useEffect(()=>{
-    
-    console.log('other user:',otherUser._id)
-    
     socket.on("message",(data)=>{
       const newFrom = otherUser._id == data.from ? otherUser.firstName : data.from
-      // console.log("received message from server!",data)
-      console.log("other user id:", otherUser._id)
       const updatedMessage = {...data, from: newFrom };
-      console.log("updated message:",updatedMessage)
       setMessageList([...messageList,updatedMessage])
     })
     // return () => socket.disconnect(true);
@@ -48,10 +40,19 @@ const Chat = ({socket}) => {
   useEffect(()=>{
     // on component load user joins private room based on chatRoomId
     socket.emit('join',chatId)
-  },[])
-  
+  },[]);
 
-    const submitMessage = (e) => {
+  useEffect(()=>{
+    for(let message of messageList){
+      if(message.unread === true){
+        axios.put(`${process.env.REACT_APP_BE_URL}/messaging/message/${message._id}/update`)
+          .then((res)=>{
+          }).catch((err)=> console.log(`your message could not be updated to read`));
+      }
+    }
+  }, [messageList]);
+
+  const submitMessage = (e) => {
     e.preventDefault()
     if(!message) {
       console.log("no message")
@@ -59,14 +60,15 @@ const Chat = ({socket}) => {
     }
     // emits message to server which is sent to shared private room
     socket.emit("clientMessage",{
-      // chatRoomId: chatId,
-      // from: user._id,
+      chatRoomId: chatId,
+      from: user._id,
       to: otherUser._id,
       message,
       unread:false
     })
     setMessage("")
-  }
+  };
+
   return (
 <div className="w-full max-w-sm mx-auto">
       <div>

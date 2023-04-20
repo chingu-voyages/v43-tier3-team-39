@@ -9,10 +9,10 @@ import NavMenu from "../components/NavMenu/NavMenu";
 
 const Inbox = () => {
   const user = useReactiveVar(userState);
-  console.log("Inbox user", user);
   const id = user._id;
   const navigate = useNavigate();
   const [chats, setChats] = useState([]);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_BE_URL}/messaging/inbox`)
@@ -24,6 +24,15 @@ const Inbox = () => {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_BE_URL}/messaging/user/message/unreadCount`)
+    .then((res)=>{
+        setUnreadCount(res.data);
+    }).catch((err)=>{
+        console.log(err);
+    });
+}, []);
 
   return (
     <div className="bg-gray-50 ">
@@ -61,7 +70,7 @@ const Inbox = () => {
                 </div>
                 {/* <Search /> */}
               </div>
-            <div></div>
+            <div className="text-blue-800 text-sm font-bold">Unread Messages: {unreadCount}</div>
             </header>
             {/* <!-- Card body --> */}
             <div className="py-3 px-5">
