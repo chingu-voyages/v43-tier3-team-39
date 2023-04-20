@@ -96,15 +96,14 @@ module.exports ={
 
     //Messaging
     createNewMessage: (io,data) => {
-        const { message, to, chatRoomId,from } = data;
-        console.log("message from socket to controller:",data)
+        const { message, to, chatRoomId, from } = data;
         IndividualMessage.create({
             chatRoomId,
             from,
             to,
             message
         }).then((newMessage) => {
-            io.to(chatRoomId).emit("message",newMessage)
+            io.to(chatRoomId).emit("message",newMessage);
             // res.json(newMessage);
         }).catch((err) =>{
             console.log("createNewMessage is not working", err);

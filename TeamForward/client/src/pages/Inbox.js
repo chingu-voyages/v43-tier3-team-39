@@ -11,16 +11,13 @@ const Inbox = () => {
   const user = useReactiveVar(userState);
   console.log("Inbox user", user);
   const id = user._id;
-
   const navigate = useNavigate();
-
   const [chats, setChats] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BE_URL}/messaging/inbox`)
+    axios.get(`${process.env.REACT_APP_BE_URL}/messaging/inbox`)
       .then((res) => {
-        console.log("returned chats");
+        // console.log("returned chats");
         setChats(res.data);
       })
       .catch((err) => {
@@ -33,7 +30,7 @@ const Inbox = () => {
       <div className="ml-4">
         <NavMenu />
       </div>
-      <section className="flex flex-col justify-center antialiased bg-gray-50 text-gray-600 min-h-screen p-4">
+      <section className=" justify-center antialiased bg-gray-50 text-gray-600 min-h-screen p-4">
         <div className="h-full">
           {/* <!-- Card --> */}
           <div className="relative max-w-screen-sm mx-auto bg-white shadow-lg rounded-lg ">
@@ -62,9 +59,9 @@ const Inbox = () => {
                     </a>
                   </div>
                 </div>
-
-                <Search />
+                {/* <Search /> */}
               </div>
+            <div></div>
             </header>
             {/* <!-- Card body --> */}
             <div className="py-3 px-5">
@@ -74,9 +71,8 @@ const Inbox = () => {
               {/* <!-- Chat list --> */}
               <div className="divide-y divide-gray-200">
                 {/* <!-- User --> */}
-
                 {chats.map((chat) => {
-                  return <InboxList key={chat._id} user={chat} />;
+                  return <InboxList chatRoom={chat.ChatRoomInfo} otherUser={chat.userObject} />;
                 })}
               </div>
             </div>

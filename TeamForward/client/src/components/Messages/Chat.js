@@ -24,6 +24,7 @@ const Chat = ({socket}) => {
       console.log("grabbed messages from db:",res)
       setMessageList(res.data[0].messages)
       setOtherUser(res.data[0].otherUser)
+      console.log('other user:',otherUser._id)
     }).catch((err)=>{
       console.log(err)
     })
@@ -50,7 +51,7 @@ const Chat = ({socket}) => {
   },[])
   
 
-   const submitMessage = (e) => {
+    const submitMessage = (e) => {
     e.preventDefault()
     if(!message) {
       console.log("no message")
@@ -58,8 +59,8 @@ const Chat = ({socket}) => {
     }
     // emits message to server which is sent to shared private room
     socket.emit("clientMessage",{
-      chatRoomId: chatId,
-      from: user._id,
+      // chatRoomId: chatId,
+      // from: user._id,
       to: otherUser._id,
       message,
       unread:false
