@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useReactiveVar } from "@apollo/client";
 import { userState } from "../../GlobalState";
 import dateformat from 'dateformat'
+import NavMenu from '../NavMenu/NavMenu';
 
 
 const Chat = ({socket}) => {
@@ -67,12 +68,15 @@ const Chat = ({socket}) => {
     setMessage("")
   }
   return (
-<div className="w-full max-w-sm mx-auto">
-      <div>
+<div className="flex flex-col h-screen">
+      <div className="block sm:items-center justify-between">
+        <NavMenu />
+      </div>
+      <div className="flex flex-col space-y-4 p-3 overflow-y-auto h-full scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
           {
             messageList.map((message)=>{
               // conditionally renders message on either side depending on user
-              let messageSide = user._id === message.from ? "flex flex-row justify-start items-end mb-2" :"flex flex-row justify-end mb-2";
+              let messageSide = user._id === message.from ? "flex flex-row justify-start mb-2" :"flex flex-row justify-end mb-2";
               // conditionally renders avatar for each user
               let image = user._id === message.from ? user.cloudinaryProfileImgUrl : otherUser.cloudinaryProfileImgUrl;
               return <div key={message._id} className={messageSide}>
@@ -89,11 +93,10 @@ const Chat = ({socket}) => {
             })
           }
       </div>
-      <div className="flex flex-col h-screen #a1a1aa">
       
         <div className="flex-shrink-0 flex p-4 border-t bg-white">
           <div className="relative flex-grow">
-            <form onSubmit={submitMessage} >
+            <form onSubmit={submitMessage} className="flex" >
               <input
                 type="text"
                 value={message}
@@ -101,10 +104,10 @@ const Chat = ({socket}) => {
                 className="w-full border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-300"
                 placeholder="Type your message..."
               />
+              <button className="text-white ml-4 py-2 px-4 uppercase rounded bg-green-900 hover:bg-green-900 shadow hover:shadow-lg h-10  font-medium transition transform hover:-translate-y-0.5">Submit</button>
             </form>
-          </div>
+{/*           
           
-          <div className="flex-shrink-0 ml-4">
             <button
               type="button"
               className="inline-flex items-center justify-center w-12 h-12 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300"
@@ -119,7 +122,7 @@ const Chat = ({socket}) => {
               </svg>
             </button>
             
-          </div>
+          </div> */}
         </div>
         
       </div>
