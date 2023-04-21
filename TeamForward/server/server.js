@@ -76,12 +76,6 @@ io.on("connection", async (socket) => {
   // });
 
   socket.on("clientMessage", (data) => {
-
-    // console.log(data)
-    // this should run controller function to add new message
-    // into the db
-
       ChatController.createNewMessage(io, data);
   })
 })
-// app.use("/", require("./routes/oauth.routes"));

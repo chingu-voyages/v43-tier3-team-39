@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect, useRef} from 'react'
 import axios from 'axios'
 import {io} from 'socket.io-client'
 import { useParams } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { useReactiveVar } from "@apollo/client";
 import { userState } from "../../GlobalState";
 import dateformat from 'dateformat'
 import NavMenu from '../NavMenu/NavMenu';
+import useChatScroll from './UseChatScroll';
 
 
 const Chat = ({socket}) => {
@@ -18,10 +19,19 @@ const Chat = ({socket}) => {
 
   const [messageList,setMessageList] = useState([])
   const [otherUser,setOtherUser] = useState({})
+
+  const chatWindowRef = useRef(null);
+
+  useEffect(()=>{
+    chatWindowRef.current?.scrollIntoView()
+  },[messageList])
  
   useEffect(()=>{
     axios.get(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom/${chatId}/allMessages`)
     .then((res)=>{
+    
+      // console.log("grabbed messages from db:",res.data[0].messages)
+      // console.log("other user:", res.data[0].otherUser)
       setMessageList(res.data[0].messages)
       setOtherUser(res.data[0].otherUser)
     }).catch((err)=>{
@@ -33,7 +43,10 @@ const Chat = ({socket}) => {
     socket.on("message",(data)=>{
       const newFrom = otherUser._id == data.from ? otherUser.firstName : data.from
       const updatedMessage = {...data, from: newFrom };
-      setMessageList([...messageList,updatedMessage])
+
+      console.log("updated message:",updatedMessage)
+      setMessageList((prevMessageList) => [...prevMessageList, updatedMessage]);
+
     })
     // return () => socket.disconnect(true);
   },[socket])
@@ -68,14 +81,16 @@ const Chat = ({socket}) => {
       unread:false
     })
     setMessage("")
-  };
+
+  }
+
 
   return (
-<div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen">
       <div className="block sm:items-center justify-between">
         <NavMenu />
       </div>
-      <div className="flex flex-col space-y-4 p-3 overflow-y-auto h-full scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+      <div className="flex flex-col space-y-4 p-3 sm:w-1/3 sm:mx-auto overflow-y-auto h-full scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
           {
             messageList.map((message)=>{
               // conditionally renders message on either side depending on user
@@ -83,21 +98,22 @@ const Chat = ({socket}) => {
               // conditionally renders avatar for each user
               let image = user._id === message.from ? user.cloudinaryProfileImgUrl : otherUser.cloudinaryProfileImgUrl;
               return <div key={message._id} className={messageSide}>
-                    <img className="w-8 h-8 rounded-full align-middle" src={image} alt={user.firstName} />
-                    <div className="flex flex-col items-start">
-                      <div className="relative px-4 py-2 max-w-xs rounded-lg">
-                        <div className="text-med leading-tight mb-2">
-                        {message.message}
+                      <img className="w-8 h-8 rounded-full align-middle" src={image} alt={user.firstName} />
+                      <div className="flex flex-col items-start">
+                        <div className="relative px-4 py-2 max-w-xs rounded-lg">
+                          <div className="text-med leading-tight mb-2">
+                            {message.message}
+                          </div>
+                          <div className="text-xs text-gray-500">{dateformat(message.createdAt, "dddd, h:MM TT") }</div>
                         </div>
-                        <div className="text-xs text-gray-500">{dateformat(message.createdAt, "dddd, h:MM TT") }</div>
                       </div>
                     </div>
-                  </div>
             })
           }
+          <div ref={chatWindowRef} />
       </div>
       
-        <div className="flex-shrink-0 flex p-4 border-t bg-white">
+        <div className="flex-shrink-0 flex p-4 border-t sm:w-1/2 mx-auto bg-white">
           <div className="relative flex-grow">
             <form onSubmit={submitMessage} className="flex" >
               <input
