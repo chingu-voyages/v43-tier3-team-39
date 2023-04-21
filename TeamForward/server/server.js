@@ -8,7 +8,7 @@ const passport = require("passport");
 const app = express();
 const socketio = require('socket.io')
 const port = process.env.PORTKEY;
-const ChatController = require("./Controllers/messages.controller")
+const ChatController = require("./controllers/messages.controller")
 
 
 
