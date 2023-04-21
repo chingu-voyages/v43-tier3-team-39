@@ -29,6 +29,7 @@ const Chat = ({socket}) => {
   useEffect(()=>{
     axios.get(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom/${chatId}/allMessages`)
     .then((res)=>{
+    
       // console.log("grabbed messages from db:",res.data[0].messages)
       // console.log("other user:", res.data[0].otherUser)
       setMessageList(res.data[0].messages)
@@ -42,8 +43,10 @@ const Chat = ({socket}) => {
     socket.on("message",(data)=>{
       const newFrom = otherUser._id == data.from ? otherUser.firstName : data.from
       const updatedMessage = {...data, from: newFrom };
+
       console.log("updated message:",updatedMessage)
       setMessageList((prevMessageList) => [...prevMessageList, updatedMessage]);
+
     })
     // return () => socket.disconnect(true);
   },[socket])
@@ -51,10 +54,19 @@ const Chat = ({socket}) => {
   useEffect(()=>{
     // on component load user joins private room based on chatRoomId
     socket.emit('join',chatId)
-  },[])
-  
+  },[]);
 
-   const submitMessage = (e) => {
+  useEffect(()=>{
+    for(let message of messageList){
+      if(message.unread === true){
+        axios.put(`${process.env.REACT_APP_BE_URL}/messaging/message/${message._id}/update`)
+          .then((res)=>{
+          }).catch((err)=> console.log(`your message could not be updated to read`));
+      }
+    }
+  }, [messageList]);
+
+  const submitMessage = (e) => {
     e.preventDefault()
     if(!message) {
       console.log("no message")
@@ -69,7 +81,9 @@ const Chat = ({socket}) => {
       unread:false
     })
     setMessage("")
+
   }
+
 
   return (
     <div className="flex flex-col h-screen">

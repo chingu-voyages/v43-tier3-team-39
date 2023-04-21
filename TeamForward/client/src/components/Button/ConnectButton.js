@@ -14,7 +14,6 @@ const ConnectButton = ({otherUserId}) => {
     // creates new chatRoom or returns existing
     axios.post(`${process.env.REACT_APP_BE_URL}/messaging/chatRoom`,{otherUserId})
     .then((res)=>{
-      console.log("created chat room:",res.data)
       const chatId = res.data._id
       navigate(`/chat/${chatId}`)
     }).catch((err)=>{
