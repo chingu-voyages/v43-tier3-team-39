@@ -44,7 +44,7 @@ const Chat = ({socket}) => {
       const newFrom = otherUser._id == data.from ? otherUser.firstName : data.from
       const updatedMessage = {...data, from: newFrom };
 
-      console.log("updated message:",updatedMessage)
+      
       setMessageList((prevMessageList) => [...prevMessageList, updatedMessage]);
 
     })
