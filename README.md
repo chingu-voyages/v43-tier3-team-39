@@ -28,6 +28,10 @@ Team Forward is a social platform designed to connect local professionals throug
   </ul>
 </details>
 
+
+![teamForward](https://user-images.githubusercontent.com/97640502/233798438-9d3d5356-b4be-45c0-a1d7-070c5a6457bb.gif)
+
+
 # Overview
 
 ### :dart: Features:
