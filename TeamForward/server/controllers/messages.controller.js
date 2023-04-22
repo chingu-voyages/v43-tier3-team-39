@@ -1,4 +1,4 @@
-const User = require("../models/User");
+const User = require("../Models/User");
 const {ChatRoom, IndividualMessage} = require("../models/Messaging");
 const mongoose = require("mongoose");
 
