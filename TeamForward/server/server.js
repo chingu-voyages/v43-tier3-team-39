@@ -4,14 +4,14 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const log = require("./helpers/logging");
-const passport = require("passport");
+// const passport = require("passport");
 const app = express();
 const socketio = require('socket.io')
 const port = process.env.PORTKEY;
 const ChatController = require("./controllers/messages.controller")
 
 // configure Passport
-require("./Config/passport");
+// require("./Config/passport");
 
 // middleware
 app.use(express.json({ limit: '50mb' }));
