@@ -1,6 +1,6 @@
-<div align="center">
+
    # Team Forward
-</div>
+
 
 Team Forward is a social platform designed to connect local professionals through wellness activities, fostering meaningful relationships and personal growth. Our dynamic web app offers opportunities to network, build friendships, and have fun while prioritizing social interactions and physical activity. By promoting positivity and support, we empower individuals to achieve their goals and create thriving communities.
 
