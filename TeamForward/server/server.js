@@ -10,8 +10,6 @@ const socketio = require('socket.io')
 const port = process.env.PORTKEY;
 const ChatController = require("./Controllers/messages.controller")
 
-
-
 // configure Passport
 require("./Config/passport");
 
@@ -28,19 +26,6 @@ app.use(
   })
 );
 
-// setting up session cookie with logged in user's database id
-// app.use(
-//   session({
-//     secret: process.env.SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: false },
-//   })
-// );
-
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 app.use((req, res, next) => {
   res.locals.user = req.user;
   next();
@@ -53,8 +38,7 @@ const server = app.listen(port, () => console.log(`listening on port: ${port}`))
 
 const io = socketio(server, {
   cors: {
-    // origin needs env variable for test/deployed environments?
-      origin: 'http://localhost:3000',
+      origin: process.env.REDIRECTKEYTWO,
       methods: ['GET', 'POST'],
       allowedHeaders: ['*'],
       credentials: true,
@@ -62,18 +46,10 @@ const io = socketio(server, {
 });
 
 io.on("connection", async (socket) => {
-  // console.log("New connection at" + socket.id);
 
-  // const chatRooms = await ChatController.findInbox();
-  // console.log("server.js, chatRooms call", chatRooms);
-
-  // chatRooms.forEach(chatRoom => socket.join("chatRoom:" + chatRoom._id));
   socket.on("join", (chatRoomId) => {
-    // console.log("join: " + chatRoomId);
     socket.join(chatRoomId);
   });
-  
-  // });
 
   socket.on("clientMessage", (data) => {
       ChatController.createNewMessage(io, data);
