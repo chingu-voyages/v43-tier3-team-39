@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const User = require("../models/User");
+const User = require("../Models/User");
 const log = require("../helpers/logging");
 
 const getLocationHelper = async(address) => {
