@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const User = require("./User");
+const User = require("../Models/User");
 
 const ChatRoomSchema = new mongoose.Schema ({
     userIds: [{
